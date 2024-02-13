@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DeAcceleration.h" />
     <ClInclude Include="FighterCtrl.h" />
     <ClInclude Include="ShowAtOppositeSide.h" />
     <ClInclude Include="src\game\AIPaddle.h" />
@@ -63,6 +64,7 @@
     <ClInclude Include="src\utils\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DeAcceleration.cpp" />
     <ClCompile Include="FighterCtrl.cpp" />
     <ClCompile Include="ShowAtOppositeSide.cpp" />
     <ClCompile Include="src\game\AIPaddle.cpp" />

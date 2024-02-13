@@ -20,6 +20,7 @@
 #include "ScoreRenderer.h"
 #include "SimpleMove.h"
 #include "StopOnBorder.h"
+#include "../../DeAcceleration.h"
 #include "../../FighterCtrl.h"
 #include "../../ShowAtOppositeSide.h"
 
@@ -55,6 +56,7 @@ void Game::init() {
 	fighter_->addComponent(new FighterCtrl());
 	fighter_->addComponent(new SimpleMove());
 	fighter_->addComponent(new ShowAtOppositeSide());
+	fighter_->addComponent(new DeAcceleration());
 
 	//	// the ball
 //	ball_ = new Container();
