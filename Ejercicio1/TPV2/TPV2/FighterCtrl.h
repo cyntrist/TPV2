@@ -2,11 +2,14 @@
 #include <SDL_scancode.h>
 #include "src/game/Container.h"
 #include "src/game/InputComponent.h"
+#include "src/sdlutils/InputHandler.h"
+#include <SDL.h>
 
-class FighterCtrl : InputComponent
+class FighterCtrl : public InputComponent
 {
 public:
 	FighterCtrl();
+	virtual ~FighterCtrl() override = default;
 
 	inline void setKeys(SDL_Scancode left, SDL_Scancode right, SDL_Scancode stop) {
 		left_ = left;

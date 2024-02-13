@@ -239,5 +239,8 @@
     <ClCompile Include="src\game\SimpleMove.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
+    <ClCompile Include="FighterCtrl.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
