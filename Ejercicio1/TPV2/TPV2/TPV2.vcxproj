@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FighterCtrl.h" />
+    <ClInclude Include="ShowAtOppositeSide.h" />
     <ClInclude Include="src\game\AIPaddle.h" />
     <ClInclude Include="src\game\BounceOnBorder.h" />
     <ClInclude Include="src\game\Component.h" />
@@ -63,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FighterCtrl.cpp" />
+    <ClCompile Include="ShowAtOppositeSide.cpp" />
     <ClCompile Include="src\game\AIPaddle.cpp" />
     <ClCompile Include="src\game\BounceOnBorder.cpp" />
     <ClCompile Include="src\game\Containter.cpp" />

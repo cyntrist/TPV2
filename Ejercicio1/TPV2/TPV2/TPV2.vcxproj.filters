@@ -162,6 +162,9 @@
     <ClInclude Include="FighterCtrl.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
+    <ClInclude Include="ShowAtOppositeSide.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\json\JSONValue.cpp">
@@ -240,6 +243,9 @@
       <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="FighterCtrl.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowAtOppositeSide.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>
