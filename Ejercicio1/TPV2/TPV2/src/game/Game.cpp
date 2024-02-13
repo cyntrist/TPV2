@@ -52,8 +52,7 @@ void Game::init() {
 	objs_.push_back(fighter_);
 	fighter_->setRotation(90.0);
 	fighter_->addComponent(new FighterCtrl());
-	fighter_->addComponent(new MovePaddleWithKeyBoard());
-
+	fighter_->addComponent(new SimpleMove());
 	//	// the ball
 //	ball_ = new Container();
 //	ball_->addComponent(new SimpleMove());

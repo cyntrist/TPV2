@@ -18,5 +18,4 @@ void SimpleMove::update(Container *o) {
 	auto &vel = o->getVel();
 
 	pos = pos + vel;
-
 }
