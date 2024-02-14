@@ -20,9 +20,9 @@
 #include "ScoreRenderer.h"
 #include "SimpleMove.h"
 #include "StopOnBorder.h"
-#include "../../DeAcceleration.h"
-#include "../../FighterCtrl.h"
-#include "../../ShowAtOppositeSide.h"
+#include "DeAcceleration.h"
+#include "FighterCtrl.h"
+#include "ShowAtOppositeSide.h"
 
 Game::Game()
 //:
@@ -42,8 +42,8 @@ Game::~Game() {
 void Game::init() {
 
 	// initialize the SDL singleton
-	SDLUtils::init("Ping Pong", 800, 600,
-			"resources/config/test.resources.json");
+	SDLUtils::init("Asteroids", 800, 600,
+			"resources/config/asteroid.resources.json");
 
 	fighter_ = new Container();
 	objs_.push_back(fighter_);
