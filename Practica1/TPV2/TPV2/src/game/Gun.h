@@ -20,7 +20,7 @@ public:
 	constexpr static auto max_bullets = 20;
 	using bullets_array = std::array<Bullet, max_bullets>;
 	using iterator = bullets_array::iterator;
-	void reset();
+	void reset() const;
 
 	iterator begin()
 	{

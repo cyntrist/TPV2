@@ -17,9 +17,11 @@ void FighterCtrl::handleInput(Container* o)
 
 	if (ihdlr.isKeyDown(left_)) {
 		o->setRotation(o->getRotation() - ROTATION_MOVE);
-	} else if (ihdlr.isKeyDown(right_)) {
+	}
+	else if (ihdlr.isKeyDown(right_)) {
 		o->setRotation(o->getRotation() + ROTATION_MOVE);
-	} else if (ihdlr.isKeyDown(up_))
+	} 
+	if (ihdlr.isKeyDown(up_))
 	{
 		sdlutils().soundEffects().at("thrust").play();
 		auto &vel = o->getVel();
