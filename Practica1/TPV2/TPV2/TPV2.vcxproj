@@ -33,6 +33,7 @@
     <ClInclude Include="src\game\GameCtrl.h" />
     <ClInclude Include="src\game\GameManager.h" />
     <ClInclude Include="src\game\GameObject.h" />
+    <ClInclude Include="src\game\Gun.h" />
     <ClInclude Include="src\game\HealthComponent.h" />
     <ClInclude Include="src\game\ImageRenderer.h" />
     <ClInclude Include="src\game\InfoMsgs.h" />
@@ -74,6 +75,7 @@
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="src\game\GameCtrl.cpp" />
     <ClCompile Include="src\game\GameManager.cpp" />
+    <ClCompile Include="src\game\Gun.cpp" />
     <ClCompile Include="src\game\HealthComponent.cpp" />
     <ClCompile Include="src\game\ImageRenderer.cpp" />
     <ClCompile Include="src\game\InfoMsgs.cpp" />
