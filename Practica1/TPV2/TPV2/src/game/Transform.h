@@ -4,10 +4,10 @@
 
 #include "PhysicsComponent.h"
 
-class SimpleMove: public PhysicsComponent {
+class Transform: public PhysicsComponent {
 public:
-	SimpleMove();
-	virtual ~SimpleMove();
+	Transform();
+	virtual ~Transform();
 	void update(Container *o) override;
 };
 

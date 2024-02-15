@@ -1,20 +1,20 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
-#include "SimpleMove.h"
+#include "Transform.h"
 
 #include "../sdlutils/SDLUtils.h"
 #include "Container.h"
 
 constexpr double SPEED_LIMIT = 3.0f;	
 
-SimpleMove::SimpleMove() {
+Transform::Transform() {
 
 }
 
-SimpleMove::~SimpleMove() {
+Transform::~Transform() {
 }
 
-void SimpleMove::update(Container *o) {
+void Transform::update(Container *o) {
 
 	auto &pos = o->getPos();
 	auto &vel = o->getVel();

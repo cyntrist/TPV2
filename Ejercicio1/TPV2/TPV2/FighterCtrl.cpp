@@ -1,5 +1,7 @@
 #include "FighterCtrl.h";
 
+#include "src/sdlutils/SDLUtils.h"
+
 constexpr double THRUST_FACTOR = 0.2f;
 
 FighterCtrl::FighterCtrl() :

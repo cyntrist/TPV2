@@ -8,20 +8,17 @@
 
 #include "Container.h"
 #include "GameManager.h"
-#include "AIPaddle.h"
-#include "BounceOnBorder.h"
 #include "EmptyRectangleRenderer.h"
 #include "GameCtrl.h"
 #include "ImageRenderer.h"
 #include "InfoMsgs.h"
-#include "MovePaddleWithKeyBoard.h"
-#include "MovePaddleWithMouse.h"
 #include "RectangleRenderer.h"
 #include "ScoreRenderer.h"
-#include "SimpleMove.h"
+#include "Transform.h"
 #include "StopOnBorder.h"
 #include "DeAcceleration.h"
 #include "FighterCtrl.h"
+#include "HealthComponent.h"
 #include "ShowAtOppositeSide.h"
 
 Game::Game()
@@ -52,69 +49,18 @@ void Game::init() {
 	fighter_->setRotation(90.0);
 	fighter_->getPos().set(sdlutils().width() / 2 - fighter_->getWidth()/2,
 			sdlutils().height() / 2 - fighter_->getHeight()/2);
+	fighter_->addComponent(new Transform());
 	fighter_->addComponent(new ImageRenderer(&sdlutils().images().at("fighter")));
 	fighter_->addComponent(new FighterCtrl());
-	fighter_->addComponent(new SimpleMove());
-	fighter_->addComponent(new ShowAtOppositeSide());
 	fighter_->addComponent(new DeAcceleration());
-
-	//	// the ball
-//	ball_ = new Container();
-//	ball_->addComponent(new SimpleMove());
-//	ball_->addComponent(new BounceOnBorder());
-////	ball_->addComponent(new RectangleRenderer(build_sdlcolor(0xff0000ff)));
-//	ball_->addComponent(
-//			new ImageRenderer(&sdlutils().images().at("tennis_ball")));
-//
-//	ball_->setWidth(10.0f);
-//	ball_->setHeight(1	0.0f);
-//	ball_->getPos().set(sdlutils().width() / 2 - 5,
-//			sdlutils().height() / 2 - 5);
-//
-//
-//
-//	// the left paddle
-//	leftPaddle_ = new Container();
-//	leftPaddle_->setWidth(10.0f);
-//	leftPaddle_->setHeight(50.0f);
-//	leftPaddle_->getPos().set(10, sdlutils().height() / 2 - 25);
-//
-////	auto leftPaddle_ic = new MovePaddleWithKeyBoard();
-////	leftPaddle_ic->setKeys(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A);
-////	leftPaddle_->addComponent(leftPaddle_ic);
-//	leftPaddle_->addComponent(new AIPaddle(ball_));
-//
-//	leftPaddle_->addComponent(
-//			new RectangleRenderer(build_sdlcolor(0xff0000ff)));
-//	leftPaddle_->addComponent(new SimpleMove());
-//	leftPaddle_->addComponent(new StopOnBorder());
-//
-//	// the right paddle
-//	rightPaddle_ = new Container();
-//	rightPaddle_->setWidth(10.0f);
-//	rightPaddle_->setHeight(50.0f);
-//	rightPaddle_->getPos().set(sdlutils().width() - 15,
-//			sdlutils().height() / 2 - 25);
-//
-////	rightPaddle_->addComponent(new MovePaddleWithMouse());
-//	rightPaddle_->addComponent(new AIPaddle(ball_));
-//
-//	rightPaddle_->addComponent(
-//			new EmptyRectangleRenderer(build_sdlcolor(0x00ff00ff)));
-//
-//	rightPaddle_->addComponent(new SimpleMove());
-//	rightPaddle_->addComponent(new StopOnBorder());
+	fighter_->addComponent(new ShowAtOppositeSide());
+	fighter_->addComponent(new HealthComponent(&sdlutils().images().at("heart"), 3));
 //
 //	// game manager
 //	gm_ = new GameManager(ball_);
 //	gm_->addComponent(new GameCtrl());
 //	gm_->addComponent(new ScoreRenderer());
 //	gm_->addComponent(new InfoMsgs());
-//
-//	// add them all to the list of game objects
-//	objs_.push_back(ball_);
-//	objs_.push_back(leftPaddle_);
-//	objs_.push_back(rightPaddle_);
 //	objs_.push_back(gm_);
 
 }
