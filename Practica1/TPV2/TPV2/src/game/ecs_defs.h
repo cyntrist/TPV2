@@ -13,7 +13,12 @@
 	DEACC, \
 	HEALTH, \
 	FIGHTERCTRL, \
-	OPPOSITE,
+	OPPOSITE, \
+	IMAGEWITHFRAMES, \
+	GENERATIONS, \
+	FOLLOWS, \
+	TOWARDSDEST, \
+
 
 
 // Groups list - must have at least one element
