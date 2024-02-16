@@ -35,7 +35,7 @@ void Gun::render()
 
 void Gun::update()
 {
-	for (auto i : bullets_)
+	for (auto& i : bullets_)
 	{
 		if (i.used)
 		{
