@@ -40,24 +40,21 @@ void Game::init() {
 	auto size = 50;
 	
 	tr->initComponent(
-		Vector2D(sdlutils().width(), sdlutils().height()),
+		Vector2D(sdlutils().width()/2, sdlutils().height()/2),
 		Vector2D(0,0),
 		size,
 		size,
 		90.0f
 	);
+	tr->setPos(Vector2D(sdlutils().width() / 2 - tr->getWidth()/2,
+			sdlutils().height() / 2 - tr->getHeight()/2));
 
-	fighter_->setWidth(50.0f);
-	fighter_->setHeight(50.0f);
-	fighter_->setRotation(90.0);
-	fighter_->getPos().set(sdlutils().width() / 2 - fighter_->getWidth()/2,
-			sdlutils().height() / 2 - fighter_->getHeight()/2);
-	fighter_->addComponent(new Transform());
-	fighter_->addComponent(new ImageRenderer(&sdlutils().images().at("fighter")));
-	fighter_->addComponent(new FighterCtrl());
-	fighter_->addComponent(new DeAcceleration());
-	fighter_->addComponent(new ShowAtOppositeSide());
-	fighter_->addComponent(new HealthComponent(&sdlutils().images().at("heart"), 3));
+	mngr_->addComponent<ImageRenderer>(fighter_, &sdlutils().images().at("fighter"));
+	mngr_->addComponent<FighterCtrl>(fighter_);
+	mngr_->addComponent<DeAcceleration>(fighter_);
+	mngr_->addComponent<ShowAtOppositeSide>(fighter_);
+	mngr_->addComponent<HealthComponent>(fighter_, &sdlutils().images().at("heart"), 3);
+
 	//fighter_->addComponent(new Gun(&sdlutils().images().at("heart"));
 //	// game manager
 //	gm_ = new GameManager(ball_);
