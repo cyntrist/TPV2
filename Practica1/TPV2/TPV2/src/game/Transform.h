@@ -16,5 +16,17 @@ public:
 	virtual ~Transform();
 	void init(Vector2D pos, Vector2D vel, float w, float h, float r);
 	void update() override;
+
+	Vector2D getPos() { return pos_; }
+	Vector2D getVel() { return vel_; }
+	float getWidth() const { return width_; }
+	float getHeight() const { return width_; }
+	float getRo() const { return rot_; }
+
+	void setPos(const Vector2D& value) { pos_ = value; }
+	void setVel(const Vector2D& value) { pos_ = value; }
+	void setWidth(const float value) { width_ = value; }
+	void setHeight(const float value) { height_ = value; }
+	void setRotation(const float value) { rot_ = value; }
 };
 

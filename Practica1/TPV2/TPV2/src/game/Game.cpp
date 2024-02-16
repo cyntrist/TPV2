@@ -6,7 +6,6 @@
 #include "../utils/Collisions.h"
 #include "../ecs/Entity.h"
 #include "EmptyRectangleRenderer.h"
-#include "GameCtrl.h"
 #include "ImageRenderer.h"
 #include "InfoMsgs.h"
 #include "RectangleRenderer.h"

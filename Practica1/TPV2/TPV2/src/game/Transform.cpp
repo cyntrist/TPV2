@@ -1,9 +1,7 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "Transform.h"
-
 #include "../sdlutils/SDLUtils.h"
-#include "Container.h"
 
 constexpr double SPEED_LIMIT = 3.0f;	
 
@@ -23,15 +21,12 @@ void Transform::init(Vector2D pos, Vector2D vel, float w, float h, float r)
 	rot_ = r;
 }
 
-void Transform::update(Container *o) {
+void Transform::update()
+{
+	pos_ = pos_ + vel_;
 
-	auto &pos = o->getPos();
-	auto &vel = o->getVel();
-
-	pos = pos + vel;
-
-	if (abs(vel.getX()) > SPEED_LIMIT || abs(vel.getY()) > SPEED_LIMIT)
+	if (abs(vel_.getX()) > SPEED_LIMIT || abs(vel_.getY()) > SPEED_LIMIT)
 	{
-		vel = vel.normalize()*SPEED_LIMIT;
+		vel_ = vel_.normalize()*SPEED_LIMIT;
 	}
 }

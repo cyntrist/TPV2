@@ -11,7 +11,7 @@ HealthComponent::HealthComponent(Texture* img, int lives)
 
 }
 
-void HealthComponent::render(Container* o)
+void HealthComponent::render()
 {
 	for (int i = 0; i < lives_; i++)
 	{

@@ -3,7 +3,6 @@
 #include "EmptyRectangleRenderer.h"
 
 #include "../sdlutils/SDLUtils.h"
-#include "Container.h"
 
 EmptyRectangleRenderer::EmptyRectangleRenderer() :
 		EmptyRectangleRenderer(build_sdlcolor(0xffffffff)) {
@@ -16,7 +15,7 @@ EmptyRectangleRenderer::EmptyRectangleRenderer(SDL_Color color) :
 EmptyRectangleRenderer::~EmptyRectangleRenderer() {
 }
 
-void EmptyRectangleRenderer::render(Container *o) {
+void EmptyRectangleRenderer::render() {
 	auto &pos_ = o->getPos();
 	auto width_ = o->getWidth();
 	auto height_ = o->getHeight();

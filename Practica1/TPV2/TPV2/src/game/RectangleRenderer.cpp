@@ -4,7 +4,6 @@
 
 #include "../sdlutils/macros.h"
 #include "../sdlutils/SDLUtils.h"
-#include "Container.h"
 
 RectangleRenderer::RectangleRenderer() :
 		RectangleRenderer(build_sdlcolor(0xffffffff)) {
@@ -18,7 +17,7 @@ RectangleRenderer::RectangleRenderer(SDL_Color color) :
 RectangleRenderer::~RectangleRenderer() {
 }
 
-void RectangleRenderer::render(Container *o) {
+void RectangleRenderer::render() {
 
 	auto &pos = o->getPos();
 	auto width = o->getWidth();

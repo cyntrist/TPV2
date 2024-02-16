@@ -1,9 +1,8 @@
 #include "ShowAtOppositeSide.h"
 
-#include "Container.h"
 #include "../sdlutils/SDLUtils.h"
 
-void ShowAtOppositeSide::update(Container* o)
+void ShowAtOppositeSide::update()
 {
 	auto &pos = o->getPos();
 	// se sale por la izq

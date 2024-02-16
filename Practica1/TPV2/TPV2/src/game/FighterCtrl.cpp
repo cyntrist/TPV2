@@ -11,7 +11,7 @@ right_(SDL_SCANCODE_RIGHT)
 {
 }
 
-void FighterCtrl::handleInput(Container* o)
+void FighterCtrl::handleInput()
 {
 	auto &ihdlr = ih();
 
