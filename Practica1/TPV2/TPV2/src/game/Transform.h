@@ -14,14 +14,14 @@ class Transform: public ecs::Component {
 public:
 	Transform();
 	virtual ~Transform();
-	void init(Vector2D pos, Vector2D vel, float w, float h, float r);
+	void initComponent(Vector2D pos, Vector2D vel, float w, float h, float r) override;
 	void update() override;
 
-	Vector2D getPos() { return pos_; }
-	Vector2D getVel() { return vel_; }
+	Vector2D& getPos() { return pos_; }
+	Vector2D& getVel() { return vel_; }
 	float getWidth() const { return width_; }
 	float getHeight() const { return width_; }
-	float getRo() const { return rot_; }
+	float getRot() const { return rot_; }
 
 	void setPos(const Vector2D& value) { pos_ = value; }
 	void setVel(const Vector2D& value) { pos_ = value; }

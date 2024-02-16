@@ -39,7 +39,6 @@ void Game::init() {
 	auto tr = mngr_->addComponent<Transform>(fighter_);
 	tr->initComponent();
 
-	objs_.push_back(fighter_);
 	fighter_->setWidth(50.0f);
 	fighter_->setHeight(50.0f);
 	fighter_->setRotation(90.0);

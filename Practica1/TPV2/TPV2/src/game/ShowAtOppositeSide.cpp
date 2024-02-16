@@ -2,11 +2,17 @@
 
 #include "../sdlutils/SDLUtils.h"
 
+void ShowAtOppositeSide::initComponent()
+{
+	transform_ = mngr_->getComponent<Transform>(ent_);
+	assert(transform_ != nullptr);
+}
+
 void ShowAtOppositeSide::update()
 {
-	auto &pos = o->getPos();
+	auto &pos = transform_->getPos();
 	// se sale por la izq
-	if(pos.getX() < 0 - o->getHeight())
+	if(pos.getX() < 0 - transform_->getHeight())
 	{
 		pos = Vector2D(sdlutils().width(), pos.getY());
 	} // se sasle por la derecha
@@ -16,7 +22,7 @@ void ShowAtOppositeSide::update()
 	}
 
 	// se sale por arriba
-	if(pos.getY() < 0 - o->getHeight())
+	if(pos.getY() < 0 - transform_->getHeight())
 	{
 		pos = Vector2D(pos.getX(), sdlutils().height());
 	} // se sale por abajo
