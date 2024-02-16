@@ -37,7 +37,15 @@ void Game::init() {
 	fighter_ = mngr_->addEntity();
 
 	auto tr = mngr_->addComponent<Transform>(fighter_);
-	tr->initComponent();
+	auto size = 50;
+	
+	tr->initComponent(
+		Vector2D(sdlutils().width(), sdlutils().height()),
+		Vector2D(0,0),
+		size,
+		size,
+		90.0f
+	);
 
 	fighter_->setWidth(50.0f);
 	fighter_->setHeight(50.0f);
