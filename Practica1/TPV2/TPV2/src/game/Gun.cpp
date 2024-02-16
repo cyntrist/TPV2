@@ -12,7 +12,11 @@ constexpr int BULLET_SIZE = 50,
               SHOOT_TIMER = 250;
 
 Gun::Gun(Texture* img)
-	: image_(img)
+	: bullets_(),
+	  image_(img),
+	  transform_(),
+	  lastShot_(-1),
+	  lastIndex_(0)
 {
 }
 
@@ -58,13 +62,13 @@ void Gun::update()
 		{
 			i.pos = i.pos + i.vel;
 			if (!Collisions::collides(
-				Vector2D(0,0),
+				Vector2D(0, 0),
 				sdlutils().width(),
 				sdlutils().height(),
 				i.pos,
 				i.width,
 				i.height
-				))
+			))
 			{
 				i.used = false;
 			}
@@ -89,9 +93,9 @@ void Gun::shoot(Vector2D p, Vector2D v, int width, int height, float r)
 	// dispara
 	lastShot_ = newShot;
 
-	int i = 0;
-	while (i < max_bullets && bullets_[i].used)
-		i++;
+	int i = (lastIndex_ + 1) % max_bullets;
+	while (i != lastIndex_ && bullets_[i].used)
+		i = (i + 1) % max_bullets;
 
 	if (i < max_bullets)
 	{
@@ -103,8 +107,7 @@ void Gun::shoot(Vector2D p, Vector2D v, int width, int height, float r)
 		bullet.height = height;
 		bullet.rot = r;
 
+		lastIndex_ = i;
 		sdlutils().soundEffects().at("fire").play();
-
-		std::cout << "lol lmao pew pew " << std::endl;
 	}
 }

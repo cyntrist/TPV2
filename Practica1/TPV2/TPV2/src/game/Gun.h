@@ -51,4 +51,5 @@ private:
 	Texture* image_;
 	Transform* transform_;
 	int lastShot_;
+	int lastIndex_;
 };
