@@ -2,12 +2,12 @@
 
 #pragma once
 
-#include "RenderComponent.h"
+#include "../ecs/Component.h"
 
-class ScoreRenderer: public RenderComponent {
+class ScoreRenderer: public ecs::Component {
 public:
 	ScoreRenderer();
 	virtual ~ScoreRenderer();
-	void render(Container *o) override;
+	void render() override;
 };
 

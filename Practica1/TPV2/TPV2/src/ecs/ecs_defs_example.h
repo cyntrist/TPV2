@@ -14,7 +14,8 @@
 //
 #define _CMPS_LIST_ \
 	TRANSFORM, \
-	IMAGE
+	IMAGE,
+
 
 // Groups list - must have at least one element
 //

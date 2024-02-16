@@ -14,6 +14,15 @@ Transform::Transform() {
 Transform::~Transform() {
 }
 
+void Transform::init(Vector2D pos, Vector2D vel, float w, float h, float r)
+{
+	pos_ = pos;
+	vel_ = vel;
+	width_ = w;
+	height_ = h;
+	rot_ = r;
+}
+
 void Transform::update(Container *o) {
 
 	auto &pos = o->getPos();

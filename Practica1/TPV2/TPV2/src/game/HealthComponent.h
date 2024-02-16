@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include "RenderComponent.h"
+#include "../ecs/Component.h"
 
 class Texture;
 
-class HealthComponent : public RenderComponent
+class HealthComponent : public ecs::Component
 {
 	Texture* image_;
 	int lives_, iniLives_;
@@ -16,5 +16,5 @@ public:
 	void subLives() { lives_--; }
 	void addLives() { lives_++; }
 	void resetLives() { lives_ = iniLives_; }
-	void render(Container* o) override;
+	void render() override;
 };

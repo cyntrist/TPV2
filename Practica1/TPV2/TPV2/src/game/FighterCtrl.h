@@ -1,16 +1,15 @@
 #pragma once
 #include <SDL_scancode.h>
-#include "Container.h"
-#include "InputComponent.h"
 #include "../sdlutils/InputHandler.h"
 #include <SDL.h>
+#include "../ecs/Component.h"
 
-class FighterCtrl : public InputComponent
+class FighterCtrl : public ecs::Component
 {
 public:
 	FighterCtrl();
 	virtual ~FighterCtrl() override = default;
-	void handleInput(Container *o) override;
+	void handleInput();
 
 private:
 	SDL_Scancode up_;

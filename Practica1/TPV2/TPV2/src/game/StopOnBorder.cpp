@@ -3,7 +3,6 @@
 #include "StopOnBorder.h"
 
 #include "../sdlutils/SDLUtils.h"
-#include "Container.h"
 
 StopOnBorder::StopOnBorder() {
 }
@@ -11,7 +10,7 @@ StopOnBorder::StopOnBorder() {
 StopOnBorder::~StopOnBorder() {
 }
 
-void StopOnBorder::update(Container *o) {
+void StopOnBorder::update() {
 	auto &pos_ = o->getPos();
 	auto &vel_ = o->getVel();
 	auto height_ = o->getHeight();

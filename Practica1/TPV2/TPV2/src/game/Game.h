@@ -1,15 +1,17 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #pragma once
+#include "../ecs/Manager.h"
 
-#include <vector>
-
-#include "GameManager.h"
+namespace ecs
+{
+	class Manager;
+	struct Entity;
+}
 
 // when you are not using the methods of a class, just
 // say that it exists, that saves time when parsing files
 class Container;
-class GameManager;
 
 class Game {
 public:
@@ -20,14 +22,7 @@ public:
 private:
 	//void checkCollisions();
 
-	/*GameManager *gm_;
-	Container *leftPaddle_;
-	Container *rightPaddle_;
-	Container *ball_;*/
-
-	Container* fighter_;
-	std::vector<GameObject*> objs_;
-
-	
+	ecs::Manager* mngr_;
+	ecs::Entity* fighter_;
 };
 

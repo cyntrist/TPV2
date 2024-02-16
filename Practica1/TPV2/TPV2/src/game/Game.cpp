@@ -1,13 +1,10 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "Game.h"
-
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Collisions.h"
-
-#include "Container.h"
-#include "GameManager.h"
+#include "../ecs/Entity.h"
 #include "EmptyRectangleRenderer.h"
 #include "GameCtrl.h"
 #include "ImageRenderer.h"
@@ -15,34 +12,34 @@
 #include "RectangleRenderer.h"
 #include "ScoreRenderer.h"
 #include "Transform.h"
-#include "StopOnBorder.h"
 #include "DeAcceleration.h"
 #include "FighterCtrl.h"
+#include "Gun.h"
 #include "HealthComponent.h"
 #include "ShowAtOppositeSide.h"
 
 Game::Game()
-//:
-//		gm_(nullptr), //
-//		leftPaddle_(nullptr), //
-//		rightPaddle_(nullptr), //
-//		ball_(nullptr)
+	: mngr_(nullptr)
 {}
 
 Game::~Game() {
-	// delete all game objects
-	for (GameObject *o : objs_) {
-		delete o;
-	}
+	delete mngr_;
 }
 
 void Game::init() {
-
 	// initialize the SDL singleton
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroid.resources.json");
 
-	fighter_ = new Container();
+
+// Create the manager
+	mngr_ = new ecs::Manager();
+	//mngr_->setHandler(ecs::hdlr::PACMAN, pacman);
+	fighter_ = mngr_->addEntity();
+
+	auto tr = mngr_->addComponent<Transform>(fighter_);
+	tr->initComponent();
+
 	objs_.push_back(fighter_);
 	fighter_->setWidth(50.0f);
 	fighter_->setHeight(50.0f);
@@ -55,7 +52,7 @@ void Game::init() {
 	fighter_->addComponent(new DeAcceleration());
 	fighter_->addComponent(new ShowAtOppositeSide());
 	fighter_->addComponent(new HealthComponent(&sdlutils().images().at("heart"), 3));
-//
+	//fighter_->addComponent(new Gun(&sdlutils().images().at("heart"));
 //	// game manager
 //	gm_ = new GameManager(ball_);
 //	gm_->addComponent(new GameCtrl());

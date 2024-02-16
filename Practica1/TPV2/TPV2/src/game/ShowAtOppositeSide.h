@@ -1,10 +1,10 @@
 #pragma once
-#include "PhysicsComponent.h"
+#include "../ecs/Component.h"
 
-class ShowAtOppositeSide : public PhysicsComponent
+class ShowAtOppositeSide : public ecs::Component
 {
 public:
 	ShowAtOppositeSide() = default;
 	~ShowAtOppositeSide() override = default;
-	void update(Container *o) override;
+	void update() override;
 };

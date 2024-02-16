@@ -1,13 +1,12 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #pragma once
+#include "../ecs/Component.h"
 
-#include "RenderComponent.h"
-
-class InfoMsgs: public RenderComponent {
+class InfoMsgs: public ecs::Component {
 public:
 	InfoMsgs();
 	virtual ~InfoMsgs();
-	void render(Container *o) override;
+	void render() override;
 };
 

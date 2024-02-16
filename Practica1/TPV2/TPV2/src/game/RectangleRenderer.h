@@ -3,15 +3,15 @@
 #pragma once
 
 #include <SDL_pixels.h>
-#include "RenderComponent.h"
+#include "../ecs/Component.h"
 
-class RectangleRenderer: public RenderComponent {
+class RectangleRenderer: public ecs::Component {
 public:
 	RectangleRenderer();
 	RectangleRenderer(SDL_Color color);
 	virtual ~RectangleRenderer();
 
-	virtual void render(Container *o) override;
+	virtual void render() override;
 
 private:
 	SDL_Color color_;

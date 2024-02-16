@@ -2,15 +2,15 @@
 
 #pragma once
 
-#include "RenderComponent.h"
+#include "../ecs/Component.h"
 
 class Texture;
 
-class ImageRenderer: public RenderComponent {
+class ImageRenderer: public ecs::Component {
 public:
 	ImageRenderer(Texture *img);
 	virtual ~ImageRenderer();
-	void render(Container *o) override;
+	void render() override;
 private:
 	Texture *img_;
 };

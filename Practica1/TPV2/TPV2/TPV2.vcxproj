@@ -24,23 +24,15 @@
     <ClInclude Include="src\ecs\ecs_defs_example.h" />
     <ClInclude Include="src\ecs\Entity.h" />
     <ClInclude Include="src\ecs\Manager.h" />
-    <ClInclude Include="src\game\Component.h" />
-    <ClInclude Include="src\game\Container.h" />
     <ClInclude Include="src\game\DeAcceleration.h" />
     <ClInclude Include="src\game\EmptyRectangleRenderer.h" />
     <ClInclude Include="src\game\FighterCtrl.h" />
     <ClInclude Include="src\game\Game.h" />
-    <ClInclude Include="src\game\GameCtrl.h" />
-    <ClInclude Include="src\game\GameManager.h" />
-    <ClInclude Include="src\game\GameObject.h" />
     <ClInclude Include="src\game\Gun.h" />
     <ClInclude Include="src\game\HealthComponent.h" />
     <ClInclude Include="src\game\ImageRenderer.h" />
     <ClInclude Include="src\game\InfoMsgs.h" />
-    <ClInclude Include="src\game\InputComponent.h" />
-    <ClInclude Include="src\game\PhysicsComponent.h" />
     <ClInclude Include="src\game\RectangleRenderer.h" />
-    <ClInclude Include="src\game\RenderComponent.h" />
     <ClInclude Include="src\game\ScoreRenderer.h" />
     <ClInclude Include="src\game\ShowAtOppositeSide.h" />
     <ClInclude Include="src\game\Transform.h" />
@@ -68,13 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ecs\Manager.cpp" />
-    <ClCompile Include="src\game\Containter.cpp" />
     <ClCompile Include="src\game\DeAcceleration.cpp" />
     <ClCompile Include="src\game\EmptyRectangleRenderer.cpp" />
     <ClCompile Include="src\game\FighterCtrl.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
-    <ClCompile Include="src\game\GameCtrl.cpp" />
-    <ClCompile Include="src\game\GameManager.cpp" />
     <ClCompile Include="src\game\Gun.cpp" />
     <ClCompile Include="src\game\HealthComponent.cpp" />
     <ClCompile Include="src\game\ImageRenderer.cpp" />
