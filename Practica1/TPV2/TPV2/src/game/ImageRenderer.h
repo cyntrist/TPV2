@@ -2,16 +2,21 @@
 
 #pragma once
 
+#include "Transform.h"
 #include "../ecs/Component.h"
 
 class Texture;
 
 class ImageRenderer: public ecs::Component {
 public:
+	__CMPID_DECL__(ecs::cmp::IMAGE)
+
 	ImageRenderer(Texture *img);
 	virtual ~ImageRenderer();
+	void initComponent() override;
 	void render() override;
 private:
-	Texture *img_;
+	Texture* img_;
+	Transform* transform_;
 };
 

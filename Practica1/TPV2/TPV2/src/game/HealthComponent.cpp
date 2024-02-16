@@ -11,6 +11,11 @@ HealthComponent::HealthComponent(Texture* img, int lives)
 
 }
 
+void HealthComponent::initComponent()
+{
+	Component::initComponent();
+}
+
 void HealthComponent::render()
 {
 	for (int i = 0; i < lives_; i++)

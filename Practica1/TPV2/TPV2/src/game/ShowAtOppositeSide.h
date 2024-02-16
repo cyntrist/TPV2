@@ -6,6 +6,8 @@ class ShowAtOppositeSide : public ecs::Component
 {
 	Transform* transform_;
 public:
+	__CMPID_DECL__(ecs::cmp::OPPOSITE)
+
 	ShowAtOppositeSide() = default;
 	~ShowAtOppositeSide() override = default;
 	void initComponent() override;

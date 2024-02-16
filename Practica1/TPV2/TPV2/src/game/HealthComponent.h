@@ -9,9 +9,12 @@ class HealthComponent : public ecs::Component
 	int lives_, iniLives_;
 
 public:
+	__CMPID_DECL__(ecs::cmp::HEALTH)
+
 	HealthComponent(Texture *img, int lives);
 	~HealthComponent() override = default;
 
+	void initComponent() override;
 	int getLives() const { return lives_; }
 	void subLives() { lives_--; }
 	void addLives() { lives_++; }

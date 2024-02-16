@@ -6,6 +6,7 @@
 
 class ScoreRenderer: public ecs::Component {
 public:
+	__CMPID_DECL__(ecs::cmp::SCORE)
 	ScoreRenderer();
 	virtual ~ScoreRenderer();
 	void render() override;

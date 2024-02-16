@@ -12,9 +12,11 @@ class Transform: public ecs::Component {
 	float rot_;
 
 public:
+	__CMPID_DECL__(ecs::cmp::TRANSFORM)
+
 	Transform();
 	virtual ~Transform();
-	void initComponent(Vector2D pos, Vector2D vel, float w, float h, float r) override;
+	void init(Vector2D pos, Vector2D vel, float w, float h, float r);
 	void update() override;
 
 	Vector2D& getPos() { return pos_; }

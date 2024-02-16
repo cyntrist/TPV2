@@ -5,10 +5,8 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Collisions.h"
 #include "../ecs/Entity.h"
-#include "EmptyRectangleRenderer.h"
 #include "ImageRenderer.h"
 #include "InfoMsgs.h"
-#include "RectangleRenderer.h"
 #include "ScoreRenderer.h"
 #include "Transform.h"
 #include "DeAcceleration.h"
@@ -39,7 +37,7 @@ void Game::init() {
 	auto tr = mngr_->addComponent<Transform>(fighter_);
 	auto size = 50;
 	
-	tr->initComponent(
+	tr->init(
 		Vector2D(sdlutils().width()/2, sdlutils().height()/2),
 		Vector2D(0,0),
 		size,
@@ -54,19 +52,11 @@ void Game::init() {
 	mngr_->addComponent<DeAcceleration>(fighter_);
 	mngr_->addComponent<ShowAtOppositeSide>(fighter_);
 	mngr_->addComponent<HealthComponent>(fighter_, &sdlutils().images().at("heart"), 3);
-
-	//fighter_->addComponent(new Gun(&sdlutils().images().at("heart"));
-//	// game manager
-//	gm_ = new GameManager(ball_);
-//	gm_->addComponent(new GameCtrl());
-//	gm_->addComponent(new ScoreRenderer());
-//	gm_->addComponent(new InfoMsgs());
-//	objs_.push_back(gm_);
+	mngr_->addComponent<Gun>(fighter_, &sdlutils().images().at("heart"));
 
 }
 
 void Game::start() {
-
 	// a boolean to exit the loop
 	bool exit = false;
 
@@ -83,34 +73,23 @@ void Game::start() {
 			continue;
 		}
 
-		for (auto &o : objs_) {
-			o->handleInput();
-		}
+		mngr_->update();
+		mngr_->refresh();
 
-		// update
-		for (auto &o : objs_) {
-			o->update();
-		}
-
-		//checkCollisions();
+		checkCollisions();
 
 		sdlutils().clearRenderer();
-
-		// render
-		for (auto &o : objs_) {
-			o->render();
-		}
-
+		mngr_->render();
 		sdlutils().presentRenderer();
+
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
 
-		if (frameTime < 20)
-			SDL_Delay(20 - frameTime);
+		if (frameTime < 10)
+			SDL_Delay(10 - frameTime);
 	}
-
 }
 
-//void Game::checkCollisions() {
+void Game::checkCollisions() {
 //	if (gm_->getState() != GameManager::RUNNING)
 //		return;
 //
@@ -133,5 +112,5 @@ void Game::start() {
 //		gm_->onBallExit(GameManager::LEFT);
 //	else if (ball_->getPos().getX() + ball_->getWidth() > sdlutils().width())
 //		gm_->onBallExit(GameManager::RIGHT);
-//}
+}
 

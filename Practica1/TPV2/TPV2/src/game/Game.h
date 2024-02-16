@@ -20,8 +20,7 @@ public:
 	void init();
 	void start();
 private:
-	//void checkCollisions();
-
+	void checkCollisions();
 	ecs::Manager* mngr_;
 	ecs::Entity* fighter_;
 };

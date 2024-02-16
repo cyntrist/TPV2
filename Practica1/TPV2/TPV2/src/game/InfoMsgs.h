@@ -5,6 +5,7 @@
 
 class InfoMsgs: public ecs::Component {
 public:
+	__CMPID_DECL__(ecs::cmp::INFO)
 	InfoMsgs();
 	virtual ~InfoMsgs();
 	void render() override;

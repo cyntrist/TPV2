@@ -12,7 +12,7 @@ Transform::Transform() {
 Transform::~Transform() {
 }
 
-void Transform::initComponent(Vector2D pos, Vector2D vel, float w, float h, float r)
+void Transform::init(Vector2D pos, Vector2D vel, float w, float h, float r)
 {
 	pos_ = pos;
 	vel_ = vel;

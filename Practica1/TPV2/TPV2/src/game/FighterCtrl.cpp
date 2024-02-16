@@ -1,5 +1,6 @@
 #include "FighterCtrl.h";
 #include "../sdlutils/SDLUtils.h"
+#include "../ecs/Manager.h"
 
 constexpr double THRUST_FACTOR = 0.2f;
 constexpr double ROTATION_MOVE = 5.0f;
@@ -11,20 +12,26 @@ right_(SDL_SCANCODE_RIGHT)
 {
 }
 
-void FighterCtrl::handleInput()
+void FighterCtrl::initComponent()
+{
+	transform_ = mngr_->getComponent<Transform>(ent_);
+	assert(transform_ != nullptr);
+}
+
+void FighterCtrl::update()
 {
 	auto &ihdlr = ih();
 
 	if (ihdlr.isKeyDown(left_)) {
-		o->setRotation(o->getRotation() - ROTATION_MOVE);
+		transform_->setRotation(transform_->getRot() - ROTATION_MOVE);
 	}
 	else if (ihdlr.isKeyDown(right_)) {
-		o->setRotation(o->getRotation() + ROTATION_MOVE);
+		transform_->setRotation(transform_->getRot() + ROTATION_MOVE);
 	} 
 	if (ihdlr.isKeyDown(up_))
 	{
 		sdlutils().soundEffects().at("thrust").play();
-		auto &vel = o->getVel();
-		vel = vel + Vector2D(0,-1).rotate(o->getRotation())*THRUST_FACTOR;
+		auto &vel = transform_->getVel();
+		vel = vel + Vector2D(0,-1).rotate(transform_->getRot())*THRUST_FACTOR;
 	}
 }
