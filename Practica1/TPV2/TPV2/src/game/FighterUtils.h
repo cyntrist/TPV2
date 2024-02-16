@@ -3,6 +3,7 @@
 
 class FighterUtils : public FighterFacade
 {
+	ecs::Manager* mngr_;
 public:
 	FighterUtils() = default;
 	~FighterUtils() = default;

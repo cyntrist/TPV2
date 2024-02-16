@@ -11,7 +11,7 @@
 // Instead of a Singleton class, we could make it part of
 // SDLUtils as well.
 
-class InputHandler: public Singleton<InputHandler> {
+class InputHandler : public Singleton<InputHandler> {
 
 	friend Singleton<InputHandler> ;
 

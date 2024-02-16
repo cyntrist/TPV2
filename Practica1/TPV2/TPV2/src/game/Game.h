@@ -10,11 +10,7 @@ namespace ecs
 	struct Entity;
 }
 
-// when you are not using the methods of a class, just
-// say that it exists, that saves time when parsing files
-class Container;
-
-class Game
+class Game : public Singleton<Game>
 {
 public:
 	virtual ~Game();
@@ -70,4 +66,10 @@ private:
 	void checkCollisions();
 	ecs::Manager* mngr_;
 	ecs::Entity* fighter_;
+
+	friend Singleton;
 };
+
+inline Game& g() {
+	return* Game::instance();
+}

@@ -11,6 +11,7 @@
 #include "Transform.h"
 #include "DeAcceleration.h"
 #include "FighterCtrl.h"
+#include "FighterUtils.h"
 #include "Gun.h"
 #include "HealthComponent.h"
 #include "ShowAtOppositeSide.h"
@@ -28,32 +29,11 @@ void Game::init() {
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroid.resources.json");
 
-
-// Create the manager
+	// Manager
 	mngr_ = new ecs::Manager();
-	mngr_->setHandler(ecs::hdlr::FIGHTER, fighter_);
-	fighter_ = mngr_->addEntity();
-
-	auto tr = mngr_->addComponent<Transform>(fighter_);
-	auto size = 50;
-	
-	tr->init(
-		Vector2D(sdlutils().width()/2, sdlutils().height()/2),
-		Vector2D(0,0),
-		size,
-		size,
-		90.0f
-	);
-	tr->setPos(Vector2D(sdlutils().width() / 2 - tr->getWidth()/2,
-			sdlutils().height() / 2 - tr->getHeight()/2));
-
-	mngr_->addComponent<ImageRenderer>(fighter_, &sdlutils().images().at("fighter"));
-	mngr_->addComponent<FighterCtrl>(fighter_);
-	mngr_->addComponent<DeAcceleration>(fighter_);
-	mngr_->addComponent<ShowAtOppositeSide>(fighter_);
-	mngr_->addComponent<HealthComponent>(fighter_, &sdlutils().images().at("heart"), 3);
-	mngr_->addComponent<Gun>(fighter_, &sdlutils().images().at("fire"));
-
+	// Fighter
+	auto fighterFacade = new FighterUtils();
+	fighterFacade->create_fighter();
 }
 
 void Game::start() {

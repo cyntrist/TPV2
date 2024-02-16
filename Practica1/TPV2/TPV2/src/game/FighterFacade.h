@@ -1,4 +1,5 @@
 #pragma once
+#include "Game.h"
 
 class FighterFacade
 {
@@ -15,4 +16,4 @@ public:
 	void virtual reset_fighter() = 0;
 	void virtual reset_lives() = 0;
 	int virtual update_lives(int n) = 0;
-}
+};

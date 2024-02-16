@@ -7,7 +7,7 @@
 
 
 void start() {
-	Game g;
+	Game &g = *Game::instance();
 
 	g.init();
 	g.start();
