@@ -52,7 +52,7 @@ void Game::init() {
 	mngr_->addComponent<DeAcceleration>(fighter_);
 	mngr_->addComponent<ShowAtOppositeSide>(fighter_);
 	mngr_->addComponent<HealthComponent>(fighter_, &sdlutils().images().at("heart"), 3);
-	mngr_->addComponent<Gun>(fighter_, &sdlutils().images().at("heart"));
+	mngr_->addComponent<Gun>(fighter_, &sdlutils().images().at("fire"));
 
 }
 

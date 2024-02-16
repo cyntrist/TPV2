@@ -7,7 +7,7 @@
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/SDLUtils.h"
 
-constexpr int BULLET_SIZE = 10,
+constexpr int BULLET_SIZE = 50,
               SHOOT_TIMER = 250;
 
 Gun::Gun(Texture* img)
@@ -23,7 +23,7 @@ void Gun::initComponent()
 
 void Gun::render()
 {
-	for (auto i : bullets_)
+	for (auto& i : bullets_)
 	{
 		if (i.used)
 		{
@@ -76,6 +76,22 @@ void Gun::shoot(Vector2D p, Vector2D v, int width, int height, float r)
 
 	// dispara
 	lastShot_ = newShot;
-	
+
+	int i = 0;
+	while(bullets_[i].used)
+	{
+		i++;
+	}
+
+	Bullet& bullet = bullets_[i];
+	bullet.used = true;
+	bullet.pos = p;
+	bullet.vel = v;
+	bullet.width = width;
+	bullet.height = height;
+	bullet.rot = r;
+
+	sdlutils().soundEffects().at("fire").play();
+
 	std::cout << "lol lmao pew pew " << std::endl;
 }
