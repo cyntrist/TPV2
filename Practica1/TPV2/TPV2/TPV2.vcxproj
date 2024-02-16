@@ -26,6 +26,8 @@
     <ClInclude Include="src\game\DeAcceleration.h" />
     <ClInclude Include="src\game\ecs_defs.h" />
     <ClInclude Include="src\game\FighterCtrl.h" />
+    <ClInclude Include="src\game\FighterFacade.h" />
+    <ClInclude Include="src\game\FighterUtils.h" />
     <ClInclude Include="src\game\Game.h" />
     <ClInclude Include="src\game\Gun.h" />
     <ClInclude Include="src\game\HealthComponent.h" />
@@ -59,6 +61,7 @@
     <ClCompile Include="src\ecs\Manager.cpp" />
     <ClCompile Include="src\game\DeAcceleration.cpp" />
     <ClCompile Include="src\game\FighterCtrl.cpp" />
+    <ClCompile Include="src\game\FighterUtils.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="src\game\Gun.cpp" />
     <ClCompile Include="src\game\HealthComponent.cpp" />
