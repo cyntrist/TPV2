@@ -1,9 +1,9 @@
-#include "FighterCtrl.h";
+#include "FighterCtrl.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../ecs/Manager.h"
 
 constexpr double THRUST_FACTOR = 0.2f;
-constexpr double ROTATION_MOVE = 5.0f;
+constexpr double ROTATION_MOVE = 2.0f;
 
 FighterCtrl::FighterCtrl() :
 up_ (SDL_SCANCODE_UP),

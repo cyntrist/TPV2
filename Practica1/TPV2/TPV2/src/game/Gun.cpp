@@ -1,15 +1,24 @@
 ﻿#include "Gun.h"
 
 #include <SDL_rect.h>
-
+#include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/macros.h"
 #include "../sdlutils/Texture.h"
+#include "../sdlutils/SDLUtils.h"
+
+constexpr int BULLET_SIZE = 10,
+              SHOOT_TIMER = 250;
 
 Gun::Gun(Texture* img)
 	: image_(img)
 {
-	
+}
+
+void Gun::initComponent()
+{
+	transform_ = mngr_->getComponent<Transform>(ent_);
+	assert(transform_ != nullptr);
 }
 
 void Gun::render()
@@ -36,19 +45,37 @@ void Gun::update()
 
 	if (ih().isKeyDown(SDL_SCANCODE_S))
 	{
-		//shoot();
+		Vector2D p = transform_->getPos();
+		Vector2D v = transform_->getVel();
+		float w = transform_->getWidth();
+		float h = transform_->getHeight();
+		float r = transform_->getRot();
+		int bw = 5;
+		int bh = 20;
+		Vector2D c = p + Vector2D(w / 2.0f, h / 2.0f);
+		Vector2D bp = c - Vector2D(bw / 2, h / 2.0f + 5.0f + bh).rotate(r) - Vector2D(bw / 2, bh / 2);
+		Vector2D bv = Vector2D(0, -1).rotate(r) * (v.magnitude() + 5.0f);
+		float br = Vector2D(0, -1).angle(bv);
+		shoot(bp, bv, bw, bh, br);
 	}
 }
 
 void Gun::reset() const
 {
 	for (auto a : bullets_)
-		if (a.used) 
+		if (a.used)
 			a.used = false;
 }
 
 void Gun::shoot(Vector2D p, Vector2D v, int width, int height, float r)
 {
+	// ha pasado el cooldown?
+	const int newShot = sdlutils().currRealTime();
+	if (newShot < lastShot_ + SHOOT_TIMER)
+		return;
 
-
+	// dispara
+	lastShot_ = newShot;
+	
+	std::cout << "lol lmao pew pew " << std::endl;
 }

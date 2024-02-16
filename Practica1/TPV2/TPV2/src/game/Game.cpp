@@ -31,7 +31,7 @@ void Game::init() {
 
 // Create the manager
 	mngr_ = new ecs::Manager();
-	//mngr_->setHandler(ecs::hdlr::PACMAN, pacman);
+	mngr_->setHandler(ecs::hdlr::FIGHTER, fighter_);
 	fighter_ = mngr_->addEntity();
 
 	auto tr = mngr_->addComponent<Transform>(fighter_);

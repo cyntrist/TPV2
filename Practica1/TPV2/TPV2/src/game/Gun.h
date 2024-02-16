@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <array>
+
+#include "Transform.h"
 #include "../ecs/Component.h"
 #include "../utils/Vector2D.h"
 
@@ -25,6 +27,7 @@ public:
 	using bullets_array = std::array<Bullet, max_bullets>;
 	using iterator = bullets_array::iterator;
 
+	void initComponent() override;
 	void render() override;
 	void update() override;
 	void reset() const;
@@ -46,5 +49,6 @@ private:
 	void shoot(Vector2D p, Vector2D v, int width, int height, float r);
 	bullets_array bullets_;
 	Texture* image_;
-	//…
+	Transform* transform_;
+	int lastShot_;
 };
