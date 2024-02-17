@@ -66,10 +66,10 @@ private:
 	GameState *gameover_state_;*/
 	Game();
 	void checkCollisions();
-	FighterUtils* futils_;
-	AsteroidsUtils* autils_;
+	FighterUtils* f_utils_;
+	AsteroidsUtils* a_utils_;
 	ecs::Manager* mngr_;
-
+	int gen_timer_;
 
 	friend Singleton;
 };

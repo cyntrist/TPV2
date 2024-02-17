@@ -9,15 +9,17 @@
 #include "ShowAtOppositeSide.h"
 #include "AsteroidsUtils.h"
 #include "FighterUtils.h"
+#include "Gun.h"
+#include "HealthComponent.h"
 
 Game::Game()
-	: mngr_(nullptr)
+	: mngr_(nullptr), gen_timer_(0)
 {}
 
 Game::~Game() {
 	delete mngr_;
-	delete futils_;
-	delete autils_;
+	delete f_utils_;
+	delete a_utils_;
 }
 
 void Game::init() {
@@ -28,12 +30,12 @@ void Game::init() {
 	// Manager
 	mngr_ = new ecs::Manager();
 	// Fighter
-	futils_ = new FighterUtils();
-	futils_->create_fighter();
-	futils_->reset_fighter();
+	f_utils_ = new FighterUtils();
+	f_utils_->create_fighter();
+	f_utils_->reset_fighter();
 	//Asteroids
-	autils_ = new AsteroidsUtils();
-	autils_->create_asteroids(3);
+	a_utils_ = new AsteroidsUtils();
+	a_utils_->create_asteroids(3);
 }
 
 void Game::start() {
@@ -70,6 +72,49 @@ void Game::start() {
 }
 
 void Game::checkCollisions() {
+	auto fighter = mngr_->getHandler(ecs::hdlr::FIGHTER);
+	auto asteroids = mngr_->getEntities(ecs::grp::ASTEROID);
 
+	auto f_trans = mngr_->getComponent<Transform>(fighter);
+	auto f_health = mngr_->getComponent<HealthComponent>(fighter);
+	// asteroids + fighter
+	for( auto a : asteroids)	
+	{
+		auto a_trans = mngr_->getComponent<Transform>(a);
+		if (Collisions::collidesWithRotation(
+			f_trans->getPos(), 
+			f_trans->getWidth(), 
+			f_trans->getHeight(), 
+			f_trans->getRot(),
+			a_trans->getPos(),
+			a_trans->getWidth(),
+			a_trans->getHeight(),
+			a_trans->getRot()
+			))
+		{
+			f_health->addLives(-1);
+			//break;
+		}
+
+		// asteroids + bullet
+		auto f_gun = mngr_->getComponent<Gun>(fighter);
+		for (Gun::Bullet& b : *f_gun)
+			if (b.used && Collisions::collidesWithRotation(
+			b.pos, 
+			b.width, 
+			b.height, 
+			b.rot,
+			a_trans->getPos(),
+			a_trans->getWidth(),
+			a_trans->getHeight(),
+			a_trans->getRot()
+			))
+			{
+				//
+				a_utils_->split_astroid(a);
+				b.used = false;
+				sdlutils().soundEffects().at("explosion").play();
+			}
+	}
 }
 

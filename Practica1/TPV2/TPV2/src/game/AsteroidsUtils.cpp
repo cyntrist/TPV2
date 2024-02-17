@@ -8,7 +8,7 @@
 #include "../sdlutils/SDLUtils.h"
 
 constexpr int PADDING = 50;
-constexpr float MIN_SIZE = 24.0f;
+constexpr float MIN_SIZE = 10.0f;
 constexpr float SIZE_FACTOR = 5.0f;
 constexpr int CHILDREN = 2;
 

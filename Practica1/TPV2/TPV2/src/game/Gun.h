@@ -9,7 +9,6 @@ class Texture;
 
 class Gun : public ecs::Component
 {
-	//...
 public:
 	__CMPID_DECL__(ecs::cmp::GUN)
 
