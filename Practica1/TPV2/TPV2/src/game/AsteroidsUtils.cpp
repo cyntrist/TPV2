@@ -8,7 +8,7 @@
 #include "../sdlutils/SDLUtils.h"
 
 constexpr int PADDING = 50;
-constexpr float MIN_SIZE = 10.0f;
+constexpr float MIN_SIZE = 18.0f;
 constexpr float SIZE_FACTOR = 5.0f;
 constexpr int CHILDREN = 2;
 
@@ -56,7 +56,7 @@ void AsteroidsUtils::create_asteroids(int n)
 			+ Vector2D(random_.nextInt(-100, 100), random_.nextInt(-100, 100));
 		auto vel = (center - pos).normalize() * speed;
 
-		create_asteroid(pos, vel, size, gen);
+		create_asteroid(pos, vel, gen);
 	}
 }
 
@@ -83,16 +83,17 @@ void AsteroidsUtils::split_astroid(ecs::entity_t a)
 			int side = std::max(width, height);
 			Vector2D newPos = pos + vel.rotate(r) * 2 * side;
 			Vector2D newVel = vel.rotate(r) * 1.1f;
-			create_asteroid(newPos, newVel, side, gen - 1);
+			create_asteroid(newPos, newVel, gen - 1);
 		}
 }
 
-void AsteroidsUtils::create_asteroid(Vector2D pos, Vector2D vel, int size, int gen)
+void AsteroidsUtils::create_asteroid(Vector2D pos, Vector2D vel, int gen)
 {
 	auto* asteroid = mngr_->addEntity(ecs::grp::ASTEROID);
 
 	std::string type = "asteroid";
 	auto transform = mngr_->addComponent<Transform>(asteroid);
+	const auto size = MIN_SIZE + SIZE_FACTOR * gen;
 	transform->init(pos, vel, size, size, 0.0f);
 
 	int chance = random_.nextInt(0, 4); // 25% probabilidad de hacer un asteroide dorado

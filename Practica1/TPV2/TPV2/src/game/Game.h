@@ -69,7 +69,7 @@ private:
 	FighterUtils* f_utils_;
 	AsteroidsUtils* a_utils_;
 	ecs::Manager* mngr_;
-	int gen_timer_;
+	int last_asteroid_;
 
 	friend Singleton;
 };

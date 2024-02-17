@@ -5,15 +5,15 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Collisions.h"
 #include "../ecs/Entity.h"
-#include "FighterCtrl.h"
-#include "ShowAtOppositeSide.h"
 #include "AsteroidsUtils.h"
 #include "FighterUtils.h"
 #include "Gun.h"
 #include "HealthComponent.h"
 
+constexpr float ASTEROID_TIMER = 10000; 
+
 Game::Game()
-	: mngr_(nullptr), gen_timer_(0)
+	: mngr_(nullptr)
 {}
 
 Game::~Game() {
@@ -63,6 +63,12 @@ void Game::start() {
 		sdlutils().clearRenderer();
 		mngr_->render();
 		sdlutils().presentRenderer();
+
+		if (sdlutils().currRealTime() > last_asteroid_ + ASTEROID_TIMER)
+		{
+			a_utils_->create_asteroids(1);
+			last_asteroid_ = sdlutils().currRealTime();
+		}
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
 

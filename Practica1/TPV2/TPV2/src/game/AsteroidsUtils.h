@@ -7,7 +7,7 @@ class AsteroidsUtils : public AsteroidsFacade
 {
 	ecs::Manager* mngr_;
 	RandomNumberGenerator& random_;
-	void create_asteroid(Vector2D, Vector2D, int, int);
+	void create_asteroid(Vector2D, Vector2D, int);
 public:
 	AsteroidsUtils();
 	~AsteroidsUtils() override = default;
