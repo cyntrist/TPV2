@@ -4,5 +4,5 @@
 class Follow : public ecs::Component
 {
 public:
-	
+	__CMPID_DECL__(ecs::cmp::FOLLOWS)
 };

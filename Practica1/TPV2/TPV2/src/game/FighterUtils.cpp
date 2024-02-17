@@ -14,7 +14,7 @@ constexpr uint8_t LIVES = 3;
 void FighterUtils::create_fighter()
 {
 	mngr_ = g().getManager();
-	fighter_ = mngr_->addEntity();
+	fighter_ = mngr_->addEntity(ecs::grp::FIGHTER);
 
 	// transform
 	const auto tr = mngr_->addComponent<Transform>(fighter_);

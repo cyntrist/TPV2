@@ -11,11 +11,7 @@ HealthComponent::HealthComponent(Texture* img, int lives)
 
 }
 
-HealthComponent::~HealthComponent()
-{
-	delete image_;
-	Component::~Component();
-}
+HealthComponent::~HealthComponent() = default;
 
 void HealthComponent::initComponent()
 {

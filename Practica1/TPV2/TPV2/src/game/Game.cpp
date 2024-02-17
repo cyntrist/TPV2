@@ -70,27 +70,6 @@ void Game::start() {
 }
 
 void Game::checkCollisions() {
-//	if (gm_->getState() != GameManager::RUNNING)
-//		return;
-//
-//	// check if ball hits paddles
-//	if (Collisions::collides(leftPaddle_->getPos(), leftPaddle_->getWidth(),
-//			leftPaddle_->getHeight(), ball_->getPos(), ball_->getWidth(),
-//			ball_->getHeight())
-//			|| Collisions::collides(rightPaddle_->getPos(),
-//					rightPaddle_->getWidth(), rightPaddle_->getHeight(),
-//					ball_->getPos(), ball_->getWidth(), ball_->getHeight())) {
-//
-//		// change the direction of the ball, and increment the speed
-//		auto &vel = ball_->getVel(); // the use of & is important, so the changes goes directly to the ball
-//		vel.setX(-vel.getX());
-//		vel = vel * 1.2f;
-//
-//		// play some sound
-//		sdlutils().soundEffects().at("paddle_hit").play();
-//	} else if (ball_->getPos().getX() < 0)
-//		gm_->onBallExit(GameManager::LEFT);
-//	else if (ball_->getPos().getX() + ball_->getWidth() > sdlutils().width())
-//		gm_->onBallExit(GameManager::RIGHT);
+
 }
 
