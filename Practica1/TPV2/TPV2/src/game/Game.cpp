@@ -1,19 +1,13 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "Game.h"
+#include "AsteroidsUtils.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Collisions.h"
 #include "../ecs/Entity.h"
-#include "ImageRenderer.h"
-#include "InfoMsgs.h"
-#include "ScoreRenderer.h"
-#include "Transform.h"
-#include "DeAcceleration.h"
 #include "FighterCtrl.h"
 #include "FighterUtils.h"
-#include "Gun.h"
-#include "HealthComponent.h"
 #include "ShowAtOppositeSide.h"
 
 Game::Game()
@@ -32,10 +26,12 @@ void Game::init() {
 	// Manager
 	mngr_ = new ecs::Manager();
 	// Fighter
-	auto fighterFacade = new FighterUtils();
+	auto* fighterFacade = new FighterUtils();
 	fighterFacade->create_fighter();
 	fighterFacade->reset_fighter();
 	//Asteroids
+	auto* asteroidsFacade = new AsteroidsUtils();
+	asteroidsFacade->create_asteroids(3);
 }
 
 void Game::start() {
