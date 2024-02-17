@@ -65,7 +65,7 @@ void AsteroidsUtils::create_asteroids(int n) {
 		Vector2D v = (c - p).normalize() * (rand_.nextInt(1, 10) / 10.0f);
 
 		auto g = rand_.nextInt(1, 4);
-		generateAsteroid(p, v, g);
+			(p, v, g);
 
 	}
 

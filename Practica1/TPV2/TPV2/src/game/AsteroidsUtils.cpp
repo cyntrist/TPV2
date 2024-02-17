@@ -51,10 +51,10 @@ void AsteroidsUtils::create_asteroids(int n)
 		pos.setY(pos.getY() - size / 2);
 
 		// velocidad aleatoria hacia el centro de la ventana
-		float speed = sdlutils().rand().nextInt(1, 10) / 10.0f;
-		Vector2D center = Vector2D(sdlutils().width()/2, sdlutils().height()/2)
+		auto speed = sdlutils().rand().nextInt(1, 10) / 10.0f;
+		auto center = Vector2D(sdlutils().width()/2, sdlutils().height()/2)
 			+ Vector2D(random_.nextInt(-100, 100), random_.nextInt(-100, 100));
-		Vector2D vel = (center - pos).normalize() * speed;
+		auto vel = (center - pos).normalize() * speed;
 
 		create_asteroid(pos, vel, size, gen);
 	}
@@ -96,14 +96,20 @@ void AsteroidsUtils::create_asteroid(Vector2D pos, Vector2D vel, int size, int g
 	transform->init(pos, vel, size, size, 0.0f);
 
 	int chance = random_.nextInt(0, 4); // 25% probabilidad de hacer un asteroide dorado
-	if (chance == 0)
+	auto fighter = mngr_->getHandler(ecs::hdlr::FIGHTER);
+	auto f_trans = mngr_->getComponent<Transform>(fighter);
+	switch (chance)
 	{
+	case 0:
 		type = "asteroid_gold";
-		mngr_->addComponent<Follow>(asteroid);
-	}
-	else
+		mngr_->addComponent<Follow>(asteroid, f_trans->getPos());
+		break;
+	case 1:
 		mngr_->addComponent<TowardDestination>(asteroid);
-
+		break;
+	default:
+		break;
+	}
 	mngr_->addComponent<ShowAtOppositeSide>(asteroid);
 	mngr_->addComponent<Generations>(asteroid, gen);
 	mngr_->addComponent<ImageWithFrames>(asteroid, &sdlutils().images().at(type), 6, 5);
