@@ -3,6 +3,8 @@
 #pragma once
 #include "../ecs/Manager.h"
 #include "../utils/Singleton.h"
+class FighterUtils;
+class AsteroidsUtils;
 
 namespace ecs
 {
@@ -64,8 +66,10 @@ private:
 	GameState *gameover_state_;*/
 	Game();
 	void checkCollisions();
+	FighterUtils* futils_;
+	AsteroidsUtils* autils_;
 	ecs::Manager* mngr_;
-	ecs::Entity* fighter_;
+
 
 	friend Singleton;
 };

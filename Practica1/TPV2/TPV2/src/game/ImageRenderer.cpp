@@ -13,7 +13,7 @@ ImageRenderer::ImageRenderer(Texture *img) :
 
 ImageRenderer::~ImageRenderer()
 {
-
+	delete img_;
 }
 
 void ImageRenderer::initComponent()

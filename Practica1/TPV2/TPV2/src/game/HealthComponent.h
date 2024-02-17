@@ -12,7 +12,7 @@ public:
 	__CMPID_DECL__(ecs::cmp::HEALTH)
 
 	HealthComponent(Texture *img, int lives);
-	~HealthComponent() override = default;
+	~HealthComponent() override;
 
 	void initComponent() override;
 	int getLives() const { return lives_; }

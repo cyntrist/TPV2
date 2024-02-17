@@ -7,16 +7,17 @@
 
 class Texture;
 
-class ImageRenderer: public ecs::Component {
+class ImageRenderer : public ecs::Component
+{
 public:
 	__CMPID_DECL__(ecs::cmp::IMAGE)
 
-	ImageRenderer(Texture *img);
-	virtual ~ImageRenderer();
+	ImageRenderer(Texture* img);
+	~ImageRenderer() override;
 	void initComponent() override;
 	void render() override;
+
 private:
 	Texture* img_;
 	Transform* transform_;
 };
-

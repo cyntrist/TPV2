@@ -11,6 +11,12 @@ HealthComponent::HealthComponent(Texture* img, int lives)
 
 }
 
+HealthComponent::~HealthComponent()
+{
+	delete image_;
+	Component::~Component();
+}
+
 void HealthComponent::initComponent()
 {
 	Component::initComponent();

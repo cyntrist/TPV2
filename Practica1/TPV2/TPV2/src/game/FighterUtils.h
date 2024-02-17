@@ -1,6 +1,12 @@
 ﻿#pragma once
 #include "FighterFacade.h"
 
+namespace ecs
+{
+	struct Entity;
+	class Manager;
+}
+
 class FighterUtils : public FighterFacade
 {
 	ecs::Manager* mngr_;

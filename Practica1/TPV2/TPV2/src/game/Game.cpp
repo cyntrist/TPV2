@@ -1,14 +1,14 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "Game.h"
-#include "AsteroidsUtils.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Collisions.h"
 #include "../ecs/Entity.h"
 #include "FighterCtrl.h"
-#include "FighterUtils.h"
 #include "ShowAtOppositeSide.h"
+#include "AsteroidsUtils.h"
+#include "FighterUtils.h"
 
 Game::Game()
 	: mngr_(nullptr)
@@ -16,6 +16,8 @@ Game::Game()
 
 Game::~Game() {
 	delete mngr_;
+	delete futils_;
+	delete autils_;
 }
 
 void Game::init() {
@@ -26,12 +28,12 @@ void Game::init() {
 	// Manager
 	mngr_ = new ecs::Manager();
 	// Fighter
-	auto* fighterFacade = new FighterUtils();
-	fighterFacade->create_fighter();
-	fighterFacade->reset_fighter();
+	futils_ = new FighterUtils();
+	futils_->create_fighter();
+	futils_->reset_fighter();
 	//Asteroids
-	auto* asteroidsFacade = new AsteroidsUtils();
-	asteroidsFacade->create_asteroids(3);
+	autils_ = new AsteroidsUtils();
+	autils_->create_asteroids(3);
 }
 
 void Game::start() {

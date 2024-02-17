@@ -15,7 +15,8 @@ public:
 	__CMPID_DECL__(ecs::cmp::TRANSFORM)
 
 	Transform();
-	virtual ~Transform();
+	virtual ~Transform() override;
+	Transform(Vector2D pos, Vector2D vel, float w, float h, float r);
 	void init(Vector2D pos, Vector2D vel, float w, float h, float r);
 	void update() override;
 
