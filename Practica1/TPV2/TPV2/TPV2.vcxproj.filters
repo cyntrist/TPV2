@@ -189,20 +189,20 @@
     <ClInclude Include="src\game\GameState.h">
       <Filter>Header Files\game\states</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\GameOverState.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
     <ClInclude Include="src\game\NewGameState.h">
-      <Filter>Source Files\game\states</Filter>
+      <Filter>Header Files\game\states</Filter>
     </ClInclude>
     <ClInclude Include="src\game\NewRoundState.h">
-      <Filter>Source Files\game\states</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\RunningState.h">
-      <Filter>Source Files\game\states</Filter>
+      <Filter>Header Files\game\states</Filter>
     </ClInclude>
     <ClInclude Include="src\game\PausedState.h">
-      <Filter>Source Files\game\states</Filter>
+      <Filter>Header Files\game\states</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\GameOverStae.h">
-      <Filter>Source Files\game\states</Filter>
+    <ClInclude Include="src\game\RunningState.h">
+      <Filter>Header Files\game\states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -287,9 +287,6 @@
     <ClCompile Include="src\game\Follow.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\GameState.cpp">
-      <Filter>Source Files\game\states</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\NewGameState.cpp">
       <Filter>Source Files\game\states</Filter>
     </ClCompile>
@@ -302,7 +299,7 @@
     <ClCompile Include="src\game\PausedState.cpp">
       <Filter>Source Files\game\states</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\GameOverStae.cpp">
+    <ClCompile Include="src\game\GameOverState.cpp">
       <Filter>Source Files\game\states</Filter>
     </ClCompile>
   </ItemGroup>

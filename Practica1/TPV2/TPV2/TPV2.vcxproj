@@ -32,7 +32,7 @@
     <ClInclude Include="src\game\FighterUtils.h" />
     <ClInclude Include="src\game\Follow.h" />
     <ClInclude Include="src\game\Game.h" />
-    <ClInclude Include="src\game\GameOverStae.h" />
+    <ClInclude Include="src\game\GameOverState.h" />
     <ClInclude Include="src\game\GameState.h" />
     <ClInclude Include="src\game\Generations.h" />
     <ClInclude Include="src\game\Gun.h" />
@@ -77,8 +77,7 @@
     <ClCompile Include="src\game\FighterUtils.cpp" />
     <ClCompile Include="src\game\Follow.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
-    <ClCompile Include="src\game\GameOverStae.cpp" />
-    <ClCompile Include="src\game\GameState.cpp" />
+    <ClCompile Include="src\game\GameOverState.cpp" />
     <ClCompile Include="src\game\Generations.cpp" />
     <ClCompile Include="src\game\Gun.cpp" />
     <ClCompile Include="src\game\HealthComponent.cpp" />

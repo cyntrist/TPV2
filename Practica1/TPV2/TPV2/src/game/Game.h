@@ -4,9 +4,8 @@
 #include "GameState.h"
 #include "../ecs/Manager.h"
 #include "../utils/Singleton.h"
-class FighterUtils;
 class AsteroidsUtils;
-
+class FighterUtils;
 namespace ecs
 {
 	class Manager;
@@ -66,12 +65,9 @@ private:
 	GameState* newround_state_;
 	GameState* gameover_state_;
 	Game();
-	void checkCollisions();
+	ecs::Manager* mngr_;
 	FighterUtils* f_utils_;
 	AsteroidsUtils* a_utils_;
-	ecs::Manager* mngr_;
-	int last_asteroid_;
-
 	friend Singleton;
 };
 

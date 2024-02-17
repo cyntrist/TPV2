@@ -57,6 +57,7 @@ void FighterUtils::reset_lives()
 int FighterUtils::update_lives(int n)
 {
 	assert(fighter_ != nullptr);
-	mngr_->getComponent<HealthComponent>(fighter_)->addLives(n);
-	return 1; // no entiendo por qué en el enunciado este método es un int, pero dejo esto de placeholder
+	const auto health = mngr_->getComponent<HealthComponent>(fighter_);
+	health->addLives(n);
+	return health->getLives(); 
 }
