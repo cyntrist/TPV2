@@ -16,8 +16,8 @@ public:
 
 	void initComponent() override;
 	int getLives() const { return lives_; }
-	void subLives() { lives_--; }
-	void addLives() { lives_++; }
+	void addLives(int value) { lives_ += value; }
+	void setLives(int value) { lives_ = value; }
 	void resetLives() { lives_ = iniLives_; }
 	void render() override;
 };

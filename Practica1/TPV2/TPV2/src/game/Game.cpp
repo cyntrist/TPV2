@@ -34,6 +34,8 @@ void Game::init() {
 	// Fighter
 	auto fighterFacade = new FighterUtils();
 	fighterFacade->create_fighter();
+	fighterFacade->reset_fighter();
+	//Asteroids
 }
 
 void Game::start() {

@@ -1,5 +1,4 @@
 ﻿#include "FighterUtils.h"
-
 #include "DeAcceleration.h"
 #include "FighterCtrl.h"
 #include "../sdlutils/SDLUtils.h"
@@ -10,13 +9,15 @@
 #include "ShowAtOppositeSide.h"
 #include "Transform.h"
 
+constexpr uint8_t LIVES = 3;
+
 void FighterUtils::create_fighter()
 {
 	mngr_ = g().getManager();
-	auto fighter_ = mngr_->addEntity();
+	fighter_ = mngr_->addEntity();
 
 	// transform
-	auto tr = mngr_->addComponent<Transform>(fighter_);
+	const auto tr = mngr_->addComponent<Transform>(fighter_);
 	auto size = 50;
 	tr->init(
 		Vector2D(sdlutils().width()/2, sdlutils().height()/2),
@@ -34,19 +35,28 @@ void FighterUtils::create_fighter()
 	mngr_->addComponent<FighterCtrl>(fighter_);
 	mngr_->addComponent<DeAcceleration>(fighter_);
 	mngr_->addComponent<ShowAtOppositeSide>(fighter_);
-	mngr_->addComponent<HealthComponent>(fighter_, &sdlutils().images().at("heart"), 3);
+	mngr_->addComponent<HealthComponent>(fighter_, &sdlutils().images().at("heart"), LIVES);
 	mngr_->addComponent<Gun>(fighter_, &sdlutils().images().at("fire"));
 }
 
 void FighterUtils::reset_fighter()
 {
+	assert(fighter_ != nullptr);
+	const auto& tr = mngr_->getComponent<Transform>(fighter_);
+	tr->setPos(Vector2D(sdlutils().width() / 2 - tr->getWidth()/2,
+			sdlutils().height() / 2 - tr->getHeight()/2));
+	mngr_->getComponent<Gun>(fighter_)->reset();
 }
 
 void FighterUtils::reset_lives()
 {
+	assert(fighter_ != nullptr);
+	mngr_->getComponent<HealthComponent>(fighter_)->resetLives();
 }
 
 int FighterUtils::update_lives(int n)
 {
-	return 0;
+	assert(fighter_ != nullptr);
+	mngr_->getComponent<HealthComponent>(fighter_)->addLives(n);
+	return 1; // no entiendo por qué en el enunciado este método es un int, pero dejo esto de placeholder
 }

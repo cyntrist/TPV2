@@ -4,6 +4,7 @@
 class FighterUtils : public FighterFacade
 {
 	ecs::Manager* mngr_;
+	ecs::Entity* fighter_ = nullptr;
 public:
 	FighterUtils() = default;
 	~FighterUtils() = default;
