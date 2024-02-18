@@ -16,8 +16,8 @@ void NewGameState::enter()
 {
 	message_ = &sdlutils().msgs().at("start");
 	rect_ = {
-		sdlutils().width() - message_->width()/2,
-		sdlutils().height() - message_->height()/2,
+		(sdlutils().width() - message_->width())/2,
+		(sdlutils().height() - message_->height())/2,
 		message_->width(),
 		message_->height()
 	};

@@ -7,8 +7,13 @@
 #include "../ecs/Entity.h"
 #include "AsteroidsUtils.h"
 #include "FighterUtils.h"
+#include "GameOverState.h"
 #include "Gun.h"
 #include "HealthComponent.h"
+#include "NewGameState.h"
+#include "NewRoundState.h"
+#include "PausedState.h"
+#include "RunningState.h"
 
 Game::Game()
 	: mngr_(nullptr)
@@ -18,6 +23,12 @@ Game::~Game() {
 	delete mngr_;
 	delete f_utils_;
 	delete a_utils_;
+
+	delete newgame_state_;
+	delete newround_state_;
+	delete running_state_;
+	delete gameover_state_;
+	delete paused_state_;
 }
 
 void Game::init() {
@@ -30,10 +41,15 @@ void Game::init() {
 	// Fighter
 	f_utils_ = new FighterUtils();
 	f_utils_->create_fighter();
-	f_utils_->reset_fighter();
 	//Asteroids
 	a_utils_ = new AsteroidsUtils();
-	a_utils_->create_asteroids(3);
+
+	// States
+	newgame_state_ = new NewGameState(f_utils_);
+	newround_state_ = new NewRoundState(f_utils_, a_utils_);
+	running_state_ = new RunningState(f_utils_, a_utils_);
+	gameover_state_ = new GameOverState();
+	paused_state_ = new PausedState();
 
 	setState(NEWGAME);
 }

@@ -35,7 +35,7 @@ public:
 		switch (s)
 		{
 		case RUNNING:
-			new_state = runing_state_;
+			new_state = running_state_;
 			break;
 		case PAUSED:
 			new_state = paused_state_;
@@ -52,7 +52,8 @@ public:
 		default:
 			break;
 		}
-		current_state_->leave();
+		if (current_state_ != nullptr)
+			current_state_->leave();
 		current_state_ = new_state;
 		current_state_->enter();
 	}
@@ -60,7 +61,7 @@ public:
 private:
 	GameState* current_state_;
 	GameState* paused_state_;
-	GameState* runing_state_;
+	GameState* running_state_;
 	GameState* newgame_state_;
 	GameState* newround_state_;
 	GameState* gameover_state_;

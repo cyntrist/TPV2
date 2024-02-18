@@ -45,6 +45,7 @@ void FighterUtils::reset_fighter()
 	const auto& tr = mngr_->getComponent<Transform>(fighter_);
 	tr->setPos(Vector2D(sdlutils().width() / 2 - tr->getWidth()/2,
 			sdlutils().height() / 2 - tr->getHeight()/2));
+	tr->setVel(Vector2D(0,0));
 	mngr_->getComponent<Gun>(fighter_)->reset();
 }
 

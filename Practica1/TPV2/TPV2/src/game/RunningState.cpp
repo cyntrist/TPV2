@@ -112,5 +112,3 @@ void RunningState::onDeath()
 	else
 		g().setState(Game::GAMEOVER);
 }
-
-

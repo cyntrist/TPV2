@@ -27,7 +27,7 @@ public:
 	float getRot() const { return rot_; }
 
 	void setPos(const Vector2D& value) { pos_ = value; }
-	void setVel(const Vector2D& value) { pos_ = value; }
+	void setVel(const Vector2D& value) { vel_ = value; }
 	void setWidth(const float value) { width_ = value; }
 	void setHeight(const float value) { height_ = value; }
 	void setRotation(const float value) { rot_ = value; }

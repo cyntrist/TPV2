@@ -17,8 +17,8 @@ void GameOverState::enter()
 	else
 		message_ = &sdlutils().msgs().at("game_over");
 	rect_ = {
-		sdlutils().width() - message_->width()/2,
-		sdlutils().height() - message_->height()/2,
+		(sdlutils().width() - message_->width())/2,
+		(sdlutils().height() - message_->height())/2,
 		message_->width(),
 		message_->height()
 	};
@@ -26,6 +26,10 @@ void GameOverState::enter()
 
 void GameOverState::update()
 {
+	sdlutils().clearRenderer();
+	message_->render(rect_);
+	sdlutils().presentRenderer();
+
 	if (ih().isKeyDown(SDL_SCANCODE_RETURN))
 		g().setState(Game::NEWGAME);
 }
