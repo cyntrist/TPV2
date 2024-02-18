@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "../ecs/ecs.h"
 
-class AsteroidsFacade 
+class AsteroidsFacade
 {
 public:
 	AsteroidsFacade()

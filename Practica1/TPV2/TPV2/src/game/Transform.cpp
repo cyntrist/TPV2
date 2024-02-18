@@ -3,11 +3,12 @@
 #include "Transform.h"
 #include "../sdlutils/SDLUtils.h"
 
-constexpr double SPEED_LIMIT = 3.0f;	
+constexpr double SPEED_LIMIT = 3.0f;
 
-Transform::Transform() 
+Transform::Transform()
 	: pos_(), vel_(), width_(), height_(), rot_()
-{}
+{
+}
 
 Transform::Transform(Vector2D pos, Vector2D vel, float w, float h, float r) :
 	pos_(pos),
@@ -18,7 +19,8 @@ Transform::Transform(Vector2D pos, Vector2D vel, float w, float h, float r) :
 {
 }
 
-Transform::~Transform() {
+Transform::~Transform()
+{
 }
 
 void Transform::init(Vector2D pos, Vector2D vel, float w, float h, float r)
@@ -36,6 +38,6 @@ void Transform::update()
 
 	if (abs(vel_.getX()) > SPEED_LIMIT || abs(vel_.getY()) > SPEED_LIMIT)
 	{
-		vel_ = vel_.normalize()*SPEED_LIMIT;
+		vel_ = vel_.normalize() * SPEED_LIMIT;
 	}
 }

@@ -17,9 +17,11 @@
 
 Game::Game()
 	: mngr_(nullptr)
-{}
+{
+}
 
-Game::~Game() {
+Game::~Game()
+{
 	delete mngr_;
 	delete f_utils_;
 	delete a_utils_;
@@ -31,10 +33,11 @@ Game::~Game() {
 	delete paused_state_;
 }
 
-void Game::init() {
+void Game::init()
+{
 	// initialize the SDL singleton
 	SDLUtils::init("Asteroids", 800, 600,
-			"resources/config/asteroid.resources.json");
+	               "resources/config/asteroid.resources.json");
 
 	// Manager
 	mngr_ = new ecs::Manager();
@@ -54,19 +57,22 @@ void Game::init() {
 	setState(NEWGAME);
 }
 
-void Game::start() {
+void Game::start()
+{
 	// a boolean to exit the loop
 	bool exit = false;
 
-	auto &ihdlr = ih();
+	auto& ihdlr = ih();
 
-	while (!exit) {
+	while (!exit)
+	{
 		Uint32 startTime = sdlutils().currRealTime();
 
 		// refresh the input handler
 		ihdlr.refresh();
 
-		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
+		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE))
+		{
 			exit = true;
 			continue;
 		}
@@ -79,4 +85,3 @@ void Game::start() {
 			SDL_Delay(10 - frameTime);
 	}
 }
-

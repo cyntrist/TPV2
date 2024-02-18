@@ -52,7 +52,7 @@ void AsteroidsUtils::create_asteroids(int n)
 
 		// velocidad aleatoria hacia el centro de la ventana
 		auto speed = sdlutils().rand().nextInt(1, 10) / 10.0f;
-		auto center = Vector2D(sdlutils().width()/2, sdlutils().height()/2)
+		auto center = Vector2D(sdlutils().width() / 2, sdlutils().height() / 2)
 			+ Vector2D(random_.nextInt(-100, 100), random_.nextInt(-100, 100));
 		auto vel = (center - pos).normalize() * speed;
 

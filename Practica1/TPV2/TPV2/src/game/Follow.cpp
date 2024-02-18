@@ -5,7 +5,6 @@
 Follow::Follow(Vector2D& dest)
 	: trans_(nullptr), destination_(dest)
 {
-	
 }
 
 

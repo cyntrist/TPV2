@@ -59,25 +59,26 @@ void RunningState::leave()
 {
 }
 
-void RunningState::checkCollisions() {
+void RunningState::checkCollisions()
+{
 	auto fighter = mngr_->getHandler(ecs::hdlr::FIGHTER);
 	auto asteroids = mngr_->getEntities(ecs::grp::ASTEROID);
 	auto f_trans = mngr_->getComponent<Transform>(fighter);
 
-	for (int i = 0; i < asteroids.size(); i++)	
+	for (int i = 0; i < asteroids.size(); i++)
 	{
 		auto a = asteroids[i];
 		auto a_trans = mngr_->getComponent<Transform>(a);
 		if (Collisions::collidesWithRotation(
-			f_trans->getPos(), 
-			f_trans->getWidth(), 
-			f_trans->getHeight(), 
+			f_trans->getPos(),
+			f_trans->getWidth(),
+			f_trans->getHeight(),
 			f_trans->getRot(),
 			a_trans->getPos(),
 			a_trans->getWidth(),
 			a_trans->getHeight(),
 			a_trans->getRot()
-			))
+		))
 		{
 			onDeath();
 			break;
@@ -87,14 +88,14 @@ void RunningState::checkCollisions() {
 		auto f_gun = mngr_->getComponent<Gun>(fighter);
 		for (Gun::Bullet& b : *f_gun)
 			if (b.used && Collisions::collidesWithRotation(
-			b.pos, 
-			b.width, 
-			b.height, 
-			b.rot,
-			a_trans->getPos(),
-			a_trans->getWidth(),
-			a_trans->getHeight(),
-			a_trans->getRot()
+				b.pos,
+				b.width,
+				b.height,
+				b.rot,
+				a_trans->getPos(),
+				a_trans->getWidth(),
+				a_trans->getHeight(),
+				a_trans->getRot()
 			))
 			{
 				a_utils_->split_astroid(a);

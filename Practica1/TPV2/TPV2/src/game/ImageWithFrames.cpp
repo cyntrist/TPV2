@@ -28,7 +28,7 @@ void ImageWithFrames::initComponent()
 
 void ImageWithFrames::render()
 {
-	if(sdlutils().currRealTime() > frameTimer + FRAME_SPEED)
+	if (sdlutils().currRealTime() > frameTimer + FRAME_SPEED)
 	{
 		currentCol_ = (currentCol_ + 1) % (nCols_ - 1);
 		currentRow_ = (currentRow_ + 1) % (nRows_ - 1);
@@ -37,15 +37,14 @@ void ImageWithFrames::render()
 
 	auto frame = Vector2D(currentCol_ * frameWidth_, currentRow_ * frameHeight_);
 	const SDL_Rect srce = build_sdlrect(
-		frame, 
-		frameWidth_, 
+		frame,
+		frameWidth_,
 		frameHeight_
 	);
 	const SDL_Rect dest = build_sdlrect(
-		transform_->getPos(), 
-		transform_->getWidth(), 
+		transform_->getPos(),
+		transform_->getWidth(),
 		transform_->getHeight()
 	);
 	image_->render(srce, dest, transform_->getRot());
 }
-

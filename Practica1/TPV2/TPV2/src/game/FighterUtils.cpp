@@ -25,14 +25,14 @@ void FighterUtils::create_fighter()
 	const auto tr = mngr_->addComponent<Transform>(fighter_);
 	auto size = 50;
 	tr->init(
-		Vector2D(sdlutils().width()/2, sdlutils().height()/2),
-		Vector2D(0,0),
+		Vector2D(sdlutils().width() / 2, sdlutils().height() / 2),
+		Vector2D(0, 0),
 		size,
 		size,
 		90.0f
 	);
-	tr->setPos(Vector2D(sdlutils().width() / 2 - tr->getWidth()/2,
-			sdlutils().height() / 2 - tr->getHeight()/2));
+	tr->setPos(Vector2D(sdlutils().width() / 2 - tr->getWidth() / 2,
+	                    sdlutils().height() / 2 - tr->getHeight() / 2));
 
 	// componentes
 	mngr_->setHandler(ecs::hdlr::FIGHTER, fighter_);
@@ -48,9 +48,9 @@ void FighterUtils::reset_fighter()
 {
 	assert(fighter_ != nullptr);
 	const auto& tr = mngr_->getComponent<Transform>(fighter_);
-	tr->setPos(Vector2D(sdlutils().width() / 2 - tr->getWidth()/2,
-			sdlutils().height() / 2 - tr->getHeight()/2));
-	tr->setVel(Vector2D(0,0));
+	tr->setPos(Vector2D(sdlutils().width() / 2 - tr->getWidth() / 2,
+	                    sdlutils().height() / 2 - tr->getHeight() / 2));
+	tr->setVel(Vector2D(0, 0));
 	mngr_->getComponent<Gun>(fighter_)->reset();
 }
 
@@ -65,5 +65,5 @@ int FighterUtils::update_lives(int n)
 	assert(fighter_ != nullptr);
 	const auto health = mngr_->getComponent<HealthComponent>(fighter_);
 	health->addLives(n);
-	return health->getLives(); 
+	return health->getLives();
 }

@@ -5,9 +5,9 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/Texture.h"
 
-ImageRenderer::ImageRenderer(Texture *img) :
-		img_(img),
-		transform_()
+ImageRenderer::ImageRenderer(Texture* img) :
+	img_(img),
+	transform_()
 {
 }
 
@@ -21,7 +21,8 @@ void ImageRenderer::initComponent()
 	assert(transform_ != nullptr);
 }
 
-void ImageRenderer::render() {
+void ImageRenderer::render()
+{
 	SDL_Rect dest = build_sdlrect(transform_->getPos(), transform_->getWidth(), transform_->getHeight());
 	img_->render(dest, transform_->getRot());
 }

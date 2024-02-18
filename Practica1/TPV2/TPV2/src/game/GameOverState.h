@@ -7,6 +7,7 @@ class GameOverState : public GameState
 {
 	Texture* message_;
 	SDL_Rect rect_;
+
 public:
 	GameOverState();
 	~GameOverState() override;

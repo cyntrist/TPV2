@@ -25,7 +25,7 @@ void TowardDestination::update()
 		steer();
 }
 
-void TowardDestination::steer() 
+void TowardDestination::steer()
 {
 	auto& pos = trans_->getPos();
 	auto& vel = trans_->getVel();

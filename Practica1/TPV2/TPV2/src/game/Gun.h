@@ -41,9 +41,9 @@ public:
 		return bullets_.end();
 	}
 
-	Gun(Texture *img);
+	Gun(Texture* img);
 	~Gun() override = default;
-	
+
 private:
 	void shoot(Vector2D p, Vector2D v, int width, int height, float r);
 	bullets_array bullets_;

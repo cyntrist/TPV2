@@ -11,6 +11,7 @@ class FighterUtils : public FighterFacade
 {
 	ecs::Manager* mngr_;
 	ecs::Entity* fighter_;
+
 public:
 	FighterUtils();
 	~FighterUtils() override = default;

@@ -2,6 +2,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 #include "Game.h"
+
 GameOverState::GameOverState()
 	: message_(nullptr), rect_()
 {
@@ -18,8 +19,8 @@ void GameOverState::enter()
 	else
 		message_ = &sdlutils().msgs().at("game_over");
 	rect_ = {
-		(sdlutils().width() - message_->width())/2,
-		(sdlutils().height() - message_->height())/2,
+		(sdlutils().width() - message_->width()) / 2,
+		(sdlutils().height() - message_->height()) / 2,
 		message_->width(),
 		message_->height()
 	};

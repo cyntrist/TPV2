@@ -4,7 +4,8 @@
 #include "../utils/Vector2D.h"
 #include "../ecs/Component.h"
 
-class Transform: public ecs::Component {
+class Transform : public ecs::Component
+{
 	Vector2D pos_;
 	Vector2D vel_;
 	float width_;
@@ -32,4 +33,3 @@ public:
 	void setHeight(const float value) { height_ = value; }
 	void setRotation(const float value) { rot_ = value; }
 };
-

@@ -10,6 +10,7 @@ class TowardDestination : public ecs::Component
 	RandomNumberGenerator& random_;
 
 	void steer();
+
 public:
 	__CMPID_DECL__(ecs::cmp::TOWARDSDEST)
 	TowardDestination();

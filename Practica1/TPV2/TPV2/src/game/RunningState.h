@@ -3,6 +3,7 @@
 #include "../ecs/Manager.h"
 class AsteroidsUtils;
 class FighterUtils;
+
 class RunningState : public GameState
 {
 	void checkCollisions();
@@ -11,6 +12,7 @@ class RunningState : public GameState
 	FighterUtils* f_utils_;
 	AsteroidsUtils* a_utils_;
 	int last_asteroid_;
+
 public:
 	RunningState(FighterUtils*, AsteroidsUtils*);
 	~RunningState() override;
