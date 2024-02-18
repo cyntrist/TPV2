@@ -7,6 +7,7 @@ class PausedState : public GameState
 {
 	Texture* message_;
 	SDL_Rect rect_;
+
 public:
 	PausedState();
 	~PausedState() override;

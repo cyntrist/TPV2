@@ -16,9 +16,9 @@ void DeAcceleration::initComponent()
 
 void DeAcceleration::update()
 {
-	auto &vel = transform_->getVel();
+	auto& vel = transform_->getVel();
 	vel = vel * FRICTION_FACTOR;
 
 	if (vel.magnitude() < 0.05f)
-		vel = Vector2D(0,0);
+		vel = Vector2D(0, 0);
 }

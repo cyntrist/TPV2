@@ -17,8 +17,7 @@
 	IMAGEWITHFRAMES, \
 	GENERATIONS, \
 	FOLLOWS, \
-	TOWARDSDEST, \
-
+	TOWARDSDEST,
 
 
 // Groups list - must have at least one element
@@ -30,4 +29,4 @@
 // Handlers list - must have at least one element
 //
 #define _HDLRS_LIST_ \
-    FIGHTER, 
+    FIGHTER,

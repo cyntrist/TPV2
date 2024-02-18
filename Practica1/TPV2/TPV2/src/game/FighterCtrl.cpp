@@ -6,10 +6,10 @@ constexpr double THRUST_FACTOR = 0.2f;
 constexpr double ROTATION_MOVE = 2.0f;
 
 FighterCtrl::FighterCtrl() :
-transform_(nullptr),
-up_ (SDL_SCANCODE_UP),
-left_(SDL_SCANCODE_LEFT),
-right_(SDL_SCANCODE_RIGHT)
+	transform_(nullptr),
+	up_(SDL_SCANCODE_UP),
+	left_(SDL_SCANCODE_LEFT),
+	right_(SDL_SCANCODE_RIGHT)
 {
 }
 
@@ -21,18 +21,20 @@ void FighterCtrl::initComponent()
 
 void FighterCtrl::update()
 {
-	auto &ihdlr = ih();
+	auto& ihdlr = ih();
 
-	if (ihdlr.isKeyDown(left_)) {
+	if (ihdlr.isKeyDown(left_))
+	{
 		transform_->setRotation(transform_->getRot() - ROTATION_MOVE);
 	}
-	else if (ihdlr.isKeyDown(right_)) {
+	else if (ihdlr.isKeyDown(right_))
+	{
 		transform_->setRotation(transform_->getRot() + ROTATION_MOVE);
-	} 
+	}
 	if (ihdlr.isKeyDown(up_))
 	{
 		sdlutils().soundEffects().at("thrust").play();
-		auto &vel = transform_->getVel();
-		vel = vel + Vector2D(0,-1).rotate(transform_->getRot())*THRUST_FACTOR;
+		auto& vel = transform_->getVel();
+		vel = vel + Vector2D(0, -1).rotate(transform_->getRot()) * THRUST_FACTOR;
 	}
 }

@@ -2,7 +2,8 @@
 
 #include "Texture.h"
 
-Texture& Texture::operator=(Texture &&other) noexcept {
+Texture& Texture::operator=(Texture&& other) noexcept
+{
 	this->~Texture();
 	texture_ = other.texture_;
 	other.texture_ = nullptr;
@@ -14,7 +15,8 @@ Texture& Texture::operator=(Texture &&other) noexcept {
 	return *this;
 }
 
-Texture::Texture(Texture &&other) noexcept {
+Texture::Texture(Texture&& other) noexcept
+{
 	texture_ = other.texture_;
 	other.texture_ = nullptr;
 	renderer_ = other.renderer_;
@@ -23,11 +25,12 @@ Texture::Texture(Texture &&other) noexcept {
 	height_ = other.height_;
 }
 
-Texture::Texture(SDL_Renderer *renderer, const std::string &fileName) {
+Texture::Texture(SDL_Renderer* renderer, const std::string& fileName)
+{
 	assert(renderer != nullptr);
 	renderer_ = renderer;
 
-	SDL_Surface *surface = IMG_Load(fileName.c_str());
+	SDL_Surface* surface = IMG_Load(fileName.c_str());
 	if (surface == nullptr)
 		throw "Couldn't load image: " + fileName;
 
@@ -41,26 +44,26 @@ Texture::Texture(SDL_Renderer *renderer, const std::string &fileName) {
 		throw "Couldn't convert surface to texture for image: " + fileName;
 }
 
-Texture::Texture(SDL_Renderer *renderer, const std::string &text,
-		const Font &font, const SDL_Color &fgColor) {
+Texture::Texture(SDL_Renderer* renderer, const std::string& text,
+                 const Font& font, const SDL_Color& fgColor)
+{
 	constructFromText(renderer, text, font, &fgColor);
 }
 
-Texture::Texture(SDL_Renderer *renderer, const std::string &text,
-		const Font &font, const SDL_Color &fgColor, const SDL_Color &bgColor) {
+Texture::Texture(SDL_Renderer* renderer, const std::string& text,
+                 const Font& font, const SDL_Color& fgColor, const SDL_Color& bgColor)
+{
 	constructFromText(renderer, text, font, &fgColor, &bgColor);
 }
 
-void Texture::constructFromText(SDL_Renderer *renderer, const std::string &text,
-		const Font &font, const SDL_Color *fgColor, const SDL_Color *bgColor) {
-
+void Texture::constructFromText(SDL_Renderer* renderer, const std::string& text,
+                                const Font& font, const SDL_Color* fgColor, const SDL_Color* bgColor)
+{
 	assert(renderer != nullptr);
 	renderer_ = renderer;
 
-	SDL_Surface *textSurface =
-			bgColor == nullptr ?
-					font.renderText(text, *fgColor) :
-					font.renderText(text, *fgColor, *bgColor);
+	SDL_Surface* textSurface =
+		bgColor == nullptr ? font.renderText(text, *fgColor) : font.renderText(text, *fgColor, *bgColor);
 
 	if (textSurface == nullptr)
 		throw "Couldn't create surface for text: " + text;

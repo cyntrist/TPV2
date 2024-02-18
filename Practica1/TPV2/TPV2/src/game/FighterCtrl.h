@@ -12,7 +12,7 @@ public:
 	__CMPID_DECL__(ecs::cmp::FIGHTERCTRL)
 
 	FighterCtrl();
-	virtual ~FighterCtrl() override = default;
+	~FighterCtrl() override = default;
 	void initComponent() override;
 	void update() override;
 

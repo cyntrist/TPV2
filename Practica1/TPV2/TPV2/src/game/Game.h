@@ -6,6 +6,7 @@
 #include "../utils/Singleton.h"
 class AsteroidsUtils;
 class FighterUtils;
+
 namespace ecs
 {
 	class Manager;
@@ -15,7 +16,7 @@ namespace ecs
 class Game : public Singleton<Game>
 {
 public:
-	virtual ~Game();
+	~Game() override;
 	void init();
 	void start();
 	ecs::Manager* getManager() const { return mngr_; }
@@ -72,6 +73,7 @@ private:
 	friend Singleton;
 };
 
-inline Game& g() {
-	return* Game::instance();
+inline Game& g()
+{
+	return *Game::instance();
 }
