@@ -11,6 +11,11 @@
 
 constexpr uint8_t LIVES = 3;
 
+FighterUtils::FighterUtils()
+	: mngr_(nullptr), fighter_(nullptr)
+{
+}
+
 void FighterUtils::create_fighter()
 {
 	mngr_ = g().getManager();

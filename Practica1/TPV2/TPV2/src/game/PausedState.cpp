@@ -3,6 +3,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 PausedState::PausedState()
+	: message_(nullptr), rect_()
 {
 }
 

@@ -5,8 +5,9 @@
 
 constexpr double SPEED_LIMIT = 3.0f;	
 
-Transform::Transform() {
-}
+Transform::Transform() 
+	: pos_(), vel_(), width_(), height_(), rot_()
+{}
 
 Transform::Transform(Vector2D pos, Vector2D vel, float w, float h, float r) :
 	pos_(pos),

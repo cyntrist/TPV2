@@ -9,7 +9,7 @@
 constexpr int ASTEROID_WAVE = 10;
 
 NewRoundState::NewRoundState(FighterUtils* fu, AsteroidsUtils* au)
-	: f_utils_(fu), a_utils_(au)
+	: f_utils_(fu), a_utils_(au), message_(nullptr), rect_()
 {
 }
 

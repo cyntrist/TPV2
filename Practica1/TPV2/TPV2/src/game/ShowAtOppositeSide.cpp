@@ -2,6 +2,10 @@
 
 #include "../sdlutils/SDLUtils.h"
 
+ShowAtOppositeSide::ShowAtOppositeSide() : transform_(nullptr)
+{
+}
+
 void ShowAtOppositeSide::initComponent()
 {
 	transform_ = mngr_->getComponent<Transform>(ent_);

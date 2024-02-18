@@ -6,6 +6,7 @@ constexpr double THRUST_FACTOR = 0.2f;
 constexpr double ROTATION_MOVE = 2.0f;
 
 FighterCtrl::FighterCtrl() :
+transform_(nullptr),
 up_ (SDL_SCANCODE_UP),
 left_(SDL_SCANCODE_LEFT),
 right_(SDL_SCANCODE_RIGHT)

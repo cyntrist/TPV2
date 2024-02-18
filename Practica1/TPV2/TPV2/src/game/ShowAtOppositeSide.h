@@ -8,7 +8,7 @@ class ShowAtOppositeSide : public ecs::Component
 public:
 	__CMPID_DECL__(ecs::cmp::OPPOSITE)
 
-	ShowAtOppositeSide() = default;
+	ShowAtOppositeSide();
 	~ShowAtOppositeSide() override = default;
 	void initComponent() override;
 	void update() override;

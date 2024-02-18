@@ -12,7 +12,7 @@
 constexpr float ASTEROID_TIMER = 5000;
 
 RunningState::RunningState(FighterUtils* fu, AsteroidsUtils* au)
-	: f_utils_(fu), a_utils_(au), last_asteroid_(0)
+	: mngr_(nullptr), f_utils_(fu), a_utils_(au), last_asteroid_(0)
 {
 }
 

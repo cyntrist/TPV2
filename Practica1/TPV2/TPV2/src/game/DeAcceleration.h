@@ -7,7 +7,7 @@ class DeAcceleration : public ecs::Component
 	Transform* transform_;
 public:
 	__CMPID_DECL__(ecs::cmp::DEACC)
-	DeAcceleration() = default;
+	DeAcceleration();
 	~DeAcceleration() override = default;
 	void initComponent() override;
 	virtual void update() override;

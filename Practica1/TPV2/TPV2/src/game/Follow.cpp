@@ -3,7 +3,7 @@
 #include "../ecs/Manager.h"
 
 Follow::Follow(Vector2D& dest)
-	: destination_(dest)
+	: trans_(nullptr), destination_(dest)
 {
 	
 }

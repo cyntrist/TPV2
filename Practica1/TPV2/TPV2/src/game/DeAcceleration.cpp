@@ -4,6 +4,10 @@
 #include "../utils/Vector2D.h"
 constexpr double FRICTION_FACTOR = 0.995f;
 
+DeAcceleration::DeAcceleration() : transform_(nullptr)
+{
+}
+
 void DeAcceleration::initComponent()
 {
 	transform_ = mngr_->getComponent<Transform>(ent_);

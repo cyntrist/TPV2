@@ -4,7 +4,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 NewGameState::NewGameState(FighterUtils* fu)
-	: f_utils_(fu)
+	: f_utils_(fu), message_(nullptr), rect_()
 {
 }
 

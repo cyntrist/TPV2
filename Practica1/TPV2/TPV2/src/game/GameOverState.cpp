@@ -3,6 +3,7 @@
 #include "../sdlutils/InputHandler.h"
 #include "Game.h"
 GameOverState::GameOverState()
+	: message_(nullptr), rect_()
 {
 }
 
