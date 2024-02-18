@@ -107,7 +107,7 @@ void RunningState::checkCollisions()
 
 void RunningState::onDeath()
 {
-	sdlutils().soundEffects().at("explosion").play();
+	sdlutils().soundEffects().at("bang").play();
 	if (f_utils_->update_lives(-1) > 0)
 		g().setState(Game::NEWROUND);
 	else
