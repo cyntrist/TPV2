@@ -10,8 +10,8 @@ constexpr int ASTEROID_WAVE = 10;
 constexpr int HOLE_WAVE = 6;
 
 NewRoundState::NewRoundState(FighterUtils* fu, AsteroidsUtils* au,
-                             BlackHoleUtils* bhu, MissileUtils* mu)
-	: f_utils_(fu), a_utils_(au), bh_utils_(bhu), m_utils_(mu),
+                             BlackHoleUtils* bhu)
+	: f_utils_(fu), a_utils_(au), bh_utils_(bhu),
 	  message_(nullptr), rect_()
 {
 }

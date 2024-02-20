@@ -17,7 +17,8 @@
 	IMAGEWITHFRAMES, \
 	GENERATIONS, \
 	FOLLOWS, \
-	TOWARDSDEST,
+	TOWARDSDEST, \
+	ROTATE
 
 
 // Groups list - must have at least one element

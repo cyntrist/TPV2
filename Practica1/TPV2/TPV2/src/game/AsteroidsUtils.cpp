@@ -68,7 +68,7 @@ void AsteroidsUtils::remove_all_asteroids()
 	mngr_->refresh();
 }
 
-void AsteroidsUtils::split_astroid(ecs::entity_t a)
+void AsteroidsUtils::split_asteroid(ecs::entity_t a)
 {
 	mngr_->setAlive(a, false);
 	auto pos = mngr_->getComponent<Transform>(a)->getPos();
@@ -85,6 +85,14 @@ void AsteroidsUtils::split_astroid(ecs::entity_t a)
 			Vector2D newVel = vel.rotate(r) * 1.1f;
 			create_asteroid(newPos, newVel, gen - 1);
 		}
+}
+
+void AsteroidsUtils::displace_asteroid(ecs::entity_t a)
+{
+	mngr_->getComponent<Transform>(a)->setPos(Vector2D(
+		random_.nextInt(0, sdlutils().width()),
+		random_.nextInt(0, sdlutils().height())
+	));
 }
 
 void AsteroidsUtils::create_asteroid(Vector2D pos, Vector2D vel, int gen)

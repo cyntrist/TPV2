@@ -14,5 +14,6 @@ public:
 	~AsteroidsUtils() override = default;
 	void create_asteroids(int n) override;
 	void remove_all_asteroids() override;
-	void split_astroid(ecs::entity_t a) override;
+	void split_asteroid(ecs::entity_t a) override;
+	void displace_asteroid(ecs::entity_t a) override;
 };

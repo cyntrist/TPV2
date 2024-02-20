@@ -44,7 +44,7 @@ namespace ecs
 		// first number is 0 in C/C++ standard
 		enum cmpId : cmpId_t
 		{
-			_CMPS_LIST_
+			_CMPS_LIST_,
 			/* taken from ../game/ecs_defs */
 
 			// do not remove this
