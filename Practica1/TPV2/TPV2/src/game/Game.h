@@ -4,8 +4,10 @@
 #include "GameState.h"
 #include "../ecs/Manager.h"
 #include "../utils/Singleton.h"
+class BlackHoleUtils;
 class AsteroidsUtils;
 class FighterUtils;
+class MissileUtils;
 
 namespace ecs
 {
@@ -68,8 +70,13 @@ private:
 	GameState* gameover_state_;
 	Game();
 	ecs::Manager* mngr_;
+
+	// fachadas
 	FighterUtils* f_utils_;
 	AsteroidsUtils* a_utils_;
+	BlackHoleUtils* bh_utils_;
+	MissileUtils* m_utils_;
+
 	friend Singleton;
 };
 

@@ -7,9 +7,12 @@
 #include "../sdlutils/InputHandler.h"
 
 constexpr int ASTEROID_WAVE = 10;
+constexpr int HOLE_WAVE = 6;
 
-NewRoundState::NewRoundState(FighterUtils* fu, AsteroidsUtils* au)
-	: f_utils_(fu), a_utils_(au), message_(nullptr), rect_()
+NewRoundState::NewRoundState(FighterUtils* fu, AsteroidsUtils* au,
+                             BlackHoleUtils* bhu, MissileUtils* mu)
+	: f_utils_(fu), a_utils_(au), bh_utils_(bhu), m_utils_(mu),
+	  message_(nullptr), rect_()
 {
 }
 
@@ -37,8 +40,13 @@ void NewRoundState::update()
 	if (ih().isKeyDown(SDL_SCANCODE_RETURN))
 	{
 		f_utils_->reset_fighter();
+
 		a_utils_->remove_all_asteroids();
 		a_utils_->create_asteroids(ASTEROID_WAVE);
+
+		bh_utils_->remove_all_holes();
+		bh_utils_->create_holes(HOLE_WAVE);
+
 		g().setState(Game::RUNNING);
 	}
 }

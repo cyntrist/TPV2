@@ -25,6 +25,8 @@
     <ClInclude Include="src\ecs\Manager.h" />
     <ClInclude Include="src\game\AsteroidsFacade.h" />
     <ClInclude Include="src\game\AsteroidsUtils.h" />
+    <ClInclude Include="src\game\BlackHoleFacade.h" />
+    <ClInclude Include="src\game\BlackHoleUtils.h" />
     <ClInclude Include="src\game\DeAcceleration.h" />
     <ClInclude Include="src\game\ecs_defs.h" />
     <ClInclude Include="src\game\FighterCtrl.h" />
@@ -39,9 +41,12 @@
     <ClInclude Include="src\game\HealthComponent.h" />
     <ClInclude Include="src\game\ImageRenderer.h" />
     <ClInclude Include="src\game\ImageWithFrames.h" />
+    <ClInclude Include="src\game\MissileFacade.h" />
+    <ClInclude Include="src\game\MissileUtils.h" />
     <ClInclude Include="src\game\NewGameState.h" />
     <ClInclude Include="src\game\NewRoundState.h" />
     <ClInclude Include="src\game\PausedState.h" />
+    <ClInclude Include="src\game\RotateComponent.h" />
     <ClInclude Include="src\game\RunningState.h" />
     <ClInclude Include="src\game\ShowAtOppositeSide.h" />
     <ClInclude Include="src\game\TowardDestination.h" />
@@ -70,6 +75,7 @@
   <ItemGroup>
     <ClCompile Include="src\ecs\Manager.cpp" />
     <ClCompile Include="src\game\AsteroidsUtils.cpp" />
+    <ClCompile Include="src\game\BlackHoleUtils.cpp" />
     <ClCompile Include="src\game\DeAcceleration.cpp" />
     <ClCompile Include="src\game\FighterCtrl.cpp" />
     <ClCompile Include="src\game\FighterUtils.cpp" />
@@ -81,9 +87,11 @@
     <ClCompile Include="src\game\HealthComponent.cpp" />
     <ClCompile Include="src\game\ImageRenderer.cpp" />
     <ClCompile Include="src\game\ImageWithFrames.cpp" />
+    <ClCompile Include="src\game\MissileUtils.cpp" />
     <ClCompile Include="src\game\NewGameState.cpp" />
     <ClCompile Include="src\game\NewRoundState.cpp" />
     <ClCompile Include="src\game\PausedState.cpp" />
+    <ClCompile Include="src\game\RotateComponent.cpp" />
     <ClCompile Include="src\game\RunningState.cpp" />
     <ClCompile Include="src\game\ShowAtOppositeSide.cpp" />
     <ClCompile Include="src\game\TowardDestination.cpp" />

@@ -10,9 +10,12 @@
 #include "../sdlutils/InputHandler.h"
 
 constexpr float ASTEROID_TIMER = 5000;
+constexpr float MISSILE_TIMER = 15000;
 
-RunningState::RunningState(FighterUtils* fu, AsteroidsUtils* au)
-	: mngr_(nullptr), f_utils_(fu), a_utils_(au), last_asteroid_(0)
+RunningState::RunningState(FighterUtils* fu, AsteroidsUtils* au,
+                           BlackHoleUtils* bhu, MissileUtils* mu)
+	: mngr_(nullptr), f_utils_(fu), a_utils_(au),
+	  bh_utils_(bhu), m_utils_(mu), last_asteroid_(0)
 {
 }
 
@@ -48,10 +51,18 @@ void RunningState::update()
 	mngr_->render();
 	sdlutils().presentRenderer();
 
-	if (sdlutils().virtualTimer().currTime() > last_asteroid_ + ASTEROID_TIMER)
+	const int now = sdlutils().virtualTimer().currTime();
+
+	if (now > last_asteroid_ + ASTEROID_TIMER)
 	{
 		a_utils_->create_asteroids(1);
-		last_asteroid_ = sdlutils().virtualTimer().currTime();
+		last_asteroid_ = now;
+	}
+
+	if (now > last_missile_ + MISSILE_TIMER)
+	{
+		m_utils_->create_missiles(1);
+		last_missile_ = now;
 	}
 }
 

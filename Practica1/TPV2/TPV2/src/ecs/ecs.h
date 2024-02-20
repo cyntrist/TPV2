@@ -59,7 +59,7 @@ namespace ecs
 		enum grpId : cmpId_t
 		{
 			DEFAULT,
-			_GRPS_LIST_
+			_GRPS_LIST_,
 			/* taken from ../game/ecs_defs */
 
 			// do not remove this

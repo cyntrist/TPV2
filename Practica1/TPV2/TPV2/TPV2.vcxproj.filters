@@ -55,6 +55,12 @@
     <Filter Include="Header Files\game\states">
       <UniqueIdentifier>{6d902509-bc61-455e-90ce-d2e6f2fe3717}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game\facades">
+      <UniqueIdentifier>{cdd33268-5dcb-4f29-94b2-d3fff1adcac9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\facades">
+      <UniqueIdentifier>{d64bce4c-d7bf-4214-9a26-1586113bede4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\json\JSONValue.h">
@@ -156,18 +162,6 @@
     <ClInclude Include="src\game\ecs_defs.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\FighterFacade.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\FighterUtils.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\AsteroidsUtils.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\AsteroidsFacade.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\ImageWithFrames.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
@@ -197,6 +191,33 @@
     </ClInclude>
     <ClInclude Include="src\game\RunningState.h">
       <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\AsteroidsFacade.h">
+      <Filter>Header Files\game\facades</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\AsteroidsUtils.h">
+      <Filter>Header Files\game\facades</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\FighterFacade.h">
+      <Filter>Header Files\game\facades</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\FighterUtils.h">
+      <Filter>Header Files\game\facades</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\BlackHoleFacade.h">
+      <Filter>Header Files\game\facades</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\MissileFacade.h">
+      <Filter>Header Files\game\facades</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\BlackHoleUtils.h">
+      <Filter>Header Files\game\facades</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\MissileUtils.h">
+      <Filter>Header Files\game\facades</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\RotateComponent.h">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -257,12 +278,6 @@
     <ClCompile Include="src\game\Gun.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\FighterUtils.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\AsteroidsUtils.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\ImageWithFrames.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -289,6 +304,21 @@
     </ClCompile>
     <ClCompile Include="src\game\GameOverState.cpp">
       <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\FighterUtils.cpp">
+      <Filter>Source Files\game\facades</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\AsteroidsUtils.cpp">
+      <Filter>Source Files\game\facades</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\MissileUtils.cpp">
+      <Filter>Source Files\game\facades</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\BlackHoleUtils.cpp">
+      <Filter>Source Files\game\facades</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\RotateComponent.cpp">
+      <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
