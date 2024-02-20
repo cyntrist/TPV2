@@ -10,8 +10,8 @@ constexpr int ASTEROID_WAVE = 10;
 constexpr int HOLE_WAVE = 6;
 
 NewRoundState::NewRoundState(FighterUtils* fu, AsteroidsUtils* au,
-                             BlackHoleUtils* bhu)
-	: f_utils_(fu), a_utils_(au), bh_utils_(bhu),
+                             BlackHoleUtils* bhu, MissileUtils* mu)
+	: f_utils_(fu), a_utils_(au), bh_utils_(bhu), m_utils_(mu),
 	  message_(nullptr), rect_()
 {
 }
@@ -46,6 +46,8 @@ void NewRoundState::update()
 
 		bh_utils_->remove_all_holes();
 		bh_utils_->create_holes(HOLE_WAVE);
+
+		m_utils_->remove_all_missiles();
 
 		g().setState(Game::RUNNING);
 	}

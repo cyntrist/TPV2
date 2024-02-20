@@ -1,10 +1,14 @@
 ﻿#pragma once
 #include "MissileFacade.h"
 #include "../ecs/ecs.h"
+#include "../sdlutils/RandomNumberGenerator.h"
+
+constexpr float SIZE = 50;
 
 class MissileUtils : MissileFacade
 {
 	ecs::Manager* mngr_;
+	RandomNumberGenerator& random_;
 
 public:
 	MissileUtils();

@@ -19,5 +19,6 @@ void Follow::update()
 	auto& pos = trans_->getPos();
 	auto& vel = trans_->getVel();
 	auto diff = destination_ - pos;
+	trans_->setRotation(Vector2D(0,-1).angle(vel));
 	vel = vel.rotate(vel.angle(diff) > 0 ? 1.0f : -1.0f);
 }

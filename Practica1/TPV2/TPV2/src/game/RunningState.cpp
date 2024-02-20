@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "../utils/Collisions.h"
 #include "Gun.h"
-#include "HealthComponent.h"
 #include "Transform.h"
 #include "../sdlutils/SDLUtils.h"
 #include "AsteroidsUtils.h"
@@ -79,6 +78,7 @@ void RunningState::checkCollisions()
 	const auto holes = mngr_->getEntities(ecs::grp::HOLES);
 	const auto missiles = mngr_->getEntities(ecs::grp::MISSILES);
 	const auto f_trans = mngr_->getComponent<Transform>(fighter);
+	auto f_gun = mngr_->getComponent<Gun>(fighter);
 
 	// Collisiones de los asteroides
 	for (int i = 0; i < asteroids.size(); i++)
@@ -101,7 +101,6 @@ void RunningState::checkCollisions()
 		}
 
 		// asteroids + bullet
-		auto f_gun = mngr_->getComponent<Gun>(fighter);
 		for (Gun::Bullet& b : *f_gun)
 			if (b.used && Collisions::collidesWithRotation(
 				b.pos,
@@ -123,15 +122,13 @@ void RunningState::checkCollisions()
 		for (auto h : holes)
 		{
 			auto h_trans = mngr_->getComponent<Transform>(h);
-			if (Collisions::collidesWithRotation(
+			if (Collisions::collides(
 				h_trans->getPos(),
 				h_trans->getWidth(),
 				h_trans->getHeight(),
-				h_trans->getRot(),
 				a_trans->getPos(),
 				a_trans->getWidth(),
-				a_trans->getHeight(),
-				a_trans->getRot()
+				a_trans->getHeight()
 			))
 			{
 				a_utils_->displace_asteroid(a);
@@ -181,27 +178,36 @@ void RunningState::checkCollisions()
 			break;
 		}
 
-		// misiles + balas
-		///
-		///
-		///
-		///
-		///
-		///
+		// missiles + bullet
+		for (Gun::Bullet& b : *f_gun)
+			if (b.used && Collisions::collidesWithRotation(
+				b.pos,
+				b.width,
+				b.height,
+				b.rot,
+				m_trans->getPos(),
+				m_trans->getWidth(),
+				m_trans->getHeight(),
+				m_trans->getRot()
+			))
+			{
+				mngr_->setAlive(m, false);
+				b.used = false;
+				sdlutils().soundEffects().at("bang").play();
+			}
+
 		// misiles + out of bounds
-		if (!Collisions::collidesWithRotation(
+		if (!Collisions::collides(
 			Vector2D(0,0),
 			sdlutils().width(),
 			sdlutils().height(),
-			0.0f,
 			m_trans->getPos(),
 			m_trans->getWidth(),
-			m_trans->getHeight(),
-			m_trans->getRot()
+			m_trans->getHeight()
 		))
 		{
 			mngr_->setAlive(m, false);
-			break;
+			sdlutils().soundEffects().at("bang").play();
 		}
 	}
 }

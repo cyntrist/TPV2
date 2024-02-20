@@ -11,11 +11,12 @@ class NewRoundState : public GameState
 	FighterUtils* f_utils_;
 	AsteroidsUtils* a_utils_;
 	BlackHoleUtils* bh_utils_;
+	MissileUtils* m_utils_;
 	Texture* message_;
 	SDL_Rect rect_;
 
 public:
-	NewRoundState(FighterUtils*, AsteroidsUtils*, BlackHoleUtils*);
+	NewRoundState(FighterUtils*, AsteroidsUtils*, BlackHoleUtils*, MissileUtils*);
 	~NewRoundState() override;
 	void enter() override;
 	void update() override;
