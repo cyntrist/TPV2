@@ -20,5 +20,4 @@ void RotateComponent::initComponent()
 void RotateComponent::update()
 {
 	trans_->setRotation(trans_->getRot() + rot_amount_);
-	
 }

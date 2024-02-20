@@ -198,7 +198,7 @@ void RunningState::checkCollisions()
 
 		// misiles + out of bounds
 		if (!Collisions::collides(
-			Vector2D(0,0),
+			Vector2D(0, 0),
 			sdlutils().width(),
 			sdlutils().height(),
 			m_trans->getPos(),

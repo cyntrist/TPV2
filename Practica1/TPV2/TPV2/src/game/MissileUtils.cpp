@@ -52,18 +52,17 @@ void MissileUtils::create_missiles(int n)
 		}
 		auto missile = mngr_->addEntity(ecs::grp::MISSILES);
 		auto trans = mngr_->addComponent<Transform>(missile,
-		                               Vector2D(x, y),
-		                               Vector2D(vx, vy),
-		                               MISS_WIDTH,
-		                               MISS_HEIGHT,
-		                               0.0f
+		                                            Vector2D(x, y),
+		                                            Vector2D(vx, vy),
+		                                            MISS_WIDTH,
+		                                            MISS_HEIGHT,
+		                                            0.0f
 		);
 		mngr_->addComponent<ImageRenderer>(missile, &sdlutils().images().at("missile"));
 		const auto fighter = mngr_->getHandler(ecs::hdlr::FIGHTER);
 		auto& f_pos = mngr_->getComponent<Transform>(fighter)->getPos();
 		mngr_->addComponent<Follow>(missile, f_pos);
 		std::cout << trans->getRot() << std::endl;
-
 	}
 }
 

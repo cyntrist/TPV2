@@ -28,7 +28,7 @@
 	HOLES, \
 	MISSILES, \
 	ASTEROID, \
-	FIGHTER		
+	FIGHTER
 
 // Handlers list - must have at least one element
 //

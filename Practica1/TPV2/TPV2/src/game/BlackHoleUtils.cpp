@@ -7,11 +7,11 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 
-constexpr float	HOLE_SIZE = 50;
+constexpr float HOLE_SIZE = 50;
 
 BlackHoleUtils::BlackHoleUtils()
 	: mngr_(g().getManager()),
-	random_(sdlutils().rand())
+	  random_(sdlutils().rand())
 {
 }
 
@@ -26,8 +26,8 @@ void BlackHoleUtils::create_holes(int n)
 		const int radio = random_.nextInt(100, 301);
 		int x = centerx + radio * cos(alpha * i);
 		int y = centery + radio * sin(alpha * i);
-		x -= HOLE_SIZE/2;
-		y -= HOLE_SIZE/2;
+		x -= HOLE_SIZE / 2;
+		y -= HOLE_SIZE / 2;
 		const auto hole = mngr_->addEntity(ecs::grp::HOLES);
 		mngr_->addComponent<Transform>(hole,
 		                               Vector2D(x, y), // pos
