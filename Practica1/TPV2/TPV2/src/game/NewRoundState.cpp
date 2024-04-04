@@ -37,7 +37,7 @@ void NewRoundState::update()
 	message_->render(rect_);
 	sdlutils().presentRenderer();
 
-	if (ih().isKeyDown(SDL_SCANCODE_RETURN))
+	if (ih().keyDownEvent() && ih().isKeyDown(SDL_SCANCODE_RETURN))
 	{
 		f_utils_->reset_fighter();
 
