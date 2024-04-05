@@ -28,7 +28,7 @@
 // Systems list - must have at least one element
 //
 #define _SYS_LIST_ \
-    STARS, \
+    FRUITS, \
 	PACMAN, \
 	RENDER, \
 	GAMECTRL, \

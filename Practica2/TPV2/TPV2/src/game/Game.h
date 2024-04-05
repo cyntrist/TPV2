@@ -6,23 +6,43 @@
 
 #include "../ecs/ecs.h"
 
+class GhostSystem;
+class ImmunitySystem;
+class CollisionsSystem;
+class RenderSystem;
+class FruitsSystem;
+class GameCtrlSystem;
+class PacManSystem;
 class GameState;
 
 class Game {
+	enum State
+	{
+		NEWGAME,
+		NEWROUND,
+		RUNNING,
+		PAUSED,
+		GAMEOVER
+	};
+
 public:
 	Game();
 	virtual ~Game();
 	void init();
 	void start();
+
+	void setState(State);
+
 private:
 	ecs::Manager *mngr_;
-	ecs::System *pacmanSys_;
-	ecs::System *gameCtrlSys_;
-	ecs::System *startsSys_;
-	ecs::System *renderSys_;
-	ecs::System *collisionSys_;
-	ecs::System *immunitySys_;
-	ecs::System *ghostSys_;
+
+	PacManSystem *pacmanSys_;
+	GameCtrlSystem *gameCtrlSys_;
+	FruitsSystem *fruitsSys_;
+	RenderSystem *renderSys_;
+	CollisionsSystem *collisionSys_;
+	ImmunitySystem *immunitySys_;
+	GhostSystem *ghostSys_;
 
 	GameState* newGameState;
 	GameState* newRoundState;

@@ -3,8 +3,10 @@
 #include "../../ecs/Component.h"
 #include "../../sdlutils/Texture.h"
 
-class ImageWithFrames : public ecs::Component
+struct ImageWithFrames : ecs::Component
 {
+	__CMPID_DECL__(ecs::cmp::IMAGEWITHFRAMES)
+
 	Texture* image_;
 	Transform* transform_;
 
@@ -18,13 +20,14 @@ class ImageWithFrames : public ecs::Component
 	int nRows_; // número de filas
 	int nCols_; // número de columnas
 
+	int firstFrame; // indice de la primera frame de la animacion
+	int lastFrame; // indice de la ultima frame de la animacion
+	int currentFrame; // indice del frame actual
+
 	Uint32 frameTimer; // contador del tiempo
 
-public:
-	__CMPID_DECL__(ecs::cmp::IMAGEWITHFRAMES)
-
 	ImageWithFrames() = default;
-	ImageWithFrames(Texture*, int, int);
+	ImageWithFrames(Texture*, int, int, int, int);
 	~ImageWithFrames() override;
 	void initComponent() override;
 	void render() override;

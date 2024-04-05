@@ -3,13 +3,13 @@
 #pragma once
 #include "../ecs/System.h"
 
-class StarsSystem: public ecs::System {
+class FruitsSystem: public ecs::System {
 public:
 
-	__SYSID_DECL__(ecs::sys::STARS)
+	__SYSID_DECL__(ecs::sys::FRUITS)
 
-	StarsSystem();
-	virtual ~StarsSystem();
+	FruitsSystem();
+	virtual ~FruitsSystem();
 	void initSystem() override;
 	void update() override;
 	void addStar(unsigned int n);

@@ -3,6 +3,7 @@
 #include "RenderSystem.h"
 
 #include "../components/Image.h"
+#include "../components/p1/ImageWithFrames.h"
 #include "../components/Transform.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/macros.h"
@@ -39,11 +40,10 @@ void RenderSystem::drawFruits() {
 void RenderSystem::drawPacMan() {
 	auto e = mngr_->getHandler(ecs::hdlr::PACMAN);
 	auto tr = mngr_->getComponent<Transform>(e);
-	auto tex = mngr_->getComponent<Image>(e)->tex_;
+	auto tex = mngr_->getComponent<ImageWithFrames>(e)->image_;
 	draw(tr, tex);
 
 }
-
 
 void RenderSystem::drawMsgs() {
 	// draw the score

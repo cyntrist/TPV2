@@ -144,7 +144,7 @@
     <ClInclude Include="src\systems\RenderSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
-    <ClInclude Include="src\systems\StarsSystem.h">
+    <ClInclude Include="src\systems\FruitsSystem.h">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
     <ClInclude Include="src\ecs\messages.h">
@@ -272,7 +272,7 @@
     <ClCompile Include="src\systems\RenderSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
-    <ClCompile Include="src\systems\StarsSystem.cpp">
+    <ClCompile Include="src\systems\FruitsSystem.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
     <ClCompile Include="src\ecs\Manager.cpp">

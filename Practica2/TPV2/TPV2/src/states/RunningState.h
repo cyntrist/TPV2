@@ -1,19 +1,31 @@
 ﻿#pragma once
 #include "GameState.h"
 #include "../ecs/Manager.h"
-class AsteroidsUtils;
-class FighterUtils;
+
+
+class RenderSystem;
+class CollisionsSystem;
+class ImmunitySystem;
+class FruitsSystem;
+class GhostSystem;
+class PacManSystem;
 
 class RunningState : public GameState
 {
 	void checkCollisions();
 	void onDeath();
-	ecs::Manager* mngr_;
-	int last_asteroid_; // timer
-	int last_missile_; // timer
+	PacManSystem *pacmanSys_;
+	//ecs::System *gameCtrlSys_;
+	GhostSystem *ghostSys_;
+	FruitsSystem *fruitsSys_;
+	ImmunitySystem *immunitySys_;
+	RenderSystem *renderSys_;
+	CollisionsSystem *collisionSys_;
+	
 
 public:
-	RunningState();
+	RunningState(PacManSystem* pc, GhostSystem*gh, FruitsSystem*fo,
+	ImmunitySystem*im, RenderSystem*r, CollisionsSystem*col);
 	~RunningState() override;
 	void enter() override;
 	void update() override;

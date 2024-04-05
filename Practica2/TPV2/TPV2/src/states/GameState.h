@@ -13,6 +13,10 @@ public:
 	{
 	}
 
+	GameState(ecs::Manager* mngr) : mngr_(mngr)
+	{
+	}
+
 	virtual ~GameState()
 	{
 	}

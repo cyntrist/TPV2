@@ -4,13 +4,20 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 
-constexpr float ASTEROID_TIMER = 5000;
-constexpr float MISSILE_TIMER = 15000;
+#include "../systems/PacManSystem.h"
+#include "../systems/GhostSystem.h"
+#include "../systems/FruitsSystem.h"
+#include "../systems/ImmunitySystem.h"
+#include "../systems/CollisionsSystem.h"
+#include "../systems/RenderSystem.h"
+
 
 using Random = RandomNumberGenerator;
 
-RunningState::RunningState()
-	: mngr_(nullptr), last_asteroid_(0)
+RunningState::RunningState(PacManSystem* pc, GhostSystem*gh, FruitsSystem*fo,
+	ImmunitySystem*im, RenderSystem*r, CollisionsSystem*col)
+	: GameState(nullptr), pacmanSys_(pc), ghostSys_(gh), fruitsSys_(fo),
+	immunitySys_(im), renderSys_(r), collisionSys_(col)
 {
 }
 
@@ -25,6 +32,18 @@ void RunningState::enter()
 
 void RunningState::update()
 {
+	pacmanSys_->update();
+	ghostSys_->update();
+	fruitsSys_->update();
+	immunitySys_->update();
+	//gameCtrlSys_->update();
+	/// render?
+	collisionSys_->update();
+
+
+
+
+
 	//if (mngr_->getEntities(ecs::grp::ASTEROID).empty())
 	//{
 	//	g().setState(Game::GAMEOVER);

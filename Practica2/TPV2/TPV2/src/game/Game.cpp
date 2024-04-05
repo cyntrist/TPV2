@@ -14,7 +14,7 @@
 #include "../systems/GameCtrlSystem.h"
 #include "../systems/PacManSystem.h"
 #include "../systems/RenderSystem.h"
-#include "../systems/StarsSystem.h"
+#include "../systems/FruitsSystem.h"
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
 #include "../systems/GhostSystem.h"
@@ -26,7 +26,7 @@ Game::Game() :
 		mngr_(), //
 		pacmanSys_(), //
 		gameCtrlSys_(), //
-		startsSys_(), //
+		fruitsSys_(), //
 		renderSys_(), //
 		collisionSys_(),
 		newGameState(),
@@ -54,23 +54,32 @@ void Game::init() {
 	// Create the manager
 	mngr_ = new Manager();
 
-	// create the states
-	newGameState = new NewGameState();
-	newRoundState = new NewRoundState();
-	pauseState = new PausedState();
-	runningState = new RunningState();
-	gameOverState = new GameOverState();
-
-	currentState = newGameState;
-
 	// add the systems
 	pacmanSys_ = mngr_->addSystem<PacManSystem>();
-	startsSys_ = mngr_->addSystem<StarsSystem>();
-	gameCtrlSys_ = mngr_->addSystem<GameCtrlSystem>();
+	fruitsSys_ = mngr_->addSystem<FruitsSystem>();
+	//gameCtrlSys_ = mngr_->addSystem<GameCtrlSystem>();
 	renderSys_ = mngr_->addSystem<RenderSystem>();
 	collisionSys_ = mngr_->addSystem<CollisionsSystem>();
 	immunitySys_ = mngr_->addSystem<ImmunitySystem>();
 	ghostSys_ = mngr_->addSystem<GhostSystem>();
+
+	// create the states
+	newGameState = new NewGameState();
+	newRoundState = new NewRoundState();
+	pauseState = new PausedState();
+	runningState = new RunningState(
+		pacmanSys_, ghostSys_, fruitsSys_, 
+		immunitySys_, renderSys_, collisionSys_
+	);
+	gameOverState = new GameOverState();
+
+	newGameState->setContext(mngr_);
+	newRoundState->setContext(mngr_);
+	pauseState->setContext(mngr_);
+	runningState->setContext(mngr_);
+	gameOverState->setContext(mngr_);
+
+	currentState = newGameState;
 }
 
 void Game::start() {
@@ -92,11 +101,6 @@ void Game::start() {
 		}
 
 		currentState->update();
-		/// esto va dentro del update del runningstate:
-		/*pacmanSys_->update();
-		startsSys_->update();
-		gameCtrlSys_->update();
-		collisionSys_->update();*/
 		mngr_->refresh();
 		mngr_->flushMessagesWithSwap();
 
@@ -109,5 +113,21 @@ void Game::start() {
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
+}
+
+void Game::setState(State newState)
+{
+	GameState* nextState = nullptr;
+	switch (newState)
+	{
+	case NEWGAME:	nextState = newGameState; break;
+	case NEWROUND:	nextState = newRoundState; break;
+	case RUNNING:	nextState = runningState; break;
+	case PAUSED:	nextState = pauseState; break;
+	case GAMEOVER:	nextState = gameOverState; break;
+	}
+	currentState->leave();
+	currentState = nextState;
+	currentState->enter();
 }
 

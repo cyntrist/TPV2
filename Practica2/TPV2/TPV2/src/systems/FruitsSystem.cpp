@@ -1,6 +1,6 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
-#include "StarsSystem.h"
+#include "FruitsSystem.h"
 
 #include <algorithm>
 #include "../components/Image.h"
@@ -11,17 +11,17 @@
 #include "../sdlutils/SDLUtils.h"
 #include "GameCtrlSystem.h"
 
-StarsSystem::StarsSystem() :
+FruitsSystem::FruitsSystem() :
 		starsLimit_(30), currNumOfStars_(0) {
 }
 
-StarsSystem::~StarsSystem() {
+FruitsSystem::~FruitsSystem() {
 }
 
-void StarsSystem::initSystem() {
+void FruitsSystem::initSystem() {
 }
 
-void StarsSystem::update() {
+void FruitsSystem::update() {
 
 	auto currTime = sdlutils().currRealTime();
 	auto stars = mngr_->getEntities(ecs::grp::FRUITS);
@@ -50,7 +50,7 @@ void StarsSystem::update() {
 	}
 }
 
-void StarsSystem::addStar(unsigned int n) {
+void FruitsSystem::addStar(unsigned int n) {
 
 	// Always use the random number generator provided by SDLUtils
 	//
@@ -93,7 +93,7 @@ void StarsSystem::addStar(unsigned int n) {
 	}
 }
 
-void StarsSystem::onStarEaten(ecs::entity_t e) {
+void FruitsSystem::onStarEaten(ecs::entity_t e) {
 	mngr_->setAlive(e, false);
 	currNumOfStars_--;
 
@@ -102,7 +102,7 @@ void StarsSystem::onStarEaten(ecs::entity_t e) {
 	sdlutils().soundEffects().at("pacman_eat").play(0, 1);
 }
 
-void StarsSystem::recieve(const Message &m) {
+void FruitsSystem::recieve(const Message &m) {
 	switch (m.id) {
 	case _m_FRUIT_EATEN:
 		onStarEaten(m.fruit_eaten_data.e);
