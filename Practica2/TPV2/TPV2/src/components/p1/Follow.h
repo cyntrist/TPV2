@@ -1,14 +1,15 @@
 ﻿#pragma once
-#include "Transform.h"
-#include "../ecs/Component.h"
+#include "../Transform.h"
+#include "../../ecs/Component.h"
+class Vector2D;
 
-class Follow : public ecs::Component
+struct Follow : public ecs::Component
 {
 	Transform* trans_;
 	Vector2D& destination_;
 
 public:
-	__CMPID_DECL__(ecs::cmp::FOLLOWS)
+	__CMPID_DECL__(ecs::cmp::FOLLOW)
 	Follow(Vector2D&);
 	~Follow() override = default;
 	void initComponent() override;

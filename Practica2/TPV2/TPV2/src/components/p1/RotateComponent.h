@@ -1,8 +1,8 @@
 ﻿#pragma once
-#include "../ecs/Component.h"
+#include "../../ecs/Component.h"
 class Transform;
 
-class RotateComponent : public ecs::Component
+struct RotateComponent : public ecs::Component
 {
 	float rot_amount_;
 	Transform* trans_;

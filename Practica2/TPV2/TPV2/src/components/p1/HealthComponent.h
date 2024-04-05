@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include "../ecs/Component.h"
+#include "../../ecs/Component.h"
 
 class Texture;
 
-class HealthComponent : public ecs::Component
+struct HealthComponent : public ecs::Component
 {
 	Texture* image_;
 	int lives_, iniLives_;

@@ -7,6 +7,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../states/NewGameState.h"
 #include "../states/NewRoundState.h"
+#include "../states/PausedState.h"
 #include "../states/RunningState.h"
 #include "../states/GameOverState.h"
 #include "../systems/CollisionsSystem.h"
@@ -16,6 +17,8 @@
 #include "../systems/StarsSystem.h"
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
+#include "../systems/GhostSystem.h"
+#include "../systems/ImmunitySystem.h"
 
 using ecs::Manager;
 
@@ -28,6 +31,7 @@ Game::Game() :
 		collisionSys_(),
 		newGameState(),
 		newRoundState(),
+		pauseState(),
 		runningState(),
 		gameOverState()
 {
@@ -48,6 +52,7 @@ void Game::init() {
 	// create the states
 	newGameState = new NewGameState();
 	newRoundState = new NewRoundState();
+	pauseState = new PausedState();
 	runningState = new RunningState();
 	gameOverState = new GameOverState();
 
@@ -57,6 +62,8 @@ void Game::init() {
 	gameCtrlSys_ = mngr_->addSystem<GameCtrlSystem>();
 	renderSys_ = mngr_->addSystem<RenderSystem>();
 	collisionSys_ = mngr_->addSystem<CollisionsSystem>();
+	immunitySys_ = mngr_->addSystem<ImmunitySystem>();
+	ghostSys_ = mngr_->addSystem<GhostSystem>();
 }
 
 void Game::start() {

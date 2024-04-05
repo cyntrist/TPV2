@@ -21,10 +21,14 @@ private:
 	ecs::System *startsSys_;
 	ecs::System *renderSys_;
 	ecs::System *collisionSys_;
+	ecs::System *immunitySys_;
+	ecs::System *ghostSys_;
 
 	GameState* newGameState;
 	GameState* newRoundState;
+	GameState* pauseState;
 	GameState* runningState;
 	GameState* gameOverState;
+	GameState* currentState;
 };
 

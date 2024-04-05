@@ -20,6 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\Image.h" />
+    <ClInclude Include="src\components\p1\Follow.h" />
+    <ClInclude Include="src\components\p1\HealthComponent.h" />
+    <ClInclude Include="src\components\p1\ImageWithFrames.h" />
+    <ClInclude Include="src\components\p1\RotateComponent.h" />
     <ClInclude Include="src\components\Points.h" />
     <ClInclude Include="src\components\StarMotion.h" />
     <ClInclude Include="src\components\Transform.h" />
@@ -56,6 +60,8 @@
     <ClInclude Include="src\states\RunningState.h" />
     <ClInclude Include="src\systems\CollisionsSystem.h" />
     <ClInclude Include="src\systems\GameCtrlSystem.h" />
+    <ClInclude Include="src\systems\GhostSystem.h" />
+    <ClInclude Include="src\systems\ImmunitySystem.h" />
     <ClInclude Include="src\systems\PacManSystem.h" />
     <ClInclude Include="src\systems\RenderSystem.h" />
     <ClInclude Include="src\systems\StarsSystem.h" />
@@ -67,6 +73,10 @@
     <ClInclude Include="src\utils\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\p1\Follow.cpp" />
+    <ClCompile Include="src\components\p1\HealthComponent.cpp" />
+    <ClCompile Include="src\components\p1\ImageWithFrames.cpp" />
+    <ClCompile Include="src\components\p1\RotateComponent.cpp" />
     <ClCompile Include="src\ecs\Manager.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
     <ClCompile Include="src\json\JSON.cpp" />
@@ -84,6 +94,8 @@
     <ClCompile Include="src\states\RunningState.cpp" />
     <ClCompile Include="src\systems\CollisionsSystem.cpp" />
     <ClCompile Include="src\systems\GameCtrlSystem.cpp" />
+    <ClCompile Include="src\systems\GhostSystem.cpp" />
+    <ClCompile Include="src\systems\ImmunitySystem.cpp" />
     <ClCompile Include="src\systems\PacManSystem.cpp" />
     <ClCompile Include="src\systems\RenderSystem.cpp" />
     <ClCompile Include="src\systems\StarsSystem.cpp" />

@@ -1,6 +1,6 @@
 ﻿#include "ImageWithFrames.h"
-#include "../ecs/Manager.h"
-#include "../sdlutils/SDLUtils.h"
+#include "../../ecs/Manager.h"
+#include "../../sdlutils/SDLUtils.h"
 constexpr int FRAME_SPEED = 100;
 
 ImageWithFrames::ImageWithFrames(Texture* img, int rows, int cols) :
@@ -22,13 +22,13 @@ ImageWithFrames::~ImageWithFrames()
 
 void ImageWithFrames::initComponent()
 {
-	transform_ = mngr_->getComponent<Transform>(ent_);
-	assert(transform_ != nullptr);
+	/*transform_ = mngr_->getComponent<Transform>(ent_);
+	assert(transform_ != nullptr);*/
 }
 
 void ImageWithFrames::render()
 {
-	if (sdlutils().currRealTime() > frameTimer + FRAME_SPEED)
+	/*if (sdlutils().currRealTime() > frameTimer + FRAME_SPEED)
 	{
 		currentCol_ = (currentCol_ + 1) % (nCols_ - 1);
 		currentRow_ = (currentRow_ + 1) % (nRows_ - 1);
@@ -46,5 +46,5 @@ void ImageWithFrames::render()
 		transform_->getWidth(),
 		transform_->getHeight()
 	);
-	image_->render(srce, dest, transform_->getRot());
+	image_->render(srce, dest, transform_->getRot());*/
 }
