@@ -16,6 +16,9 @@ public:
 	void initSystem() override;
 	void update() override;
 	void recieve(const Message&) override;
+
+	void resetPosition();
+	void resetLives();
 private:
 	Transform *pmTR_;
 	ecs::entity_t pacman;

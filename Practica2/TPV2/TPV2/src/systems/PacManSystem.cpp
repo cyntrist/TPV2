@@ -39,44 +39,96 @@ void PacManSystem::update() {
 
 	if (ihldr.keyDownEvent()) {
 
-		if (ihldr.isKeyDown(SDL_SCANCODE_RIGHT)) { // rotate right
-			pmTR_->rot_ = pmTR_->rot_ + 5.0f;
+			if (ih().isKeyDown(SDL_SCANCODE_UP)) {
+		//setear la velocidad y rotar
+		pmTR_->vel_.set(0, -pacManVel);
+		pmTR_->getVel() = pmTR_->getVel().rotate(pmTR_->rot_);
+	}
+	if (ih().isKeyDown(SDL_SCANCODE_DOWN)) {
+		pmTR_->getVel().set(0, 0);
+	}
+	if (ih().isKeyDown(SDL_SCANCODE_RIGHT) && !rightPressed) {
+		pmTR_->rot_ += 90;
+		pmTR_->getVel() = pmTR_->getVel().rotate(90);
+		rightPressed = true;
+	}
+	if (ih().isKeyDown(SDL_SCANCODE_LEFT) && !leftPressed) {
+		pmTR_->rot_ -= 90;
+		pmTR_->getVel() = pmTR_->getVel().rotate(-90);
+		leftPressed = true;
+	}
 
-			// also rotate the PacMan so it looks in the same
-			// direction where it moves
-			//
-			pmTR_->vel_ = pmTR_->vel_.rotate(5.0f);
-		} else if (ihldr.isKeyDown(SDL_SCANCODE_LEFT)) { // rotate left
-			pmTR_->rot_ = pmTR_->rot_ - 5.0f;
+	if (ih().isKeyUp(SDL_SCANCODE_RIGHT)) {
+		rightPressed = false;
+	}
+	if (ih().isKeyUp(SDL_SCANCODE_LEFT)) {
+		leftPressed = false;
+	}
 
-			// also rotate the PacMan so it looks in the same
-			// direction where it moves
-			//
-			pmTR_->vel_ = pmTR_->vel_.rotate(-5.0f);
-		} else if (ihldr.isKeyDown(SDL_SCANCODE_UP)) { // increase speed
+	if (pmTR_->vel_.getX() != 0 && 
+		pmTR_->vel_.getY() != 0) {
 
-			// add 1.0f to the speed (respecting the limit 3.0f). Recall
-			// that speed is the length of the velocity vector
-			float speed = std::min(3.0f, pmTR_->vel_.magnitude() + 1.0f);
+		//std::cout << tf->vel_ << std::endl;
+	}
 
-			// change the length of velocity vecto to 'speed'. We need
-			// '.rotate(rot)' for the case in which the current speed is
-			// 0, so we rotate it to the same direction where the PacMan
-			// is looking
-			//
-			pmTR_->vel_ = Vector2D(0, -speed).rotate(pmTR_->rot_);
-		} else if (ihldr.isKeyDown(SDL_SCANCODE_DOWN)) { // decrease speed
-			// subtract 1.0f to the speed (respecting the limit 0.0f). Recall
-			// that speed is the length of the velocity vector
-			float speed = std::max(0.0f, pmTR_->vel_.magnitude() - 1.0f);
+	if ( (pmTR_->pos_.getX() <= 0 && pmTR_->vel_.getX() < -0.01) ||
+		 (pmTR_->pos_.getY() <= 0 && pmTR_->vel_.getY() < -0.01) || 
+	     (pmTR_->pos_.getX() >= (sdlutils().width()  - pmTR_->width_) && pmTR_->vel_.getX() > 0.01) ||
+		 (pmTR_->pos_.getY() >= (sdlutils().height() - pmTR_->height_) && pmTR_->vel_.getY() >  0.01)) {
 
-			// change the length of velocity vector to 'speed'. We need
-			// '.rotate(rot)' for the case in which the current speed is
-			// 0, so we rotate it to the same direction where the PacMan
-			// is looking
-			//
-			pmTR_->vel_ = Vector2D(0, -speed).rotate(pmTR_->rot_);
-		}
+		pmTR_->vel_.set(0, 0);
+	}
+
+	pmTR_->pos_ = pmTR_->pos_ + pmTR_->vel_;
+
+	//if ((pmTR_->vel_.getX() != 0 || pmTR_->vel_.getY() != 0 )&&
+		/*lastSound+soundRate < sdlutils().virtualTimer().currTime()) {
+		lastSound = sdlutils().virtualTimer().currTime();
+		sdlutils().soundEffects().at("chomp").play();*/
+	}
+
+
+
+
+
+		//if (ihldr.isKeyDown(SDL_SCANCODE_RIGHT)) { // rotate right
+		//	pmTR_->rot_ = pmTR_->rot_ + 5.0f;
+
+		//	// also rotate the PacMan so it looks in the same
+		//	// direction where it moves
+		//	//
+		//	pmTR_->vel_ = pmTR_->vel_.rotate(5.0f);
+		//} else if (ihldr.isKeyDown(SDL_SCANCODE_LEFT)) { // rotate left
+		//	pmTR_->rot_ = pmTR_->rot_ - 5.0f;
+
+		//	// also rotate the PacMan so it looks in the same
+		//	// direction where it moves
+		//	//
+		//	pmTR_->vel_ = pmTR_->vel_.rotate(-5.0f);
+		//} else if (ihldr.isKeyDown(SDL_SCANCODE_UP)) { // increase speed
+
+		//	// add 1.0f to the speed (respecting the limit 3.0f). Recall
+		//	// that speed is the length of the velocity vector
+		//	float speed = std::min(3.0f, pmTR_->vel_.magnitude() + 1.0f);
+
+		//	// change the length of velocity vecto to 'speed'. We need
+		//	// '.rotate(rot)' for the case in which the current speed is
+		//	// 0, so we rotate it to the same direction where the PacMan
+		//	// is looking
+		//	//
+		//	pmTR_->vel_ = Vector2D(0, -speed).rotate(pmTR_->rot_);
+		//} else if (ihldr.isKeyDown(SDL_SCANCODE_DOWN)) { // decrease speed
+		//	// subtract 1.0f to the speed (respecting the limit 0.0f). Recall
+		//	// that speed is the length of the velocity vector
+		//	float speed = std::max(0.0f, pmTR_->vel_.magnitude() - 1.0f);
+
+		//	// change the length of velocity vector to 'speed'. We need
+		//	// '.rotate(rot)' for the case in which the current speed is
+		//	// 0, so we rotate it to the same direction where the PacMan
+		//	// is looking
+		//	//
+		//	pmTR_->vel_ = Vector2D(0, -speed).rotate(pmTR_->rot_);
+		//}
 
 	}
 
