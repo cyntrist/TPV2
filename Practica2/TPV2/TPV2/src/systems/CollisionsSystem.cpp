@@ -30,7 +30,7 @@ void CollisionsSystem::update() {
 	// particular case we could use a for-each loop since the list stars is not
 	// modified.
 	//
-	auto &stars = mngr_->getEntities(ecs::grp::STARS);
+	auto &stars = mngr_->getEntities(ecs::grp::FRUITS);
 	auto n = stars.size();
 	for (auto i = 0u; i < n; i++) {
 		auto e = stars[i];
@@ -46,8 +46,8 @@ void CollisionsSystem::update() {
 					eTR->pos_, eTR->width_, eTR->height_)) {
 
 				Message m;
-				m.id = _m_STAR_EATEN;
-				m.star_eaten_data.e = e;
+				m.id = _m_FRUIT_EATEN;
+				m.fruit_eaten_data.e = e;
 				mngr_->send(m);
 
 			}

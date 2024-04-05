@@ -26,8 +26,8 @@ void GameCtrlSystem::update() {
 		if (ihldr.isKeyDown(SDL_SCANCODE_SPACE)) {
 
 			Message m;
-			m.id = _m_CREATE_STARS;
-			m.create_stars_data.n = 5;
+			m.id = _m_CREATE_FRUIT;
+			m.create_fruits_data.n = 5;
 			mngr_->send(m);
 		}
 	}
@@ -35,8 +35,8 @@ void GameCtrlSystem::update() {
 
 void GameCtrlSystem::recieve(const Message &m) {
 	switch (m.id) {
-	case _m_STAR_EATEN:
-		score_ += mngr_->getComponent<Points>(m.star_eaten_data.e)->points_;
+	case _m_FRUIT_EATEN:
+		score_ += mngr_->getComponent<Points>(m.fruit_eaten_data.e)->points_;
 		break;
 	default:
 		break;

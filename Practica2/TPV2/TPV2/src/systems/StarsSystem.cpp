@@ -24,7 +24,7 @@ void StarsSystem::initSystem() {
 void StarsSystem::update() {
 
 	auto currTime = sdlutils().currRealTime();
-	auto stars = mngr_->getEntities(ecs::grp::STARS);
+	auto stars = mngr_->getEntities(ecs::grp::FRUITS);
 	auto n = stars.size();
 
 	for (auto i = 0u; i < n; i++) {
@@ -64,7 +64,7 @@ void StarsSystem::addStar(unsigned int n) {
 
 		// add and entity to the manager
 		//
-		auto e = mngr_->addEntity(ecs::grp::STARS);
+		auto e = mngr_->addEntity(ecs::grp::FRUITS);
 
 		// add a Transform component, and initialise it with random
 		// size and position
@@ -104,11 +104,11 @@ void StarsSystem::onStarEaten(ecs::entity_t e) {
 
 void StarsSystem::recieve(const Message &m) {
 	switch (m.id) {
-	case _m_STAR_EATEN:
-		onStarEaten(m.star_eaten_data.e);
+	case _m_FRUIT_EATEN:
+		onStarEaten(m.fruit_eaten_data.e);
 		break;
-	case _m_CREATE_STARS:
-		addStar(m.create_stars_data.n);
+	case _m_CREATE_FRUIT:
+		addStar(m.create_fruits_data.n);
 		break;
 	default:
 		break;

@@ -45,7 +45,7 @@ namespace cmp {
 // list of component identifiers - note that we rely on that the
 // first number is 0 in C/C++ standard
 enum cmpId : cmpId_t {
-	_CMPS_LIST_, /* taken from ../game/ecs_defs */
+	_CMPS_LIST_ /* taken from ../game/ecs_defs */
 
 	// do not remove this
 	_LAST_CMP_ID
@@ -57,7 +57,7 @@ namespace grp {
 // first number is 0 in C/C++ standard
 enum grpId : cmpId_t {
 	DEFAULT,
-	_GRPS_LIST_, /* taken from ../game/ecs_defs */
+	_GRPS_LIST_ /* taken from ../game/ecs_defs */
 
 	// do not remove this
 	_LAST_GRP_ID
@@ -79,7 +79,7 @@ namespace sys {
 // list of system identifiers - note that we rely on that the
 // first number is 0 in C/C++ standard
 enum sysId : hdlrId_t {
-	_SYS_LIST_, /* taken from ../game/ecs_defs */
+	_SYS_LIST_ /* taken from ../game/ecs_defs */
 
 	// do not remove this
 	_LAST_SYS_ID
