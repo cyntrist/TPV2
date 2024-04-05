@@ -7,18 +7,20 @@
   ],
   
   "images" : [
-    { "id" : "sdl_logo", "file" : "resources/images/SDL_logo.png" },
+    { "id" : "heart", "file" : "resources/images/heart.png"},
     { "id": "atlas", "file": "resources/images/pacman_sprites.png" }
   ],
   
   "messages" : [
-    { "id" : "PressAnyKey", "text" : "Press Any Key", "font" : "ARIAL24", "color" : "0x112233ff", "bg" : "0xffffffff" },
-    { "id" : "HelloSDL", "text" : "Hello SDL!", "font" : "ARIAL48", "color" : "0x0000ffff" }
+    { "id" : "start", "text" : "Press any key to start a new game", "font" : "ARIAL24", "color" : "0x0000ffff" },
+    { "id" : "round", "text" : "Press ENTER to start the round", "font" : "ARIAL24", "color" : "0x112233ff", "bg" : "0xffffffff" },
+    { "id" : "pause", "text" : "Press any key to resume the game", "font" : "ARIAL24", "color" : "0x0000ffff" },
+    { "id" : "continue", "text" : "Press space to continue", "font" : "ARIAL24", "color" : "0x112233ff", "bg" : "0xffffffff" },
+    { "id" : "game_over", "text" : "Game Over Loser! Press ENTER to continue.", "font" : "ARIAL24", "color" : "0x0000ffff" },
+    { "id" : "game_won", "text" : "Game Over Champion! Press ENTER to continue.", "font" : "ARIAL24", "color" : "0x0000ffff" }
   ],
   
   "sounds" : [
-    { "id" : "wall_hit", "file" : "resources/sound/wall_hit.wav" },
-    { "id" : "explosion", "file" : "resources/sound/explosion.wav" },
     { "id": "intro", "file": "resources/sound/pacman_intro.wav" },
     { "id": "chomp", "file": "resources/sound/pacman_chomp.wav" },
     { "id": "eat", "file": "resources/sound/pacman_eat.wav" },
@@ -27,7 +29,6 @@
   ],
 
   "musics" : [
-    { "id" : "beat", "file" : "resources/sound/beat.wav" }
   ]
 
 }
