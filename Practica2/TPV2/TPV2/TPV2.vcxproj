@@ -48,6 +48,12 @@
     <ClInclude Include="src\sdlutils\SoundEffect.h" />
     <ClInclude Include="src\sdlutils\Texture.h" />
     <ClInclude Include="src\sdlutils\VirtualTimer.h" />
+    <ClInclude Include="src\states\GameOverState.h" />
+    <ClInclude Include="src\states\GameState.h" />
+    <ClInclude Include="src\states\NewGameState.h" />
+    <ClInclude Include="src\states\NewRoundState.h" />
+    <ClInclude Include="src\states\PausedState.h" />
+    <ClInclude Include="src\states\RunningState.h" />
     <ClInclude Include="src\systems\CollisionsSystem.h" />
     <ClInclude Include="src\systems\GameCtrlSystem.h" />
     <ClInclude Include="src\systems\PacManSystem.h" />
@@ -71,6 +77,11 @@
     <ClCompile Include="src\sdlutils\sdlutils_demo.cpp" />
     <ClCompile Include="src\sdlutils\SoundEffect.cpp" />
     <ClCompile Include="src\sdlutils\Texture.cpp" />
+    <ClCompile Include="src\states\GameOverState.cpp" />
+    <ClCompile Include="src\states\NewGameState.cpp" />
+    <ClCompile Include="src\states\NewRoundState.cpp" />
+    <ClCompile Include="src\states\PausedState.cpp" />
+    <ClCompile Include="src\states\RunningState.cpp" />
     <ClCompile Include="src\systems\CollisionsSystem.cpp" />
     <ClCompile Include="src\systems\GameCtrlSystem.cpp" />
     <ClCompile Include="src\systems\PacManSystem.cpp" />

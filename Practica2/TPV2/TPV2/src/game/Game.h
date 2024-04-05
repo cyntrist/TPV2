@@ -19,6 +19,6 @@ private:
 	ecs::System *startsSys_;
 	ecs::System *renderSys_;
 	ecs::System *collisionSys_;
-
+	GameOverState
 };
 

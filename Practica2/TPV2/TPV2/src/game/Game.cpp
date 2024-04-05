@@ -37,6 +37,8 @@ void Game::init() {
 	// Create the manager
 	mngr_ = new Manager();
 
+	// create the states
+
 
 	// add the systems
 	pacmanSys_ = mngr_->addSystem<PacManSystem>();
