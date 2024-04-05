@@ -3,13 +3,8 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 
-constexpr int ASTEROID_WAVE = 10;
-constexpr int HOLE_WAVE = 6;
-
-NewRoundState::NewRoundState(FighterUtils* fu, AsteroidsUtils* au,
-                             BlackHoleUtils* bhu, MissileUtils* mu)
-	: f_utils_(fu), a_utils_(au), bh_utils_(bhu), m_utils_(mu),
-	  message_(nullptr), rect_()
+NewRoundState::NewRoundState()
+	: message_(nullptr), rect_()
 {
 }
 
@@ -19,18 +14,18 @@ NewRoundState::~NewRoundState()
 
 void NewRoundState::enter()
 {
-	message_ = &sdlutils().msgs().at("round");
+	/*message_ = &sdlutils().msgs().at("round");
 	rect_ = {
 		(sdlutils().width() - message_->width()) / 2,
 		(sdlutils().height() - message_->height()) / 2,
 		message_->width(),
 		message_->height()
-	};
+	};*/
 }
 
 void NewRoundState::update()
 {
-	sdlutils().clearRenderer();
+	/*sdlutils().clearRenderer();
 	message_->render(rect_);
 	sdlutils().presentRenderer();
 
@@ -47,7 +42,7 @@ void NewRoundState::update()
 		m_utils_->remove_all_missiles();
 
 		g().setState(Game::RUNNING);
-	}
+	}*/
 }
 
 void NewRoundState::leave()

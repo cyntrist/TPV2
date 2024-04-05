@@ -3,8 +3,8 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 
-NewGameState::NewGameState(FighterUtils* fu)
-	: f_utils_(fu), message_(nullptr), rect_()
+NewGameState::NewGameState()
+	: message_(nullptr), rect_()
 {
 }
 
@@ -25,15 +25,14 @@ void NewGameState::enter()
 
 void NewGameState::update()
 {
-	sdlutils().clearRenderer();
+	/*sdlutils().clearRenderer();
 	message_->render(rect_);
 	sdlutils().presentRenderer();
 
 	if (ih().keyDownEvent())
 	{
-		f_utils_->reset_lives();
 		g().setState(Game::NEWROUND);
-	}
+	}*/
 }
 
 void NewGameState::leave()

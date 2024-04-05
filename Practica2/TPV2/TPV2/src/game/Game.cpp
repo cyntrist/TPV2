@@ -5,6 +5,10 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
+#include "../states/NewGameState.h"
+#include "../states/NewRoundState.h"
+#include "../states/RunningState.h"
+#include "../states/GameOverState.h"
 #include "../systems/CollisionsSystem.h"
 #include "../systems/GameCtrlSystem.h"
 #include "../systems/PacManSystem.h"
@@ -21,8 +25,12 @@ Game::Game() :
 		gameCtrlSys_(), //
 		startsSys_(), //
 		renderSys_(), //
-		collisionSys_() {
-
+		collisionSys_(),
+		newGameState(),
+		newRoundState(),
+		runningState(),
+		gameOverState()
+{
 }
 
 Game::~Game() {
@@ -38,7 +46,10 @@ void Game::init() {
 	mngr_ = new Manager();
 
 	// create the states
-
+	newGameState = new NewGameState();
+	newRoundState = new NewRoundState();
+	runningState = new RunningState();
+	gameOverState = new GameOverState();
 
 	// add the systems
 	pacmanSys_ = mngr_->addSystem<PacManSystem>();
