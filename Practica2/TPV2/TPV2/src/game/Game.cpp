@@ -38,6 +38,11 @@ Game::Game() :
 }
 
 Game::~Game() {
+	delete newGameState;
+	delete newRoundState;
+	delete pauseState;
+	delete runningState;
+	delete gameOverState;
 	delete mngr_;
 }
 
@@ -55,6 +60,8 @@ void Game::init() {
 	pauseState = new PausedState();
 	runningState = new RunningState();
 	gameOverState = new GameOverState();
+
+	currentState = newGameState;
 
 	// add the systems
 	pacmanSys_ = mngr_->addSystem<PacManSystem>();
@@ -84,13 +91,14 @@ void Game::start() {
 			continue;
 		}
 
-
-		pacmanSys_->update();
+		currentState->update();
+		/// esto va dentro del update del runningstate:
+		/*pacmanSys_->update();
 		startsSys_->update();
 		gameCtrlSys_->update();
-		collisionSys_->update();
-
+		collisionSys_->update();*/
 		mngr_->refresh();
+		mngr_->flushMessagesWithSwap();
 
 		sdlutils().clearRenderer();
 		renderSys_->update();
@@ -101,6 +109,5 @@ void Game::start() {
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
-
 }
 
