@@ -1,7 +1,6 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "RenderSystem.h"
-
 #include "../components/Image.h"
 #include "../components/p1/ImageWithFrames.h"
 #include "../components/Transform.h"
@@ -10,6 +9,8 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/Texture.h"
 #include "GameCtrlSystem.h"
+
+constexpr Uint32 FRAME_DURATION = 100;
 
 RenderSystem::RenderSystem() {
 
@@ -40,8 +41,9 @@ void RenderSystem::drawFruits() {
 void RenderSystem::drawPacMan() {
 	auto e = mngr_->getHandler(ecs::hdlr::PACMAN);
 	auto tr = mngr_->getComponent<Transform>(e);
-	auto tex = mngr_->getComponent<ImageWithFrames>(e)->image_;
-	draw(tr, tex);
+	auto iwf = mngr_->getComponent<ImageWithFrames>(e);
+	drawImageWithFrames(iwf);
+	//draw(tr, tex);
 
 }
 
@@ -64,6 +66,35 @@ void RenderSystem::drawMsgs() {
 	//// draw add stars message
 	//sdlutils().msgs().at("addstars").render(10, 10);
 
+}
+
+void RenderSystem::drawImageWithFrames(ImageWithFrames* image)
+{
+	if (image->frameTimer + FRAME_DURATION 
+		< sdlutils().virtualTimer().currTime()) 
+	{
+		image->frameTimer = sdlutils().virtualTimer().currTime();
+		image->currentFrame++;
+		if (image->currentFrame > image->lastFrame) {
+			image->currentFrame = image->firstFrame;
+		}
+	}
+
+	SDL_Rect src = build_sdlrect(
+	image->currentFrame % image->nCols_ * image->frameWidth_, 
+	image->currentFrame / image->nCols_ * image->frameHeight_, 
+	image->frameWidth_, image->frameHeight_
+	);
+	SDL_Rect dst = build_sdlrect(
+		image->transform_->pos_, 
+		image->transform_->width_, 
+		image->transform_->height_);
+	image->image_->render(src, dst, image->transform_->rot_);
+}
+
+void RenderSystem::drawHealth(HealthComponent*)
+{
+	
 }
 
 void RenderSystem::draw(Transform *tr, Texture *tex) {

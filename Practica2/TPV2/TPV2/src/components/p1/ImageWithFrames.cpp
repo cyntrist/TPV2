@@ -27,8 +27,8 @@ ImageWithFrames::~ImageWithFrames()
 
 void ImageWithFrames::initComponent()
 {
-	/*transform_ = mngr_->getComponent<Transform>(ent_);
-	assert(transform_ != nullptr);*/
+	transform_ = mngr_->getComponent<Transform>(ent_);
+	assert(transform_ != nullptr);
 }
 
 void ImageWithFrames::render()
