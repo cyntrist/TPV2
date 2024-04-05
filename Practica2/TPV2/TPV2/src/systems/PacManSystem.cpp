@@ -4,6 +4,8 @@
 
 #include "../components/Image.h"
 #include "../components/Transform.h"
+#include "../components/p1/HealthComponent.h"
+#include "../components/p1/ImageWithFrames.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
@@ -26,7 +28,12 @@ void PacManSystem::initSystem() {
 	auto x = (sdlutils().width() - s) / 2.0f;
 	auto y = (sdlutils().height() - s) / 2.0f;
 	pmTR_->init(Vector2D(x, y), Vector2D(), s, s, 0.0f);
-	mngr_->addComponent<Image>(pacman, &sdlutils().images().at("pacman"));
+
+
+	mngr_->addComponent<ImageWithFrames>(pacman, &sdlutils().images().at("atlas"),
+		8, 8, 0, 3);
+	mngr_->addComponent<HealthComponent>(pacman, &sdlutils().images().at("heart"),
+		3);
 }
 
 void PacManSystem::update() {
@@ -96,5 +103,4 @@ void PacManSystem::update() {
 		pmTR_->pos_.setY(sdlutils().height() - pmTR_->height_);
 		pmTR_->vel_.set(0.0f, 0.0f);
 	}
-
 }

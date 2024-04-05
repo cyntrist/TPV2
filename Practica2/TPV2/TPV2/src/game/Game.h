@@ -15,16 +15,16 @@ class GameCtrlSystem;
 class PacManSystem;
 class GameState;
 
-class Game {
-	enum State
-	{
-		NEWGAME,
-		NEWROUND,
-		RUNNING,
-		PAUSED,
-		GAMEOVER
-	};
+enum State
+{
+	NEWGAME,
+	NEWROUND,
+	RUNNING,
+	PAUSED,
+	GAMEOVER
+};
 
+class Game {
 public:
 	Game();
 	virtual ~Game();

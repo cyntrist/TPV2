@@ -79,7 +79,7 @@ void Game::init() {
 	runningState->setContext(mngr_);
 	gameOverState->setContext(mngr_);
 
-	currentState = newGameState;
+	currentState = runningState;
 }
 
 void Game::start() {
@@ -100,12 +100,11 @@ void Game::start() {
 			continue;
 		}
 
-		currentState->update();
-		mngr_->refresh();
-		mngr_->flushMessagesWithSwap();
-
 		sdlutils().clearRenderer();
-		renderSys_->update();
+		//renderSys_->update();
+		currentState->update();
+		mngr_->flushMessagesWithSwap();
+		mngr_->refresh();
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;

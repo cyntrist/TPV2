@@ -48,21 +48,21 @@ void RenderSystem::drawPacMan() {
 void RenderSystem::drawMsgs() {
 	// draw the score
 	//
-	auto score = mngr_->getSystem<GameCtrlSystem>()->getScore();
+	//auto score = mngr_->getSystem<GameCtrlSystem>()->getScore();
 
-	Texture scoreTex(sdlutils().renderer(), std::to_string(score),
-			sdlutils().fonts().at("ARIAL24"), build_sdlcolor(0x444444ff));
+	//Texture scoreTex(sdlutils().renderer(), std::to_string(score),
+	//		sdlutils().fonts().at("ARIAL24"), build_sdlcolor(0x444444ff));
 
-	SDL_Rect dest = build_sdlrect( //
-			(sdlutils().width() - scoreTex.width()) / 2.0f, //
-			10.0f, //
-			scoreTex.width(), //
-			scoreTex.height());
+	//SDL_Rect dest = build_sdlrect( //
+	//		(sdlutils().width() - scoreTex.width()) / 2.0f, //
+	//		10.0f, //
+	//		scoreTex.width(), //
+	//		scoreTex.height());
 
-	scoreTex.render(dest);
+	//scoreTex.render(dest);
 
-	// draw add stars message
-	sdlutils().msgs().at("addstars").render(10, 10);
+	//// draw add stars message
+	//sdlutils().msgs().at("addstars").render(10, 10);
 
 }
 

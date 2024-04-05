@@ -11,7 +11,7 @@ struct HealthComponent : public ecs::Component
 public:
 	__CMPID_DECL__(ecs::cmp::HEALTH)
 
-	HealthComponent(Texture* img, int lives);
+	HealthComponent(Texture* img, int lives = 3);
 	~HealthComponent() override;
 
 	void initComponent() override;

@@ -27,7 +27,6 @@ RunningState::~RunningState()
 
 void RunningState::enter()
 {
-	//mngr_ = g().getManager();
 }
 
 void RunningState::update()
@@ -37,8 +36,8 @@ void RunningState::update()
 	fruitsSys_->update();
 	immunitySys_->update();
 	//gameCtrlSys_->update();
-	/// render?
 	collisionSys_->update();
+	renderSys_->update();
 
 
 

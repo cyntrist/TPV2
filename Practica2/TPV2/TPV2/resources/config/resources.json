@@ -7,17 +7,17 @@
   ],
   
   "images" : [
-    { "id" : "heart", "file" : "resources/images/heart.png"},
+    { "id": "heart", "file" : "resources/images/heart.png"},
     { "id": "atlas", "file": "resources/images/pacman_sprites.png" }
   ],
   
   "messages" : [
-    { "id" : "start", "text" : "Press any key to start a new game", "font" : "ARIAL24", "color" : "0x0000ffff" },
-    { "id" : "round", "text" : "Press ENTER to start the round", "font" : "ARIAL24", "color" : "0x112233ff", "bg" : "0xffffffff" },
-    { "id" : "pause", "text" : "Press any key to resume the game", "font" : "ARIAL24", "color" : "0x0000ffff" },
-    { "id" : "continue", "text" : "Press space to continue", "font" : "ARIAL24", "color" : "0x112233ff", "bg" : "0xffffffff" },
-    { "id" : "game_over", "text" : "Game Over Loser! Press ENTER to continue.", "font" : "ARIAL24", "color" : "0x0000ffff" },
-    { "id" : "game_won", "text" : "Game Over Champion! Press ENTER to continue.", "font" : "ARIAL24", "color" : "0x0000ffff" }
+    { "id": "start", "text" : "Press any key to start a new game", "font" : "ARIAL24", "color" : "0x0000ffff" },
+    { "id": "round", "text" : "Press ENTER to start the round", "font" : "ARIAL24", "color" : "0x112233ff", "bg" : "0xffffffff" },
+    { "id": "pause", "text" : "Press any key to resume the game", "font" : "ARIAL24", "color" : "0x0000ffff" },
+    { "id": "continue", "text" : "Press space to continue", "font" : "ARIAL24", "color" : "0x112233ff", "bg" : "0xffffffff" },
+    { "id": "game_over", "text" : "Game Over Loser! Press ENTER to continue.", "font" : "ARIAL24", "color" : "0x0000ffff" },
+    { "id": "game_won", "text" : "Game Over Champion! Press ENTER to continue.", "font" : "ARIAL24", "color" : "0x0000ffff" }
   ],
   
   "sounds" : [
