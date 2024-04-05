@@ -16,6 +16,7 @@ public:
 
 	void initComponent() override;
 	int getLives() const { return lives_; }
+	int getInitLives() const { return iniLives_; }
 	void addLives(int value) { lives_ += value; }
 	void setLives(int value) { lives_ = value; }
 	void resetLives() { lives_ = iniLives_; }

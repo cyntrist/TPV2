@@ -25,4 +25,5 @@ public:
 	virtual void leave() = 0;
 	virtual void update() = 0;
 	void setContext(ecs::Manager* manager) { mngr_ = manager; }
+	ecs::Manager* getManager() { return mngr_; }
 };

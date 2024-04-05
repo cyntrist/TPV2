@@ -9,6 +9,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/Texture.h"
 #include "GameCtrlSystem.h"
+#include "../components/p1/HealthComponent.h"
 
 constexpr Uint32 FRAME_DURATION = 100;
 
@@ -42,9 +43,11 @@ void RenderSystem::drawPacMan() {
 	auto e = mngr_->getHandler(ecs::hdlr::PACMAN);
 	auto tr = mngr_->getComponent<Transform>(e);
 	auto iwf = mngr_->getComponent<ImageWithFrames>(e);
-	drawImageWithFrames(iwf);
-	//draw(tr, tex);
+	auto hc = mngr_->getComponent<HealthComponent>(e);
 
+	drawImageWithFrames(iwf);
+	drawHealth(hc);
+	//draw(tr, tex);
 }
 
 void RenderSystem::drawMsgs() {
@@ -92,9 +95,9 @@ void RenderSystem::drawImageWithFrames(ImageWithFrames* image)
 	image->image_->render(src, dst, image->transform_->rot_);
 }
 
-void RenderSystem::drawHealth(HealthComponent*)
+void RenderSystem::drawHealth(HealthComponent* hc)
 {
-	
+	hc->render();
 }
 
 void RenderSystem::draw(Transform *tr, Texture *tex) {

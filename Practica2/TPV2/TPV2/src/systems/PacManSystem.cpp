@@ -20,20 +20,17 @@ PacManSystem::~PacManSystem() {
 void PacManSystem::initSystem() {
 	// create the PacMan entity
 	//
-	auto pacman = mngr_->addEntity();
+	pacman = mngr_->addEntity();
 	mngr_->setHandler(ecs::hdlr::PACMAN, pacman);
-
 	pmTR_ = mngr_->addComponent<Transform>(pacman);
-	auto s = 50.0f;
-	auto x = (sdlutils().width() - s) / 2.0f;
-	auto y = (sdlutils().height() - s) / 2.0f;
-	pmTR_->init(Vector2D(x, y), Vector2D(), s, s, 0.0f);
-
 
 	mngr_->addComponent<ImageWithFrames>(pacman, &sdlutils().images().at("atlas"),
 		8, 8, 0, 3);
 	mngr_->addComponent<HealthComponent>(pacman, &sdlutils().images().at("heart"),
 		3);
+
+	resetLives();
+	resetPosition();
 }
 
 void PacManSystem::update() {
@@ -103,4 +100,26 @@ void PacManSystem::update() {
 		pmTR_->pos_.setY(sdlutils().height() - pmTR_->height_);
 		pmTR_->vel_.set(0.0f, 0.0f);
 	}
+}
+
+void PacManSystem::recieve(const Message& message)
+{
+	System::recieve(message);
+}
+
+void PacManSystem::resetPosition()
+{
+	auto iwf = mngr_->addComponent<ImageWithFrames>(pacman, &sdlutils().images().at("atlas"),
+		8, 8, 0, 3);
+	auto w = iwf->frameWidth_/2;
+	auto h = iwf->frameHeight_/2;
+	auto x = (sdlutils().width() - w) / 2.0f;
+	auto y = (sdlutils().height() - h) / 2.0f;
+	pmTR_->init(Vector2D(x, y), Vector2D(), 
+		w, h, 0.0f);
+}
+
+void PacManSystem::resetLives()
+{
+	mngr_->getComponent<HealthComponent>(pacman)->resetLives();
 }

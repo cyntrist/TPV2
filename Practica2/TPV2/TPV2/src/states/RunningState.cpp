@@ -35,25 +35,12 @@ void RunningState::update()
 	ghostSys_->update();
 	fruitsSys_->update();
 	immunitySys_->update();
-	//gameCtrlSys_->update();
 	collisionSys_->update();
 	renderSys_->update();
 
 
-
-
-
-	//if (mngr_->getEntities(ecs::grp::ASTEROID).empty())
-	//{
-	//	g().setState(Game::GAMEOVER);
-	//	return;
-	//}
-
-	//if (ih().isKeyDown(SDL_SCANCODE_P))
-	//{
-	//	g().setState(Game::PAUSED);
-	//	return;
-	//}
+	if (ih().isKeyDown(SDL_SCANCODE_P))
+		Game::instance()->setState(GAMEOVER);
 
 	//mngr_->update();
 	//mngr_->refresh();

@@ -3,7 +3,7 @@
 #pragma once
 
 #include <vector>
-
+#include "../utils/Singleton.h"
 #include "../ecs/ecs.h"
 
 class GhostSystem;
@@ -24,7 +24,8 @@ enum State
 	GAMEOVER
 };
 
-class Game {
+class Game : public Singleton<Game> {
+	friend Singleton;
 public:
 	Game();
 	virtual ~Game();
@@ -32,7 +33,7 @@ public:
 	void start();
 
 	void setState(State);
-
+	ecs::Manager* getManager() const { return mngr_; }
 private:
 	ecs::Manager *mngr_;
 
