@@ -16,7 +16,7 @@ public:
 	void initSystem() override;
 	void update() override;
 private:
-	void drawStars();
+	void drawFruits();
 	void drawPacMan();
 	void drawMsgs();
 	void draw(Transform *tr, Texture *tex);

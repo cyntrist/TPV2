@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Immune.h" />
+    <ClInclude Include="Miraculous.h" />
     <ClInclude Include="src\components\Image.h" />
     <ClInclude Include="src\components\p1\Follow.h" />
     <ClInclude Include="src\components\p1\HealthComponent.h" />
