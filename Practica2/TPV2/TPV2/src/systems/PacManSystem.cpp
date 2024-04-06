@@ -43,32 +43,32 @@ void PacManSystem::update()
 
 	/// GESTION DE INPUT
 	/// ARRIBA
-	if (ih().isKeyDown(SDL_SCANCODE_UP))
+	if (ihldr.isKeyDown(SDL_SCANCODE_UP))
 	{
 		pmTR_->vel_.set(0, -PACMAN_SPEED);
 		pmTR_->vel_ = pmTR_->vel_.rotate(pmTR_->rot_);
 	}
 	/// DERECHA
-	if (ih().isKeyDown(SDL_SCANCODE_RIGHT) && !right)
+	if (ihldr.isKeyDown(SDL_SCANCODE_RIGHT) && !right)
 	{
 		right = true;
 		pmTR_->rot_ += ROT_FACTOR;
 		pmTR_->vel_ = pmTR_->vel_.rotate(ROT_FACTOR);
 	}
 	/// ABAJO
-	if (ih().isKeyDown(SDL_SCANCODE_DOWN))
+	if (ihldr.isKeyDown(SDL_SCANCODE_DOWN))
 		pmTR_->vel_.set(0, 0);
 	/// IZQUIERDA
-	if (ih().isKeyDown(SDL_SCANCODE_LEFT) && !left)
+	if (ihldr.isKeyDown(SDL_SCANCODE_LEFT) && !left)
 	{
 		left = true;
 		pmTR_->rot_ -= ROT_FACTOR;
 		pmTR_->vel_ = pmTR_->vel_.rotate(-ROT_FACTOR);
 	}
 	/// NADA
-	if (ih().isKeyUp(SDL_SCANCODE_RIGHT))
+	if (ihldr.isKeyUp(SDL_SCANCODE_RIGHT))
 		right = false;
-	if (ih().isKeyUp(SDL_SCANCODE_LEFT))
+	if (ihldr.isKeyUp(SDL_SCANCODE_LEFT))
 		left = false;
 
 	//if ((pmTR_->vel_.getX() != 0 || pmTR_->vel_.getY() != 0 )&&
@@ -146,6 +146,19 @@ void PacManSystem::update()
 void PacManSystem::recieve(const Message& message)
 {
 	System::recieve(message);
+	if (pacman == nullptr) return;
+	switch (message)
+	{
+	case _m_NEW_GAME:
+		resetPosition();
+		break;
+	case _m_ROUND_START:
+		resetLives();
+		resetPosition();
+		break;
+	default:
+		break;
+	}
 }
 
 void PacManSystem::resetPosition()
