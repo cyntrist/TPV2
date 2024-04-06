@@ -10,105 +10,80 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 #include "GameCtrlSystem.h"
+#include "../components/p1/ImageWithFrames.h"
+#include "../components/Miraculous.h"
+
+constexpr int FRUIT_SIZE = 50;
 
 FruitsSystem::FruitsSystem() :
-		starsLimit_(30), currNumOfStars_(0) {
+	gridSide(6), currNumOfFruits_(0)
+{
 }
 
-FruitsSystem::~FruitsSystem() {
+FruitsSystem::~FruitsSystem()
+{
 }
 
-void FruitsSystem::initSystem() {
+void FruitsSystem::initSystem()
+{
 }
 
-void FruitsSystem::update() {
-
+void FruitsSystem::update()
+{
 	auto currTime = sdlutils().currRealTime();
-	auto stars = mngr_->getEntities(ecs::grp::FRUITS);
-	auto n = stars.size();
-
-	for (auto i = 0u; i < n; i++) {
-		auto tr = mngr_->getComponent<Transform>(stars[i]);
-		auto starmotion = mngr_->getComponent<StarMotion>(stars[i]);
-
-		if (starmotion->shouldUpdate(currTime)) {
-
-			// rotate it
-			tr->rot_ += starmotion->rot_;
-
-			// resize it
-			tr->width_ *= 0.95f;
-			tr->height_ *= 0.95f;
-
-			// check if it should die
-			if (tr->width_ < starmotion->sizeLimit_
-					|| tr->height_ < starmotion->sizeLimit_) {
-				mngr_->setAlive(stars[i], false);
-				currNumOfStars_--;
-			}
-		}
-	}
 }
 
-void FruitsSystem::addStar(unsigned int n) {
+void FruitsSystem::addFruitGrid(unsigned int n)
+{
+	const double paddingX = sdlutils().width() / gridSide;
+	const double paddingY = sdlutils().height() / gridSide;
+	const float iniOffsetX = (paddingX - FRUIT_SIZE) / 2;
+	const float iniOffsetY = (paddingY - FRUIT_SIZE) / 2;
 
-	// Always use the random number generator provided by SDLUtils
-	//
-	auto &rand = sdlutils().rand();
-
-	auto limit = std::min( //
-			static_cast<unsigned int>(n), //
-			starsLimit_ - currNumOfStars_);
-
-	for (auto i = 0u; i < limit; i++) {
-
-		// add and entity to the manager
-		//
+	currNumOfFruits_ = 0;
+	for (int i = 0; i < gridSide * gridSide; i++)
+	{
 		auto e = mngr_->addEntity(ecs::grp::FRUITS);
+		auto tf = mngr_->addComponent<Transform>(e);
+		auto img = mngr_->addComponent<ImageWithFrames>(e,  &sdlutils().images().at("atlas"),
+		                                                8, 8, 12, 12);
+		const int chance = sdlutils().rand().nextInt(0, 10);
+		if (chance == 0) // es milagrosa? 1 de cada 10
+			//mngr_->addComponent<Miraculous>(e);
 
-		// add a Transform component, and initialise it with random
-		// size and position
-		//
-		auto tr = mngr_->addComponent<Transform>(e);
-		auto s = rand.nextInt(50, 100);
-		auto x = rand.nextInt(0, sdlutils().width() - s);
-		auto y = rand.nextInt(0, sdlutils().height() - s);
-		tr->init(Vector2D(x, y), Vector2D(), s, s, 0.0f);
-
-		// add an Image Component
-		//
-		mngr_->addComponent<Image>(e, &sdlutils().images().at("star"));
-
-		// add a StarMotion component to resize/rotate the star
-		//
-		auto motion = mngr_->addComponent<StarMotion>(e);
-
-		motion->rot_ = rand.nextInt(5, 10);
-		motion->sizeLimit_ = rand.nextInt(2, 10);
-		motion->updateFreq_ = rand.nextInt(20, 100);
-
-		auto pts = mngr_->addComponent<Points>(e);
-		pts->points_ = rand.nextInt(1, 5);
-		currNumOfStars_++;
+		tf->init(
+			Vector2D(
+				iniOffsetX + paddingX * (i % gridSide),
+				iniOffsetY + paddingY * (i / gridSide)
+			),
+			Vector2D(),
+			FRUIT_SIZE,
+			FRUIT_SIZE,
+			0.0f
+		);
+		currNumOfFruits_++;
 	}
 }
 
-void FruitsSystem::onStarEaten(ecs::entity_t e) {
+void FruitsSystem::onFruitEaten(ecs::entity_t e)
+{
 	mngr_->setAlive(e, false);
-	currNumOfStars_--;
+	currNumOfFruits_--;
 
 	// play sound on channel 1 (if there is something playing there
 	// it will be cancelled
-	sdlutils().soundEffects().at("pacman_eat").play(0, 1);
+	sdlutils().soundEffects().at("eat").play(0, 1);
 }
 
-void FruitsSystem::recieve(const Message &m) {
-	switch (m.id) {
+void FruitsSystem::recieve(const Message& m)
+{
+	switch (m.id)
+	{
 	case _m_FRUIT_EATEN:
-		onStarEaten(m.fruit_eaten_data.e);
+		onFruitEaten(m.fruit_eaten_data.e);
 		break;
 	case _m_CREATE_FRUIT:
-		addStar(m.create_fruits_data.n);
+		addFruitGrid(m.create_fruits_data.n);
 		break;
 	default:
 		break;

@@ -13,6 +13,8 @@
 	HEALTH, \
 	FOLLOW, \
 	ROTATE, \
+	MIRACULOUS, \
+	IMMUNE
 
 // Groups list - must have at least one element
 //

@@ -219,10 +219,10 @@
     <ClInclude Include="src\components\p1\RotateComponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="Miraculous.h">
+    <ClInclude Include="src\components\Immune.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="Immune.h">
+    <ClInclude Include="src\components\Miraculous.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,11 +12,11 @@ public:
 	virtual ~FruitsSystem();
 	void initSystem() override;
 	void update() override;
-	void addStar(unsigned int n);
-	void onStarEaten(ecs::entity_t e);
+	void addFruitGrid(unsigned int n);
+	void onFruitEaten(ecs::entity_t e);
 	void recieve(const Message &m) override;
 private:
-	unsigned int starsLimit_;
-	unsigned int currNumOfStars_;
+	unsigned int gridSide;
+	unsigned int currNumOfFruits_;
 };
 

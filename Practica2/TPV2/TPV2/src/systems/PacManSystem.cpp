@@ -147,7 +147,8 @@ void PacManSystem::recieve(const Message& message)
 {
 	System::recieve(message);
 	if (pacman == nullptr) return;
-	switch (message)
+
+	switch (message.id)
 	{
 	case _m_NEW_GAME:
 		resetPosition();

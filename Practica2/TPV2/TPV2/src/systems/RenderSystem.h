@@ -3,6 +3,7 @@
 #pragma once
 #include "../ecs/System.h"
 
+struct Image;
 struct HealthComponent;
 struct ImageWithFrames;
 class Texture;
@@ -21,6 +22,7 @@ private:
 	void drawFruits();
 	void drawPacMan();
 	void drawMsgs();
+	void drawImage(Image*);
 	void drawImageWithFrames(ImageWithFrames*);
 	void drawHealth(HealthComponent*);
 	void draw(Transform *tr, Texture *tex);

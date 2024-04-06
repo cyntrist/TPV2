@@ -73,15 +73,16 @@ void RenderSystem::drawMsgs() {
 
 void RenderSystem::drawImageWithFrames(ImageWithFrames* image)
 {
-	if (image->frameTimer + FRAME_DURATION 
-		< sdlutils().virtualTimer().currTime()) 
-	{
-		image->frameTimer = sdlutils().virtualTimer().currTime();
-		image->currentFrame++;
-		if (image->currentFrame > image->lastFrame) {
-			image->currentFrame = image->firstFrame;
+	if (image->firstFrame != image->lastFrame) // si la imagen no es estática
+		if (image->frameTimer + FRAME_DURATION 
+			< sdlutils().virtualTimer().currTime()) 
+		{
+			image->frameTimer = sdlutils().virtualTimer().currTime();
+			image->currentFrame++;
+			if (image->currentFrame > image->lastFrame) {
+				image->currentFrame = image->firstFrame;
+			}
 		}
-	}
 
 	SDL_Rect src = build_sdlrect(
 	image->currentFrame % image->nCols_ * image->frameWidth_, 
