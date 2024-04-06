@@ -22,5 +22,6 @@ public:
 private:
 	Transform *pmTR_;
 	ecs::entity_t pacman;
+	bool right, left;
 };
 
