@@ -1,19 +1,13 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "FruitsSystem.h"
-
-#include <algorithm>
-#include "../components/Image.h"
-#include "../components/Points.h"
-#include "../components/StarMotion.h"
 #include "../components/Transform.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
-#include "GameCtrlSystem.h"
 #include "../components/p1/ImageWithFrames.h"
 #include "../components/Miraculous.h"
 
-constexpr int FRUIT_SIZE = 50;
+constexpr int FRUIT_SIZE = 20;
 
 FruitsSystem::FruitsSystem() :
 	gridSide(6), currNumOfFruits_(0)
@@ -35,6 +29,7 @@ void FruitsSystem::update()
 
 void FruitsSystem::addFruitGrid(unsigned int n)
 {
+	gridSide = n;
 	const double paddingX = sdlutils().width() / gridSide;
 	const double paddingY = sdlutils().height() / gridSide;
 	const float iniOffsetX = (paddingX - FRUIT_SIZE) / 2;
@@ -49,7 +44,7 @@ void FruitsSystem::addFruitGrid(unsigned int n)
 		                                                8, 8, 12, 12);
 		const int chance = sdlutils().rand().nextInt(0, 10);
 		if (chance == 0) // es milagrosa? 1 de cada 10
-			//mngr_->addComponent<Miraculous>(e);
+			mngr_->addComponent<Miraculous>(e);
 
 		tf->init(
 			Vector2D(

@@ -5,7 +5,7 @@ struct Miraculous : ecs::Component
 {
 	__CMPID_DECL__(ecs::cmp::MIRACULOUS)
 
-	Miraculous();
-	~Miraculous() override;
+	Miraculous() {};
+	~Miraculous() override {};
 	bool isMiraculous = false;
 };

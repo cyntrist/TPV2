@@ -34,8 +34,8 @@ void RenderSystem::drawFruits() {
 	for (auto e : mngr_->getEntities(ecs::grp::FRUITS)) {
 
 		auto tr = mngr_->getComponent<Transform>(e);
-		auto tex = mngr_->getComponent<Image>(e)->tex_;
-		draw(tr, tex);
+		auto iwf = mngr_->getComponent<ImageWithFrames>(e);
+		drawImageWithFrames(iwf);
 	}
 }
 

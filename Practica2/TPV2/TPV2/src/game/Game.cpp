@@ -79,7 +79,7 @@ void Game::init() {
 	runningState->setContext(mngr_);
 	gameOverState->setContext(mngr_);
 
-	currentState = runningState;
+	setState(RUNNING);
 }
 
 void Game::start() {
@@ -125,7 +125,7 @@ void Game::setState(State newState)
 	case PAUSED:	nextState = pauseState; break;
 	case GAMEOVER:	nextState = gameOverState; break;
 	}
-	currentState->leave();
+	if (currentState != nullptr) currentState->leave();
 	currentState = nextState;
 	currentState->enter();
 }
