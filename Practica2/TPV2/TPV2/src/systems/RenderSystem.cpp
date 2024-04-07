@@ -26,8 +26,9 @@ void RenderSystem::initSystem() {
 void RenderSystem::update() {
 	drawMsgs();
 	drawFruits();
-	drawPacMan();
 	drawGhosts();
+	drawPacMan();
+
 }
 
 void RenderSystem::drawFruits() {

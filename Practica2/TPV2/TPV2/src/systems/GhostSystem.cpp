@@ -8,11 +8,12 @@
 struct Immune;
 struct Follow;
 struct Transform;
-constexpr int GHOST_SIZE = 50;
-constexpr Uint32 MIN_SPAWN_TIME = 1000,
-				 MAX_SPAWN_TIME = 5000;
+constexpr int GHOST_SIZE = 50,
+              GHOST_LIMIT = 10;
+constexpr Uint32 MIN_SPAWN_TIME = 50,
+                 MAX_SPAWN_TIME = 5000;
 
-GhostSystem::GhostSystem() 
+GhostSystem::GhostSystem()
 {
 	timer = sdlutils().virtualTimer().currTime();
 }
@@ -30,21 +31,21 @@ void GhostSystem::addGhost()
 	case 0: break;
 	case 1: // sup der 
 		{
-			x = sdlutils().width() - GHOST_SIZE/2;
+			x = sdlutils().width() - GHOST_SIZE / 2;
 			vx *= -1;
 			break;
 		}
 	case 2: // inf der
 		{
-			x = sdlutils().width() - GHOST_SIZE/2;
-			y = sdlutils().height() - GHOST_SIZE/2;
+			x = sdlutils().width() - GHOST_SIZE / 2;
+			y = sdlutils().height() - GHOST_SIZE / 2;
 			vx *= -1;
 			vy *= -1;
 			break;
 		}
 	default: // inf izq
 		{
-			y = sdlutils().height() - GHOST_SIZE/2;
+			y = sdlutils().height() - GHOST_SIZE / 2;
 			vy *= -1;
 			break;
 		}
@@ -54,8 +55,8 @@ void GhostSystem::addGhost()
 		ghost,
 		Vector2D(x, y),
 		Vector2D(vx, vy),
-		GHOST_SIZE/2,
-		GHOST_SIZE/2,
+		GHOST_SIZE / 2,
+		GHOST_SIZE / 2,
 		0.0f
 	);
 
@@ -63,7 +64,7 @@ void GhostSystem::addGhost()
 	int color = sdlutils().rand().nextInt(0, 4);
 	int firstFrame = 32;
 	int lastFrame = 39;
-	switch(color)
+	switch (color)
 	{
 	case 1:
 		firstFrame = 40;
@@ -79,7 +80,7 @@ void GhostSystem::addGhost()
 		break;
 	}
 	mngr_->addComponent<ImageWithFrames>(
-		ghost, 
+		ghost,
 		&sdlutils().images().at("atlas"),
 		8,
 		8,
@@ -87,16 +88,81 @@ void GhostSystem::addGhost()
 		lastFrame // last frame
 	);
 
-	const auto pacman = mngr_->getHandler(ecs::hdlr::PACMAN	);
+	const auto pacman = mngr_->getHandler(ecs::hdlr::PACMAN);
 	auto& pacmanTrans = mngr_->getComponent<Transform>(pacman)->pos_;
 	assert(pacman != nullptr);
 	mngr_->addComponent<Follow>(ghost, pacmanTrans);
+	currentGhosts++;
 }
 
 void GhostSystem::destroyGhosts()
 {
 	for (const auto e : mngr_->getEntities(ecs::grp::GHOSTS))
 		mngr_->setAlive(e, false);
+	timer = sdlutils().virtualTimer().currTime();
+	currentGhosts = 0;
+}
+
+void GhostSystem::frightenGhosts()
+{
+		for (auto e : mngr_->getEntities(ecs::grp::GHOSTS))
+	{
+		auto iwf = mngr_->getComponent<ImageWithFrames>(e);
+		if (iwf != nullptr)
+		{
+			int firstFrame = 30;
+			int lastFrame = 31;
+
+			iwf->firstFrame = firstFrame;
+			iwf->lastFrame = lastFrame;
+			iwf->currentFrame = firstFrame;
+		}
+	}
+
+}
+
+void GhostSystem::colorGhosts()
+{
+	for (auto e : mngr_->getEntities(ecs::grp::GHOSTS))
+	{
+		auto iwf = mngr_->getComponent<ImageWithFrames>(e);
+		if (iwf != nullptr)
+		{
+			/// CHANCE DE COLORINES?
+			int color = sdlutils().rand().nextInt(0, 4);
+			int firstFrame = 32;
+			int lastFrame = 39;
+			switch (color)
+			{
+			case 1:
+				firstFrame = 40;
+				lastFrame = 47;
+				break;
+			case 2:
+				firstFrame = 48;
+				lastFrame = 55;
+				break;
+			case 3:
+				firstFrame = 56;
+				lastFrame = 63;
+				break;
+			}
+
+			iwf->firstFrame = firstFrame;
+			iwf->lastFrame = lastFrame;
+			iwf->currentFrame = firstFrame;
+		}
+	}
+}
+
+void GhostSystem::invertSpeeds()
+{
+	for (const auto e : mngr_->getEntities(ecs::grp::GHOSTS))
+	{
+		const auto fc = mngr_->getComponent<Follow>(e);
+		if (fc != nullptr) 
+			fc->invertSpeed();
+	}
 }
 
 void GhostSystem::initSystem()
@@ -105,7 +171,7 @@ void GhostSystem::initSystem()
 
 void GhostSystem::recieve(const Message& message)
 {
-	switch(message.id)
+	switch (message.id)
 	{
 	case _m_ROUND_OVER:
 		destroyGhosts();
@@ -115,6 +181,14 @@ void GhostSystem::recieve(const Message& message)
 		break;
 	case _m_ROUND_START:
 		destroyGhosts();
+		break;
+	case _m_IMMUNITY_START:
+		frightenGhosts();
+		invertSpeeds();
+		break;
+	case _m_IMMUNITY_END:
+		colorGhosts();
+		invertSpeeds();
 		break;
 	default:
 		break;
@@ -126,7 +200,7 @@ void GhostSystem::update()
 	const auto currTime = sdlutils().currRealTime();
 	const auto pacman = mngr_->getHandler(ecs::hdlr::PACMAN);
 	const auto immune = mngr_->getComponent<Immune>(pacman)->isImmune_;
-	if (!immune && timer + MIN_SPAWN_TIME < currTime)
+	if (!immune && timer + MIN_SPAWN_TIME < currTime && currentGhosts < GHOST_LIMIT)
 	{
 		addGhost();
 		timer = currTime;
@@ -137,3 +211,4 @@ void GhostSystem::update()
 		mngr_->getComponent<Follow>(e)->update();
 	}
 }
+

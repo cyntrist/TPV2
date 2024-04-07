@@ -22,32 +22,33 @@ void Follow::update()
 	const auto currTime = sdlutils().currRealTime();
 
 	/// cambia de destino?
-	if (timer + followDuration < currTime) 
+	const auto chance = sdlutils().rand().nextInt(0, 1000);
+	if (chance < 5) // 5 veces de cada 1000 
 	{ // cambia de destino
 		auto pacman = mngr_->getHandler(ecs::hdlr::PACMAN);
 		destination_ = mngr_->getComponent<Transform>(pacman)->pos_;
 		auto diff = destination_ - pos;
 		vel = diff.normalize() * 1.1f;
 		trans_->vel_ = vel;
-		followDuration = sdlutils().rand().nextInt(MIN_DURATION, MAX_DURATION);
-		timer = currTime;
 	}
+
+	/// rebote en bordes
+	if (pos.getX() - trans_->width_ <= 0 
+		|| pos.getX() + trans_->width_ >= sdlutils().width()
+		&& round(abs(vel.getX())) != 0.00)
+		vel.setX(vel.getX() * -1);
+
+
+	if (pos.getY() - trans_->height_ <= 0 
+		|| pos.getY() + trans_->height_ >= sdlutils().height()
+		&& round(abs(vel.getY())) != 0.00)
+		vel.setY(vel.getY() * -1);
 
 	/// movimiento
 	trans_->pos_ = trans_->pos_ + trans_->vel_;
+}
 
-
-	/// rebote
-	if ((pos.getX() <= 0 && vel.getX() < -0.01) ||
-		(pos.getX() >= sdlutils().width() - trans_->width_ 
-			&& vel.getX() > 0.01))
-	{
-		vel.set(-vel.getX(), vel.getY());
-	}
-	else if ((vel.getY() <= 0 && vel.getY() < -0.01) ||
-		(pos.getY() >= sdlutils().height() - trans_->height_
-			&& vel.getY() > 0.01))
-	{
-		vel.set(vel.getX(), -vel.getY());
-	}
+void Follow::invertSpeed()
+{
+	trans_->vel_.set(trans_->vel_.getX() * -1, trans_->vel_.getY() * -1);
 }
