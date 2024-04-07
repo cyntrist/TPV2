@@ -9,7 +9,7 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
-
+#include "../components/Immune.h"
 constexpr float PACMAN_SPEED = 3.0f;
 constexpr int ROT_FACTOR = 90;
 
@@ -34,6 +34,7 @@ void PacManSystem::initSystem()
 	                                     8, 8, 0, 3);
 	mngr_->addComponent<HealthComponent>(pacman, &sdlutils().images().at("heart"),
 	                                     3);
+	mngr_->addComponent<Immune>(pacman);
 	resetPosition();
 }
 

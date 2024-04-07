@@ -1,8 +1,8 @@
 #pragma once
 #include "../ecs/Component.h"
 
-constexpr Uint32 MIN_TIMER = 100,
-				 MAX_TIMER = 1000,
+constexpr Uint32 MIN_TIMER = 1,
+				 MAX_TIMER = 2,
 				 MIN_DURATION = 5000,
 				 MAX_DURATION = 10000;
 
