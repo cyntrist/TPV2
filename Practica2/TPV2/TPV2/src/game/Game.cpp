@@ -101,7 +101,6 @@ void Game::start() {
 		}
 
 		sdlutils().clearRenderer();
-		//renderSys_->update();
 		currentState->update();
 		mngr_->flushMessagesWithSwap();
 		mngr_->refresh();
@@ -124,9 +123,13 @@ void Game::setState(State newState)
 	case RUNNING:	nextState = runningState; break;
 	case PAUSED:	nextState = pauseState; break;
 	case GAMEOVER:	nextState = gameOverState; break;
+	default: break;
 	}
-	if (currentState != nullptr) currentState->leave();
-	currentState = nextState;
-	currentState->enter();
+	if (nextState != nullptr)
+	{
+		if (currentState != nullptr) currentState->leave();
+		currentState = nextState;
+		currentState->enter();
+	}
 }
 

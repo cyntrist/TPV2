@@ -17,6 +17,8 @@ public:
 	void addFruitGrid(unsigned int n);
 	void onFruitEaten(ecs::entity_t e);
 	void changeFruitSprite(ImageWithFrames*, int);
+	void resetFruits();
+	void destroyFruits();
 	void recieve(const Message &m) override;
 private:
 	unsigned int gridSide;

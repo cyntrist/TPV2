@@ -27,7 +27,7 @@ RunningState::~RunningState()
 
 void RunningState::enter()
 {
-	fruitsSys_->addFruitGrid(6);
+	fruitsSys_->addFruitGrid(1);
 }
 
 void RunningState::update()

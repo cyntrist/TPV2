@@ -6,6 +6,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../components/p1/ImageWithFrames.h"
 #include "../components/Miraculous.h"
+#include "../game/Game.h"
 
 struct Image;
 constexpr int FRUIT_SIZE = 20;
@@ -102,15 +103,54 @@ void FruitsSystem::changeFruitSprite(ImageWithFrames* iwf, int frame)
 	iwf->lastFrame = iwf->firstFrame;
 }
 
+void FruitsSystem::resetFruits()
+{
+	for (const auto e : mngr_->getEntities(ecs::grp::FRUITS)) 
+	{
+		const auto mc = mngr_->getComponent<Miraculous>(e);
+		if (mc != nullptr) 
+		{
+			mc->resetMiraculous();
+			changeFruitSprite(
+				mngr_->getComponent<ImageWithFrames>(e), 
+				NORMAL_FRAME
+			);
+		}
+	}
+}
+
+void FruitsSystem::destroyFruits()
+{
+	for (const auto e : mngr_->getEntities(ecs::grp::FRUITS))
+		mngr_->setAlive(e, false);
+}
+
 void FruitsSystem::recieve(const Message& m)
 {
 	switch (m.id)
 	{
+	case _m_NEW_GAME:
+		destroyFruits();
+		addFruitGrid(6);
+	case _m_ROUND_START:
+		resetFruits();
+		break;
 	case _m_FRUIT_EATEN:
 		onFruitEaten(m.fruit_eaten_data.e);
+		if (mngr_->getEntities(ecs::grp::FRUITS).size() <= 1) {
+			mngr_->send(Message { _m_ROUND_OVER },true);
+			mngr_->send(Message { _m_GAME_OVER }, true);
+			game_->setState(GAMEOVER);
+			sdlutils().soundEffects().at("won").play();
+		}
 		break;
 	case _m_CREATE_FRUIT:
 		addFruitGrid(m.create_fruits_data.n);
+		break;
+	case _m_PACMAN_FOOD_COLLISION:
+		/*Message mScore;
+		mScore.id = _m_SCORE_FOOD;
+		mngr_->send(mScore, true);*/
 		break;
 	default:
 		break;
