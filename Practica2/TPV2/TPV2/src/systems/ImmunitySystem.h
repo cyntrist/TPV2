@@ -20,4 +20,6 @@ public:
 	void update() override;
 	void recieve(const Message&) override;
 	void changePacmanSprite(int first, int last);
+	void setImmune();
+	void resetImmune();
 };

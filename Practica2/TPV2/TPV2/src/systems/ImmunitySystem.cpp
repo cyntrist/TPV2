@@ -5,9 +5,7 @@
 #include "../components/p1/ImageWithFrames.h"
 #include "../ecs/Manager.h"
 
-ImmunitySystem::ImmunitySystem()
-{
-}
+ImmunitySystem::ImmunitySystem() = default;
 
 void ImmunitySystem::initSystem()
 {
@@ -25,10 +23,8 @@ void ImmunitySystem::update()
 		if (!ic->isImmune_) return;
 		if (ic->timer_ + IMMUNITY_DURATION < currTime)
 		{ // si esta inmune, contamos a ver si ya se le ha pasado
-			ic->resetImmune();
-			changePacmanSprite(NORMAL_FIRST_FRAME, NORMAL_LAST_FRAME);
-		}
-		// si esta inmune pero no ha pasado el tiempo no pasa nada
+			setImmune();
+		} // si esta inmune pero no ha pasado el tiempo no pasa nada
 	}
 }
 
@@ -40,12 +36,12 @@ void ImmunitySystem::recieve(const Message& message)
 		// si el evento es de comer fruta
 		auto mc = mngr_->getComponent<Miraculous>(e);
 		if (mc != nullptr) // si la fruta es milagrosa
-		{
-			// ahora el pacman es inmune
-			ic->setImmune();
-			changePacmanSprite(IMMUNE_FIRST_FRAME, IMMUNE_LAST_FRAME);
+		{// ahora el pacman es inmune
+			setImmune();
 		} // si no es milagrosa no pasa nada
 	}
+	else if (message.id == _m_ROUND_START || message.id == _m_NEW_GAME)
+		resetImmune();
 }
 
 void ImmunitySystem::changePacmanSprite(int first, int last)
@@ -54,4 +50,18 @@ void ImmunitySystem::changePacmanSprite(int first, int last)
 	iwf->firstFrame = first;
 	iwf->lastFrame = last;
 	iwf->currentFrame = first;
+}
+
+void ImmunitySystem::setImmune()
+{
+	ic->setImmune();
+	changePacmanSprite(IMMUNE_FIRST_FRAME, IMMUNE_LAST_FRAME);
+	mngr_->send(Message { _m_IMMUNITY_START } );
+}
+
+void ImmunitySystem::resetImmune()
+{
+	ic->resetImmune();
+	changePacmanSprite(NORMAL_FIRST_FRAME, NORMAL_LAST_FRAME);
+	mngr_->send(Message { _m_IMMUNITY_END } );
 }
