@@ -12,8 +12,6 @@ class PacManSystem;
 
 class RunningState : public GameState
 {
-	void checkCollisions();
-	void onDeath();
 	PacManSystem *pacmanSys_;
 	//ecs::System *gameCtrlSys_;
 	GhostSystem *ghostSys_;

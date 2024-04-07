@@ -140,7 +140,7 @@ void FruitsSystem::recieve(const Message& m)
 		if (mngr_->getEntities(ecs::grp::FRUITS).size() <= 1) {
 			mngr_->send(Message { _m_ROUND_OVER },true);
 			mngr_->send(Message { _m_GAME_OVER }, true);
-			game_->setState(GAMEOVER);
+			Game::instance()->setState(GAMEOVER);
 			sdlutils().soundEffects().at("won").play();
 		}
 		break;

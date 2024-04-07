@@ -47,7 +47,6 @@ Game::~Game() {
 }
 
 void Game::init() {
-
 	// initialise the SDLUtils singleton
 	SDLUtils::init("Demo", 800, 600, "resources/config/resources.json");
 
@@ -107,7 +106,6 @@ void Game::start() {
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
-
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
@@ -115,21 +113,18 @@ void Game::start() {
 
 void Game::setState(State newState)
 {
-	GameState* nextState = nullptr;
+	if (currentState != nullptr) 
+		currentState->leave();
 	switch (newState)
 	{
-	case NEWGAME:	nextState = newGameState; break;
-	case NEWROUND:	nextState = newRoundState; break;
-	case RUNNING:	nextState = runningState; break;
-	case PAUSED:	nextState = pauseState; break;
-	case GAMEOVER:	nextState = gameOverState; break;
+	case NEWGAME:	currentState = newGameState; break;
+	case NEWROUND:	currentState = newRoundState; break;
+	case RUNNING:	currentState = runningState; break;
+	case PAUSED:	currentState = pauseState; break;
+	case GAMEOVER:	currentState = gameOverState; break;
 	default: break;
 	}
-	if (nextState != nullptr)
-	{
-		if (currentState != nullptr) currentState->leave();
-		currentState = nextState;
+	if (currentState != nullptr)
 		currentState->enter();
-	}
 }
 
