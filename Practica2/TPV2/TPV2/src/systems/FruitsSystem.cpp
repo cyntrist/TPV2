@@ -71,7 +71,7 @@ void FruitsSystem::addFruitGrid(unsigned int n)
 		auto img = mngr_->addComponent<ImageWithFrames>(e, &sdlutils().images().at("atlas"),
 		                                                8, 8, 12, 12);
 		const int chance = sdlutils().rand().nextInt(0, 10);
-		//if (chance == 0) // es milagrosa? 1 de cada 10
+		if (chance == 0) // es milagrosa? 1 de cada 10
 			mngr_->addComponent<Miraculous>(e);
 
 		tf->init(Vector2D(

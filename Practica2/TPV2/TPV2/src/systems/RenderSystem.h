@@ -21,6 +21,7 @@ public:
 private:
 	void drawFruits();
 	void drawPacMan();
+	void drawGhosts();
 	void drawMsgs();
 	void drawImage(Image*);
 	void drawImageWithFrames(ImageWithFrames*);

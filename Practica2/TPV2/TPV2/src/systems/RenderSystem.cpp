@@ -27,13 +27,13 @@ void RenderSystem::update() {
 	drawMsgs();
 	drawFruits();
 	drawPacMan();
+	drawGhosts();
 }
 
 void RenderSystem::drawFruits() {
 	// draw stars
-	for (auto e : mngr_->getEntities(ecs::grp::FRUITS)) {
-
-		auto tr = mngr_->getComponent<Transform>(e);
+	for (auto e : mngr_->getEntities(ecs::grp::FRUITS)) 
+	{
 		auto iwf = mngr_->getComponent<ImageWithFrames>(e);
 		drawImageWithFrames(iwf);
 	}
@@ -48,6 +48,15 @@ void RenderSystem::drawPacMan() {
 	drawImageWithFrames(iwf);
 	drawHealth(hc);
 	//draw(tr, tex);
+}
+
+void RenderSystem::drawGhosts()
+{
+	for (auto e : mngr_->getEntities(ecs::grp::GHOSTS)) 
+	{
+		auto iwf = mngr_->getComponent<ImageWithFrames>(e);
+		drawImageWithFrames(iwf);
+	}
 }
 
 void RenderSystem::drawMsgs() {
