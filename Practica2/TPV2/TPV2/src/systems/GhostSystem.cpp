@@ -12,8 +12,7 @@ struct Follow;
 struct Transform;
 constexpr int GHOST_SIZE = 50,
               GHOST_LIMIT = 10;
-constexpr Uint32 MIN_SPAWN_TIME = 50,
-                 MAX_SPAWN_TIME = 5000;
+constexpr Uint32 SPAWN_TIME = 5000;
 
 GhostSystem::GhostSystem()
 {
@@ -228,7 +227,7 @@ void GhostSystem::update()
 	const auto currTime = sdlutils().currRealTime();
 	const auto pacman = mngr_->getHandler(ecs::hdlr::PACMAN);
 	const auto immune = mngr_->getComponent<Immune>(pacman)->isImmune_;
-	if (!immune && timer + MIN_SPAWN_TIME < currTime && currentGhosts < GHOST_LIMIT)
+	if (!immune && timer + SPAWN_TIME < currTime && currentGhosts < GHOST_LIMIT)
 	{
 		addGhost();
 		timer = currTime;

@@ -1,10 +1,10 @@
 #pragma once
 #include "../ecs/Component.h"
 
-constexpr Uint32 MIN_TIMER = 1,
-                 MAX_TIMER = 2,
-                 MIN_DURATION = 5000,
-                 MAX_DURATION = 10000;
+constexpr Uint32 MIN_TIMER = 10000,
+                 MAX_TIMER = 20000,
+                 MIN_DURATION = 1000,
+                 MAX_DURATION = 5000;
 
 struct Miraculous : ecs::Component
 {

@@ -73,8 +73,8 @@ void FruitsSystem::addFruitGrid(unsigned int n)
 		auto img = mngr_->addComponent<ImageWithFrames>(e, &sdlutils().images().at("atlas"),
 		                                                8, 8, 12, 12);
 		const int chance = sdlutils().rand().nextInt(0, 10);
-		//if (chance == 0) // es milagrosa? 1 de cada 10
-		mngr_->addComponent<Miraculous>(e);
+		if (chance == 0) // es milagrosa? 1 de cada 10
+			mngr_->addComponent<Miraculous>(e);
 
 		tf->init(Vector2D(
 			         iniOffsetX + paddingX * (i % gridSide),
@@ -92,7 +92,6 @@ void FruitsSystem::onFruitEaten(ecs::entity_t e)
 {
 	mngr_->setAlive(e, false);
 	currNumOfFruits_--;
-
 	// play sound on channel 1 (if there is something playing there
 	// it will be cancelled
 	sdlutils().soundEffects().at("eat").play(0, 1);
@@ -130,6 +129,7 @@ void FruitsSystem::destroyFruits()
 		if (mc != nullptr)
 			mc->resetMiraculous();
 	}
+	currNumOfFruits_ = 0;
 }
 
 void FruitsSystem::recieve(const Message& m)
@@ -138,11 +138,12 @@ void FruitsSystem::recieve(const Message& m)
 	{
 	case _m_NEW_GAME:
 		destroyFruits();
-		addFruitGrid(6);
+		addFruitGrid(8);
 	case _m_ROUND_START:
 		resetFruits();
 		break;
 	case _m_FRUIT_EATEN:
+		std::cout << mngr_->getEntities(ecs::grp::FRUITS).size() << std::endl;
 		onFruitEaten(m.entity_collided_data.e);
 		if (mngr_->getEntities(ecs::grp::FRUITS).size() <= 1)
 		{
@@ -152,8 +153,8 @@ void FruitsSystem::recieve(const Message& m)
 			sdlutils().soundEffects().at("won").play();
 		}
 		break;
-	case _m_CREATE_FRUIT:
-		addFruitGrid(m.create_fruits_data.n);
+	case _m_GAME_OVER:
+		destroyFruits();
 		break;
 	default:
 		break;

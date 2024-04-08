@@ -3,7 +3,7 @@
 #include "../ecs/System.h"
 
 struct Immune;
-constexpr Uint32 IMMUNITY_DURATION = 5000;
+constexpr Uint32 IMMUNITY_DURATION = 10000;
 constexpr Uint8 NORMAL_FIRST_FRAME = 0,
                 NORMAL_LAST_FRAME = 3,
                 IMMUNE_FIRST_FRAME = 8,

@@ -27,7 +27,7 @@ RunningState::~RunningState()
 
 void RunningState::enter()
 {
-	fruitsSys_->addFruitGrid(2);
+	getManager()->send(Message { _m_NEW_GAME });
 	sdlutils().soundEffects().at("intro").play();
 }
 

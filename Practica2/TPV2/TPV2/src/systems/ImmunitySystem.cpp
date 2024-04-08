@@ -37,9 +37,9 @@ void ImmunitySystem::recieve(const Message& message)
 		// si el evento es de comer fruta
 		auto mc = mngr_->getComponent<Miraculous>(e);
 		if (mc != nullptr && !ic->isImmune_) // si la fruta es milagrosa
-		{
-			// ahora el pacman es inmune
+		{ // ahora el pacman es inmune
 			setImmune();
+			sdlutils().soundEffects().at("intro").play();
 		} // si no es milagrosa no pasa nada
 	}
 	else if (message.id == _m_ROUND_START || message.id == _m_NEW_GAME)

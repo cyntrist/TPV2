@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <SDL_stdinc.h>
+
 #include "../ecs/System.h"
 
 struct Transform;
@@ -24,4 +26,5 @@ private:
 	Transform* pmTR_;
 	ecs::entity_t pacman;
 	bool right, left;
+	Uint32 soundTimer = 0;
 };
