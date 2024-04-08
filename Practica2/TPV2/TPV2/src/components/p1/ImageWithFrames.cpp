@@ -5,7 +5,7 @@
 constexpr int FRAME_SPEED = 100;
 
 ImageWithFrames::ImageWithFrames(Texture* img, int rows, int cols
-	, int firstFrame, int lastFrame) :
+                                 , int firstFrame, int lastFrame) :
 	image_(img),
 	transform_(nullptr),
 	currentRow_(0),

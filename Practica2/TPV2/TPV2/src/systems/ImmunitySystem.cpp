@@ -22,7 +22,8 @@ void ImmunitySystem::update()
 	{
 		if (!ic->isImmune_) return;
 		if (ic->timer_ + IMMUNITY_DURATION < currTime)
-		{ // si esta inmune, contamos a ver si ya se le ha pasado
+		{
+			// si esta inmune, contamos a ver si ya se le ha pasado
 			resetImmune();
 		} // si esta inmune pero no ha pasado el tiempo no pasa nada
 	}
@@ -30,13 +31,14 @@ void ImmunitySystem::update()
 
 void ImmunitySystem::recieve(const Message& message)
 {
-	auto e = message.fruit_eaten_data.e;
+	auto e = message.entity_collided_data.e;
 	if (message.id == _m_FRUIT_EATEN)
 	{
 		// si el evento es de comer fruta
 		auto mc = mngr_->getComponent<Miraculous>(e);
 		if (mc != nullptr && !ic->isImmune_) // si la fruta es milagrosa
-		{// ahora el pacman es inmune
+		{
+			// ahora el pacman es inmune
 			setImmune();
 		} // si no es milagrosa no pasa nada
 	}
@@ -56,12 +58,12 @@ void ImmunitySystem::setImmune()
 {
 	ic->setImmune();
 	changePacmanSprite(IMMUNE_FIRST_FRAME, IMMUNE_LAST_FRAME);
-	mngr_->send(Message { _m_IMMUNITY_START } );
+	mngr_->send(Message{_m_IMMUNITY_START});
 }
 
 void ImmunitySystem::resetImmune()
 {
 	ic->resetImmune();
 	changePacmanSprite(NORMAL_FIRST_FRAME, NORMAL_LAST_FRAME);
-	mngr_->send(Message { _m_IMMUNITY_END } );
+	mngr_->send(Message{_m_IMMUNITY_END});
 }

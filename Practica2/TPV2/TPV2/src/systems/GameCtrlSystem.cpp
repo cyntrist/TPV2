@@ -6,25 +6,30 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 #include "FruitsSystem.h"
-GameCtrlSystem::GameCtrlSystem() :
-		score_() {
-	// TODO Auto-generated constructor stub
 
+GameCtrlSystem::GameCtrlSystem() :
+	score_()
+{
+	// TODO Auto-generated constructor stub
 }
 
-GameCtrlSystem::~GameCtrlSystem() {
+GameCtrlSystem::~GameCtrlSystem()
+{
 	// TODO Auto-generated destructor stub
 }
 
-void GameCtrlSystem::initSystem() {
+void GameCtrlSystem::initSystem()
+{
 }
 
-void GameCtrlSystem::update() {
-	auto &ihldr = ih();
+void GameCtrlSystem::update()
+{
+	auto& ihldr = ih();
 
-	if (ihldr.keyDownEvent()) {
-		if (ihldr.isKeyDown(SDL_SCANCODE_SPACE)) {
-
+	if (ihldr.keyDownEvent())
+	{
+		if (ihldr.isKeyDown(SDL_SCANCODE_SPACE))
+		{
 			Message m;
 			m.id = _m_CREATE_FRUIT;
 			m.create_fruits_data.n = 5;
@@ -33,10 +38,12 @@ void GameCtrlSystem::update() {
 	}
 }
 
-void GameCtrlSystem::recieve(const Message &m) {
-	switch (m.id) {
+void GameCtrlSystem::recieve(const Message& m)
+{
+	switch (m.id)
+	{
 	case _m_FRUIT_EATEN:
-		score_ += mngr_->getComponent<Points>(m.fruit_eaten_data.e)->points_;
+		score_ += mngr_->getComponent<Points>(m.entity_collided_data.e)->points_;
 		break;
 	default:
 		break;

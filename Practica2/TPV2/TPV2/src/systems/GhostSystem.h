@@ -9,6 +9,8 @@ class GhostSystem : public ecs::System
 {
 	Uint32 timer = 0;
 	Uint8 currentGhosts = 0;
+	bool isPacmanImmune = false;
+
 public:
 	__SYSID_DECL__(ecs::sys::GHOST)
 	GhostSystem();

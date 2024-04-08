@@ -2,9 +2,11 @@
 
 #include "../components/Immune.h"
 #include "../components/p1/Follow.h"
+#include "../components/p1/HealthComponent.h"
 #include "../components/p1/ImageWithFrames.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
+#include "../game/Game.h"
 struct Immune;
 struct Follow;
 struct Transform;
@@ -105,7 +107,7 @@ void GhostSystem::destroyGhosts()
 
 void GhostSystem::frightenGhosts()
 {
-		for (auto e : mngr_->getEntities(ecs::grp::GHOSTS))
+	for (auto e : mngr_->getEntities(ecs::grp::GHOSTS))
 	{
 		auto iwf = mngr_->getComponent<ImageWithFrames>(e);
 		if (iwf != nullptr)
@@ -118,7 +120,6 @@ void GhostSystem::frightenGhosts()
 			iwf->currentFrame = firstFrame;
 		}
 	}
-
 }
 
 void GhostSystem::colorGhosts()
@@ -160,7 +161,7 @@ void GhostSystem::invertSpeeds()
 	for (const auto e : mngr_->getEntities(ecs::grp::GHOSTS))
 	{
 		const auto fc = mngr_->getComponent<Follow>(e);
-		if (fc != nullptr) 
+		if (fc != nullptr)
 			fc->invertSpeed();
 	}
 }
@@ -183,12 +184,39 @@ void GhostSystem::recieve(const Message& message)
 		destroyGhosts();
 		break;
 	case _m_IMMUNITY_START:
+		isPacmanImmune = true;
 		frightenGhosts();
 		invertSpeeds();
 		break;
 	case _m_IMMUNITY_END:
+		isPacmanImmune = false;
 		colorGhosts();
 		invertSpeeds();
+		break;
+	case _m_PACMAN_GHOST_COLLISION:
+		if (isPacmanImmune)
+		{
+			mngr_->setAlive(message.entity_collided_data.e, false);
+			currentGhosts--;
+			sdlutils().soundEffects().at("eat").play(0, 1);
+		}
+		else
+		{
+			auto pacman = mngr_->getHandler(ecs::hdlr::PACMAN);
+			auto hc = mngr_->getComponent<HealthComponent>(pacman);
+
+			mngr_->send(Message{_m_ROUND_OVER}, true);
+
+			hc->lives_--;
+			sdlutils().soundEffects().at("death").play();
+
+			if (hc->getLives() <= 0)
+			{
+				mngr_->send(Message{_m_NEW_GAME}, true);
+				Game::instance()->setState(GAMEOVER);
+			}
+			else Game::instance()->setState(NEWROUND);
+		}
 		break;
 	default:
 		break;
@@ -211,4 +239,3 @@ void GhostSystem::update()
 		mngr_->getComponent<Follow>(e)->update();
 	}
 }
-

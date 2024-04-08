@@ -24,7 +24,8 @@ void Follow::update()
 	/// cambia de destino?
 	const auto chance = sdlutils().rand().nextInt(0, 1000);
 	if (chance < 5) // 5 veces de cada 1000 
-	{ // cambia de destino
+	{
+		// cambia de destino
 		auto pacman = mngr_->getHandler(ecs::hdlr::PACMAN);
 		destination_ = mngr_->getComponent<Transform>(pacman)->pos_;
 		auto diff = destination_ - pos;
@@ -33,13 +34,13 @@ void Follow::update()
 	}
 
 	/// rebote en bordes
-	if (pos.getX() - trans_->width_ <= 0 
+	if (pos.getX() - trans_->width_ <= 0
 		|| pos.getX() + trans_->width_ >= sdlutils().width()
 		&& round(abs(vel.getX())) != 0.00)
 		vel.setX(vel.getX() * -1);
 
 
-	if (pos.getY() - trans_->height_ <= 0 
+	if (pos.getY() - trans_->height_ <= 0
 		|| pos.getY() + trans_->height_ >= sdlutils().height()
 		&& round(abs(vel.getY())) != 0.00)
 		vel.setY(vel.getY() * -1);

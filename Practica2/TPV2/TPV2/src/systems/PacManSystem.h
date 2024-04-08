@@ -6,22 +6,22 @@
 
 struct Transform;
 
-class PacManSystem: public ecs::System {
+class PacManSystem : public ecs::System
+{
 public:
-
 	__SYSID_DECL__(ecs::sys::PACMAN)
 
 	PacManSystem();
-	virtual ~PacManSystem();
+	~PacManSystem() override;
 	void initSystem() override;
 	void update() override;
 	void recieve(const Message&) override;
 
 	void resetPosition();
 	void resetLives();
+
 private:
-	Transform *pmTR_;
+	Transform* pmTR_;
 	ecs::entity_t pacman;
 	bool right, left;
 };
-

@@ -8,6 +8,7 @@ namespace ecs
 class GameState
 {
 	ecs::Manager* mngr_ = nullptr;
+
 public:
 	GameState()
 	{

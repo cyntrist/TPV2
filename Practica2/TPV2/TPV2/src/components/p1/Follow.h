@@ -8,6 +8,7 @@ struct Follow : public ecs::Component
 {
 	Transform* trans_;
 	Vector2D destination_;
+
 public:
 	__CMPID_DECL__(ecs::cmp::FOLLOW)
 	Follow(Vector2D&);

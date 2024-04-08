@@ -3,6 +3,6 @@
 #include "json_demo.h"
 
 
-void simplejson_demo() {
-
+void simplejson_demo()
+{
 }

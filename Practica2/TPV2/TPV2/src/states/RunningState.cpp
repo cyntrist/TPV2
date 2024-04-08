@@ -14,10 +14,10 @@
 
 using Random = RandomNumberGenerator;
 
-RunningState::RunningState(PacManSystem* pc, GhostSystem*gh, FruitsSystem*fo,
-	ImmunitySystem*im, RenderSystem*r, CollisionsSystem*col)
+RunningState::RunningState(PacManSystem* pc, GhostSystem* gh, FruitsSystem* fo,
+                           ImmunitySystem* im, RenderSystem* r, CollisionsSystem* col)
 	: GameState(nullptr), pacmanSys_(pc), ghostSys_(gh), fruitsSys_(fo),
-	immunitySys_(im), renderSys_(r), collisionSys_(col)
+	  immunitySys_(im), renderSys_(r), collisionSys_(col)
 {
 }
 
@@ -28,6 +28,7 @@ RunningState::~RunningState()
 void RunningState::enter()
 {
 	fruitsSys_->addFruitGrid(2);
+	sdlutils().soundEffects().at("intro").play();
 }
 
 void RunningState::update()
@@ -41,7 +42,7 @@ void RunningState::update()
 
 
 	if (ih().isKeyDown(SDL_SCANCODE_P))
-		Game::instance()->setState(GAMEOVER);
+		Game::instance()->setState(PAUSED);
 }
 
 void RunningState::leave()

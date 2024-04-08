@@ -7,20 +7,22 @@
 #include "../utils/Collisions.h"
 #include "FruitsSystem.h"
 
-CollisionsSystem::CollisionsSystem() {
+CollisionsSystem::CollisionsSystem()
+{
 	// TODO Auto-generated constructor stub
-
 }
 
-CollisionsSystem::~CollisionsSystem() {
+CollisionsSystem::~CollisionsSystem()
+{
 	// TODO Auto-generated destructor stub
 }
 
-void CollisionsSystem::initSystem() {
+void CollisionsSystem::initSystem()
+{
 }
 
-void CollisionsSystem::update() {
-
+void CollisionsSystem::update()
+{
 	// the PacMan's Transform
 	//
 	auto pm = mngr_->getHandler(ecs::hdlr::PACMAN);
@@ -30,29 +32,53 @@ void CollisionsSystem::update() {
 	// particular case we could use a for-each loop since the list stars is not
 	// modified.
 	//
-	auto &stars = mngr_->getEntities(ecs::grp::FRUITS);
+	auto& stars = mngr_->getEntities(ecs::grp::FRUITS);
 	auto n = stars.size();
-	for (auto i = 0u; i < n; i++) {
+	for (auto i = 0u; i < n; i++)
+	{
 		auto e = stars[i];
-		if (mngr_->isAlive(e)) { // if the star is active (it might have died in this frame)
+		if (mngr_->isAlive(e))
+		{
+			// if the star is active (it might have died in this frame)
 
 			// the Star's Transform
 			//
 			auto eTR = mngr_->getComponent<Transform>(e);
 
 			// check if PacMan collides with the Star (i.e., eat it)
-			if (Collisions::collides(			//
-					pTR->pos_, pTR->width_, pTR->height_, //
-					eTR->pos_, eTR->width_, eTR->height_)) {
-
+			if (Collisions::collides( //
+				pTR->pos_, pTR->width_, pTR->height_, //
+				eTR->pos_, eTR->width_, eTR->height_))
+			{
 				Message m;
 				m.id = _m_FRUIT_EATEN;
-				m.fruit_eaten_data.e = e;
+				m.entity_collided_data.e = e;
 				mngr_->send(m);
-
 			}
 		}
 	}
 
-}
+	auto& ghosts = mngr_->getEntities(ecs::grp::GHOSTS);
+	auto gn = ghosts.size();
+	for (auto i = 0u; i < gn; i++)
+	{
+		auto e = ghosts[i];
+		if (mngr_->isAlive(e))
+		{
+			// if the star is active (it might have died in this frame)
 
+			// the Star's Transform
+			//
+			auto eTR = mngr_->getComponent<Transform>(e);
+
+			// check if PacMan collides with the Ghost 
+			if (Collisions::collides( //
+				pTR->pos_, pTR->width_, pTR->height_, //
+				eTR->pos_, eTR->width_, eTR->height_))
+			{
+				Message m{_m_PACMAN_GHOST_COLLISION, e};
+				mngr_->send(m);
+			}
+		}
+	}
+}

@@ -13,34 +13,38 @@
 
 constexpr Uint32 FRAME_DURATION = 100;
 
-RenderSystem::RenderSystem() {
-
+RenderSystem::RenderSystem()
+{
 }
 
-RenderSystem::~RenderSystem() {
+RenderSystem::~RenderSystem()
+{
 }
 
-void RenderSystem::initSystem() {
+void RenderSystem::initSystem()
+{
 }
 
-void RenderSystem::update() {
+void RenderSystem::update()
+{
 	drawMsgs();
 	drawFruits();
 	drawGhosts();
 	drawPacMan();
-
 }
 
-void RenderSystem::drawFruits() {
+void RenderSystem::drawFruits()
+{
 	// draw stars
-	for (auto e : mngr_->getEntities(ecs::grp::FRUITS)) 
+	for (auto e : mngr_->getEntities(ecs::grp::FRUITS))
 	{
 		auto iwf = mngr_->getComponent<ImageWithFrames>(e);
 		drawImageWithFrames(iwf);
 	}
 }
 
-void RenderSystem::drawPacMan() {
+void RenderSystem::drawPacMan()
+{
 	auto e = mngr_->getHandler(ecs::hdlr::PACMAN);
 	auto tr = mngr_->getComponent<Transform>(e);
 	auto iwf = mngr_->getComponent<ImageWithFrames>(e);
@@ -53,14 +57,15 @@ void RenderSystem::drawPacMan() {
 
 void RenderSystem::drawGhosts()
 {
-	for (auto e : mngr_->getEntities(ecs::grp::GHOSTS)) 
+	for (auto e : mngr_->getEntities(ecs::grp::GHOSTS))
 	{
 		auto iwf = mngr_->getComponent<ImageWithFrames>(e);
 		drawImageWithFrames(iwf);
 	}
 }
 
-void RenderSystem::drawMsgs() {
+void RenderSystem::drawMsgs()
+{
 	// draw the score
 	//
 	//auto score = mngr_->getSystem<GameCtrlSystem>()->getScore();
@@ -78,30 +83,30 @@ void RenderSystem::drawMsgs() {
 
 	//// draw add stars message
 	//sdlutils().msgs().at("addstars").render(10, 10);
-
 }
 
 void RenderSystem::drawImageWithFrames(ImageWithFrames* image)
 {
 	if (image->firstFrame != image->lastFrame) // si la imagen no es estática
-		if (image->frameTimer + FRAME_DURATION 
-			< sdlutils().virtualTimer().currTime()) 
+		if (image->frameTimer + FRAME_DURATION
+			< sdlutils().virtualTimer().currTime())
 		{
 			image->frameTimer = sdlutils().virtualTimer().currTime();
 			image->currentFrame++;
-			if (image->currentFrame > image->lastFrame) {
+			if (image->currentFrame > image->lastFrame)
+			{
 				image->currentFrame = image->firstFrame;
 			}
 		}
 
 	SDL_Rect src = build_sdlrect(
-	image->currentFrame % image->nCols_ * image->frameWidth_, 
-	image->currentFrame / image->nCols_ * image->frameHeight_, 
-	image->frameWidth_, image->frameHeight_
+		image->currentFrame % image->nCols_ * image->frameWidth_,
+		image->currentFrame / image->nCols_ * image->frameHeight_,
+		image->frameWidth_, image->frameHeight_
 	);
 	SDL_Rect dst = build_sdlrect(
-		image->transform_->pos_, 
-		image->transform_->width_, 
+		image->transform_->pos_,
+		image->transform_->width_,
 		image->transform_->height_);
 	image->image_->render(src, dst, image->transform_->rot_);
 }
@@ -111,7 +116,8 @@ void RenderSystem::drawHealth(HealthComponent* hc)
 	hc->render();
 }
 
-void RenderSystem::draw(Transform *tr, Texture *tex) {
+void RenderSystem::draw(Transform* tr, Texture* tex)
+{
 	SDL_Rect dest = build_sdlrect(tr->pos_, tr->width_, tr->height_);
 
 	assert(tex != nullptr);

@@ -46,4 +46,3 @@ struct Message {
 	uint8_t id;
 };
 #endif
-

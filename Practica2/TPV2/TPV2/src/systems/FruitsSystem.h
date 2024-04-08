@@ -5,13 +5,13 @@
 
 struct ImageWithFrames;
 
-class FruitsSystem: public ecs::System {
+class FruitsSystem : public ecs::System
+{
 public:
-
 	__SYSID_DECL__(ecs::sys::FRUITS)
 
 	FruitsSystem();
-	virtual ~FruitsSystem();
+	~FruitsSystem() override;
 	void initSystem() override;
 	void update() override;
 	void addFruitGrid(unsigned int n);
@@ -19,9 +19,9 @@ public:
 	void changeFruitSprite(ImageWithFrames*, int);
 	void resetFruits();
 	void destroyFruits();
-	void recieve(const Message &m) override;
+	void recieve(const Message& m) override;
+
 private:
 	unsigned int gridSide;
 	unsigned int currNumOfFruits_;
 };
-

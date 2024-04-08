@@ -5,22 +5,26 @@
 #include "../utils/Vector2D.h"
 #include <cassert>
 
-struct Transform: public ecs::Component {
-
+struct Transform : public ecs::Component
+{
 	__CMPID_DECL__(ecs::cmp::TRANSFORM)
 
 	Transform() :
-			pos_(), vel_(), width_(), height_(), rot_() {
+		pos_(), vel_(), width_(), height_(), rot_()
+	{
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float w, float h, float r) :
-			pos_(pos), vel_(vel), width_(w), height_(h), rot_(r) {
+		pos_(pos), vel_(vel), width_(w), height_(h), rot_(r)
+	{
 	}
 
-	virtual ~Transform() {
+	~Transform() override
+	{
 	}
 
-	void init(Vector2D pos, Vector2D vel, float w, float h, float r) {
+	void init(Vector2D pos, Vector2D vel, float w, float h, float r)
+	{
 		pos_ = pos;
 		vel_ = vel;
 		width_ = w;
@@ -28,7 +32,8 @@ struct Transform: public ecs::Component {
 		rot_ = r;
 	}
 
-	void update() override {
+	void update() override
+	{
 		pos_ = pos_ + vel_;
 	}
 
@@ -38,4 +43,3 @@ struct Transform: public ecs::Component {
 	float height_;
 	float rot_;
 };
-

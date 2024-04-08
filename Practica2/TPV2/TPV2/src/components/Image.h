@@ -5,21 +5,23 @@
 
 class Texture;
 
-struct Image: public ecs::Component {
-
+struct Image : public ecs::Component
+{
 	__CMPID_DECL__(ecs::cmp::IMAGE)
 
 	Image() :
-			tex_() {
+		tex_()
+	{
 	}
 
-	Image(Texture *tex) :
-			tex_(tex) {
+	Image(Texture* tex) :
+		tex_(tex)
+	{
 	}
 
-	virtual ~Image() {
+	~Image() override
+	{
 	}
 
-	Texture *tex_;
+	Texture* tex_;
 };
-

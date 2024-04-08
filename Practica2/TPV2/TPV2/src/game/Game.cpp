@@ -23,21 +23,22 @@
 using ecs::Manager;
 
 Game::Game() :
-		mngr_(), //
-		pacmanSys_(), //
-		gameCtrlSys_(), //
-		fruitsSys_(), //
-		renderSys_(), //
-		collisionSys_(),
-		newGameState(),
-		newRoundState(),
-		pauseState(),
-		runningState(),
-		gameOverState()
+	mngr_(), //
+	pacmanSys_(), //
+	gameCtrlSys_(), //
+	fruitsSys_(), //
+	renderSys_(), //
+	collisionSys_(),
+	newGameState(),
+	newRoundState(),
+	pauseState(),
+	runningState(),
+	gameOverState()
 {
 }
 
-Game::~Game() {
+Game::~Game()
+{
 	delete newGameState;
 	delete newRoundState;
 	delete pauseState;
@@ -46,7 +47,8 @@ Game::~Game() {
 	delete mngr_;
 }
 
-void Game::init() {
+void Game::init()
+{
 	// initialise the SDLUtils singleton
 	SDLUtils::init("Demo", 800, 600, "resources/config/resources.json");
 
@@ -67,7 +69,7 @@ void Game::init() {
 	newRoundState = new NewRoundState();
 	pauseState = new PausedState();
 	runningState = new RunningState(
-		pacmanSys_, ghostSys_, fruitsSys_, 
+		pacmanSys_, ghostSys_, fruitsSys_,
 		immunitySys_, renderSys_, collisionSys_
 	);
 	gameOverState = new GameOverState();
@@ -78,23 +80,25 @@ void Game::init() {
 	runningState->setContext(mngr_);
 	gameOverState->setContext(mngr_);
 
-	setState(RUNNING);
+	setState(NEWGAME);
 }
 
-void Game::start() {
-
+void Game::start()
+{
 	// a boolean to exit the loop
 	bool exit = false;
 
-	auto &ihdlr = ih();
+	auto& ihdlr = ih();
 
-	while (!exit) {
+	while (!exit)
+	{
 		Uint32 startTime = sdlutils().currRealTime();
 
 		// refresh the input handler
 		ihdlr.refresh();
 
-		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
+		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE))
+		{
 			exit = true;
 			continue;
 		}
@@ -113,18 +117,22 @@ void Game::start() {
 
 void Game::setState(State newState)
 {
-	if (currentState != nullptr) 
+	if (currentState != nullptr)
 		currentState->leave();
 	switch (newState)
 	{
-	case NEWGAME:	currentState = newGameState; break;
-	case NEWROUND:	currentState = newRoundState; break;
-	case RUNNING:	currentState = runningState; break;
-	case PAUSED:	currentState = pauseState; break;
-	case GAMEOVER:	currentState = gameOverState; break;
+	case NEWGAME: currentState = newGameState;
+		break;
+	case NEWROUND: currentState = newRoundState;
+		break;
+	case RUNNING: currentState = runningState;
+		break;
+	case PAUSED: currentState = pauseState;
+		break;
+	case GAMEOVER: currentState = gameOverState;
+		break;
 	default: break;
 	}
 	if (currentState != nullptr)
 		currentState->enter();
 }
-

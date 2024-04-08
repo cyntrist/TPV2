@@ -24,26 +24,29 @@ enum State
 	GAMEOVER
 };
 
-class Game : public Singleton<Game> {
+class Game : public Singleton<Game>
+{
 	friend Singleton;
+
 public:
 	Game();
-	virtual ~Game();
+	~Game() override;
 	void init();
 	void start();
 
 	void setState(State);
 	ecs::Manager* getManager() const { return mngr_; }
-private:
-	ecs::Manager *mngr_;
 
-	PacManSystem *pacmanSys_;
-	GameCtrlSystem *gameCtrlSys_;
-	FruitsSystem *fruitsSys_;
-	RenderSystem *renderSys_;
-	CollisionsSystem *collisionSys_;
-	ImmunitySystem *immunitySys_;
-	GhostSystem *ghostSys_;
+private:
+	ecs::Manager* mngr_;
+
+	PacManSystem* pacmanSys_;
+	GameCtrlSystem* gameCtrlSys_;
+	FruitsSystem* fruitsSys_;
+	RenderSystem* renderSys_;
+	CollisionsSystem* collisionSys_;
+	ImmunitySystem* immunitySys_;
+	GhostSystem* ghostSys_;
 
 	GameState* newGameState;
 	GameState* newRoundState;
@@ -52,4 +55,3 @@ private:
 	GameState* gameOverState;
 	GameState* currentState;
 };
-

@@ -36,7 +36,8 @@ void FruitsSystem::update()
 		if (mc != nullptr)
 		{
 			if (mc->isMiraculous_)
-			{ // si esta milagrosa y ha dejado de serlo
+			{
+				// si esta milagrosa y ha dejado de serlo
 				if (mc->timer_ + mc->miraculousDuration_ < currTime)
 				{
 					mc->resetMiraculous();
@@ -44,7 +45,8 @@ void FruitsSystem::update()
 				}
 			}
 			else
-			{ // si no esta milagrosa y ha de serlo
+			{
+				// si no esta milagrosa y ha de serlo
 				if (mc->timer_ + mc->nonMiraculousDuration_ < currTime)
 				{
 					mc->setMiraculous();
@@ -72,7 +74,7 @@ void FruitsSystem::addFruitGrid(unsigned int n)
 		                                                8, 8, 12, 12);
 		const int chance = sdlutils().rand().nextInt(0, 10);
 		//if (chance == 0) // es milagrosa? 1 de cada 10
-			mngr_->addComponent<Miraculous>(e);
+		mngr_->addComponent<Miraculous>(e);
 
 		tf->init(Vector2D(
 			         iniOffsetX + paddingX * (i % gridSide),
@@ -105,14 +107,14 @@ void FruitsSystem::changeFruitSprite(ImageWithFrames* iwf, int frame)
 
 void FruitsSystem::resetFruits()
 {
-	for (const auto e : mngr_->getEntities(ecs::grp::FRUITS)) 
+	for (const auto e : mngr_->getEntities(ecs::grp::FRUITS))
 	{
 		const auto mc = mngr_->getComponent<Miraculous>(e);
-		if (mc != nullptr) 
+		if (mc != nullptr)
 		{
 			mc->resetMiraculous();
 			changeFruitSprite(
-				mngr_->getComponent<ImageWithFrames>(e), 
+				mngr_->getComponent<ImageWithFrames>(e),
 				NORMAL_FRAME
 			);
 		}
@@ -128,7 +130,6 @@ void FruitsSystem::destroyFruits()
 		if (mc != nullptr)
 			mc->resetMiraculous();
 	}
-
 }
 
 void FruitsSystem::recieve(const Message& m)
@@ -142,10 +143,11 @@ void FruitsSystem::recieve(const Message& m)
 		resetFruits();
 		break;
 	case _m_FRUIT_EATEN:
-		onFruitEaten(m.fruit_eaten_data.e);
-		if (mngr_->getEntities(ecs::grp::FRUITS).size() <= 1) {
-			mngr_->send(Message { _m_ROUND_OVER },true);
-			mngr_->send(Message { _m_GAME_OVER }, true);
+		onFruitEaten(m.entity_collided_data.e);
+		if (mngr_->getEntities(ecs::grp::FRUITS).size() <= 1)
+		{
+			mngr_->send(Message{_m_ROUND_OVER}, true);
+			mngr_->send(Message{_m_GAME_OVER}, true);
 			Game::instance()->setState(GAMEOVER);
 			sdlutils().soundEffects().at("won").play();
 		}

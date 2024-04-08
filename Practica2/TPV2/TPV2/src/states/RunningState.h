@@ -12,18 +12,17 @@ class PacManSystem;
 
 class RunningState : public GameState
 {
-	PacManSystem *pacmanSys_;
+	PacManSystem* pacmanSys_;
 	//ecs::System *gameCtrlSys_;
-	GhostSystem *ghostSys_;
-	FruitsSystem *fruitsSys_;
-	ImmunitySystem *immunitySys_;
-	RenderSystem *renderSys_;
-	CollisionsSystem *collisionSys_;
-	
+	GhostSystem* ghostSys_;
+	FruitsSystem* fruitsSys_;
+	ImmunitySystem* immunitySys_;
+	RenderSystem* renderSys_;
+	CollisionsSystem* collisionSys_;
 
 public:
-	RunningState(PacManSystem* pc, GhostSystem*gh, FruitsSystem*fo,
-	ImmunitySystem*im, RenderSystem*r, CollisionsSystem*col);
+	RunningState(PacManSystem* pc, GhostSystem* gh, FruitsSystem* fo,
+	             ImmunitySystem* im, RenderSystem* r, CollisionsSystem* col);
 	~RunningState() override;
 	void enter() override;
 	void update() override;

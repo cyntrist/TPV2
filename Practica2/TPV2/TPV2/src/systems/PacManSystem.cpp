@@ -152,10 +152,10 @@ void PacManSystem::recieve(const Message& message)
 	switch (message.id)
 	{
 	case _m_NEW_GAME:
+		resetLives();
 		resetPosition();
 		break;
 	case _m_ROUND_START:
-		resetLives();
 		resetPosition();
 		break;
 	default:

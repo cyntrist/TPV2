@@ -25,14 +25,12 @@ void NewGameState::enter()
 
 void NewGameState::update()
 {
-	/*sdlutils().clearRenderer();
 	message_->render(rect_);
-	sdlutils().presentRenderer();
 
 	if (ih().keyDownEvent())
 	{
-		g().setState(Game::NEWROUND);
-	}*/
+		Game::instance()->setState(NEWROUND);
+	}
 }
 
 void NewGameState::leave()

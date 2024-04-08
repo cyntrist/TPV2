@@ -33,4 +33,3 @@
 #define _SYS_LIST_ \
     COLLISION, \
 	RENDER
-

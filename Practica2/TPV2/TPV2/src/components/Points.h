@@ -3,17 +3,18 @@
 #pragma once
 #include "../ecs/Component.h"
 
-struct Points: public ecs::Component {
-
+struct Points : public ecs::Component
+{
 	__CMPID_DECL__(ecs::cmp::POINTS)
 
 	Points() :
-			points_() {
+		points_()
+	{
 	}
-	virtual ~Points() {
 
+	~Points() override
+	{
 	}
 
 	int points_;
 };
-

@@ -5,24 +5,27 @@
 
 #include "../ecs/Component.h"
 
-struct StarMotion: public ecs::Component {
-
+struct StarMotion : public ecs::Component
+{
 	__CMPID_DECL__(ecs::cmp::STARMOTION)
 
 	StarMotion() :
-			updateFreq_(), lastUpdate_(), rot_(), sizeLimit_() {
+		updateFreq_(), lastUpdate_(), rot_(), sizeLimit_()
+	{
 	}
 
-	virtual ~StarMotion() {
+	~StarMotion() override
+	{
 	}
 
-	inline bool shouldUpdate(Uint32 currTime) {
-		if (lastUpdate_ + updateFreq_ < currTime) {
+	bool shouldUpdate(Uint32 currTime)
+	{
+		if (lastUpdate_ + updateFreq_ < currTime)
+		{
 			lastUpdate_ = currTime;
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	Uint32 updateFreq_;
@@ -30,4 +33,3 @@ struct StarMotion: public ecs::Component {
 	float rot_;
 	float sizeLimit_;
 };
-

@@ -3,31 +3,33 @@
 #pragma once
 #include "../ecs/System.h"
 
-class GameCtrlSystem: public ecs::System {
+class GameCtrlSystem : public ecs::System
+{
 public:
-
 	__SYSID_DECL__(ecs::sys::GAMECTRL)
 
 	GameCtrlSystem();
-	virtual ~GameCtrlSystem();
+	~GameCtrlSystem() override;
 
-	inline auto getScore() {
+	auto getScore()
+	{
 		return score_;
 	}
 
-	inline void setScore(unsigned int score) {
+	void setScore(unsigned int score)
+	{
 		score_ = score;
 	}
 
-	inline void incrScore(unsigned int n) {
+	void incrScore(unsigned int n)
+	{
 		score_ += n;
 	}
 
 	void initSystem() override;
 	void update() override;
-	void recieve(const Message &m) override;
+	void recieve(const Message& m) override;
 
 private:
 	unsigned int score_;
 };
-

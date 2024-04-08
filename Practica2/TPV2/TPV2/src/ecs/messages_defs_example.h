@@ -14,30 +14,35 @@
 #include "../ecs/ecs.h"
 
 using msgId_t = uint8_t;
-enum msgId : msgId_t {
-	STAR_EATEN, //
+
+enum msgId : msgId_t
+{
+	STAR_EATEN,
+	//
 	CREATE_STARS
 };
 
 
-struct Message {
+struct Message
+{
 	msgId_t id;
 
 	// if we use union we save memory, but then use only primitive
 	// types, otherwise you will need to define constructors almost
 	// every where.
 
-	union {
-
+	union
+	{
 		// _m_STAR_EATEN
-		struct {
-			ecs::Entity *e;
+		struct
+		{
+			ecs::Entity* e;
 		} star_eaten_data;
 
 		// _m_CREATE_STARS
-		struct {
+		struct
+		{
 			unsigned int n;
 		} create_stars_data;
-
 	};
 };

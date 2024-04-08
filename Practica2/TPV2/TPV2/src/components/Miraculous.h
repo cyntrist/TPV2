@@ -2,9 +2,9 @@
 #include "../ecs/Component.h"
 
 constexpr Uint32 MIN_TIMER = 1,
-				 MAX_TIMER = 2,
-				 MIN_DURATION = 5000,
-				 MAX_DURATION = 10000;
+                 MAX_TIMER = 2,
+                 MIN_DURATION = 5000,
+                 MAX_DURATION = 10000;
 
 struct Miraculous : ecs::Component
 {
@@ -20,12 +20,17 @@ struct Miraculous : ecs::Component
 		miraculousDuration_ = sdlutils().rand().nextInt(MIN_DURATION, MAX_DURATION);
 		nonMiraculousDuration_ = sdlutils().rand().nextInt(MIN_TIMER, MAX_TIMER);
 	}
-	~Miraculous() override {};
+
+	~Miraculous() override
+	{
+	};
+
 	void resetMiraculous()
 	{
-		timer_ = sdlutils().virtualTimer().currTime();	
+		timer_ = sdlutils().virtualTimer().currTime();
 		isMiraculous_ = false;
 	}
+
 	void setMiraculous()
 	{
 		timer_ = sdlutils().virtualTimer().currTime();

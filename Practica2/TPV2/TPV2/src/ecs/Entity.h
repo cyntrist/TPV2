@@ -9,61 +9,59 @@
 #include "Component.h"
 #include "ecs.h"
 
-namespace ecs {
-
-/*
- * A struct that represents a collection of components.
- *
- */
-struct Entity {
-public:
-	Entity(grpId_t gId) :
+namespace ecs
+{
+	/*
+	 * A struct that represents a collection of components.
+	 *
+	 */
+	struct Entity
+	{
+	public:
+		Entity(grpId_t gId) :
 			currCmps_(),
 			cmps_(), //
-			alive_(),  //
+			alive_(), //
 			gId_(gId) //
-	{
-		// We reserve the a space for the maximum number of
-		// components. This way we avoid resizing the vector.
+		{
+			// We reserve the a space for the maximum number of
+			// components. This way we avoid resizing the vector.
+			//
+			currCmps_.reserve(maxComponentId);
+		}
+
+		// we delete the copy constructor/assignment because it is
+		// not clear how to copy the components
 		//
-		currCmps_.reserve(ecs::maxComponentId);
-	}
+		Entity(const Entity&) = delete;
+		Entity& operator=(const Entity&) = delete;
 
-	// we delete the copy constructor/assignment because it is
-	// not clear how to copy the components
-	//
-	Entity(const Entity&) = delete;
-	Entity& operator=(const Entity&) = delete;
+		// Exercise: define move constructor/assignment for class Entity
 
-	// Exercise: define move constructor/assignment for class Entity
-
-	// Destroys the entity
-	//
-	virtual ~Entity() {
-
-		// we delete all available components
+		// Destroys the entity
 		//
-		for (auto c : cmps_)
-			if (c != nullptr)
-				delete c;
-	}
+		virtual ~Entity()
+		{
+			// we delete all available components
+			//
+			for (auto c : cmps_)
+				if (c != nullptr)
+					delete c;
+		}
 
+	private:
+		// the field currCmps_ can be removed, and instead we can traverse cmps_
+		// and process non-null elements. We keep it because sometimes the order
+		// in which the components are executed is important
 
-private:
+		friend Manager;
 
-	// the field currCmps_ can be removed, and instead we can traverse cmps_
-	// and process non-null elements. We keep it because sometimes the order
-	// in which the components are executed is important
-
-	friend Manager;
-
-	// the list of components is not really needed when using systems,
-	// but for now we keep it just in case
-	//
-	std::vector<Component*> currCmps_;
-	std::array<Component*, maxComponentId> cmps_;
-	bool alive_;
-	ecs::grpId_t gId_;
-};
-
+		// the list of components is not really needed when using systems,
+		// but for now we keep it just in case
+		//
+		std::vector<Component*> currCmps_;
+		std::array<Component*, maxComponentId> cmps_;
+		bool alive_;
+		grpId_t gId_;
+	};
 } // end of name space

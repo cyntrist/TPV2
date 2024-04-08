@@ -9,15 +9,16 @@ struct ImageWithFrames;
 class Texture;
 struct Transform;
 
-class RenderSystem: public ecs::System {
+class RenderSystem : public ecs::System
+{
 public:
-
 	__SYSID_DECL__(ecs::sys::RENDER)
 
 	RenderSystem();
-	virtual ~RenderSystem();
+	~RenderSystem() override;
 	void initSystem() override;
 	void update() override;
+
 private:
 	void drawFruits();
 	void drawPacMan();
@@ -26,6 +27,5 @@ private:
 	void drawImage(Image*);
 	void drawImageWithFrames(ImageWithFrames*);
 	void drawHealth(HealthComponent*);
-	void draw(Transform *tr, Texture *tex);
+	void draw(Transform* tr, Texture* tex);
 };
-

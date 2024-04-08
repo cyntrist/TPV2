@@ -14,7 +14,7 @@ PausedState::~PausedState()
 
 void PausedState::enter()
 {
-	/*message_ = &sdlutils().msgs().at("pause");
+	message_ = &sdlutils().msgs().at("pause");
 	rect_ = {
 		(sdlutils().width() - message_->width()) / 2,
 		(sdlutils().height() - message_->height()) / 2,
@@ -22,20 +22,18 @@ void PausedState::enter()
 		message_->height()
 	};
 
-	sdlutils().virtualTimer().pause();*/
+	sdlutils().virtualTimer().pause();
 }
 
 void PausedState::update()
 {
-	/*sdlutils().clearRenderer();
 	message_->render(rect_);
-	sdlutils().presentRenderer();
 
-	if (ih().keyDownEvent())
-		g().setState(Game::RUNNING);*/
+	if (ih().keyDownEvent()) 
+		Game::instance()->setState(RUNNING);
 }
 
 void PausedState::leave()
 {
-	sdlutils().virtualTimer().reset();
+	sdlutils().virtualTimer().resume();
 }
