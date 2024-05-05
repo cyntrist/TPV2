@@ -1,11 +1,12 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #pragma once
-
+#include "../utils/Singleton.h"
 
 class LittleWolf;
 
-class Game {
+class Game : public Singleton<Game> {
+	friend Singleton;
 public:
 	Game();
 	virtual ~Game();
