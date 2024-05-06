@@ -21,7 +21,7 @@ Game::~Game() {
 	delete bm_;
 }
 
-bool Game::init(char *host, Uint16 port) {
+bool Game::init(const char *host, Uint16 port) {
 
 	net_ = new Networking();
 

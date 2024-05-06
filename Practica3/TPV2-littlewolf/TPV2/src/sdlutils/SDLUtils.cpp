@@ -19,7 +19,8 @@ SDLUtils::SDLUtils(std::string windowTitle, int width, int height) :
 		imagesAccessWrapper_(images_, "Images Table"), //
 		msgsAccessWrapper_(msgs_, "Messages Table"), //
 		soundsAccessWrapper_(sounds_, "Sounds Table"), //
-		musicsAccessWrapper_(musics_, "Musics Table") ///
+		musicsAccessWrapper_(musics_, "Musics Table"), //
+		configAccessWrapper_(config_, "Config Table") //
 {
 
 	initWindow();
@@ -265,6 +266,30 @@ void SDLUtils::loadReasources(std::string filename) {
 			}
 		} else {
 			throw "'musics' is not an array";
+		}
+	}
+
+	// load config
+	jValue = root["config"];
+	if (jValue != nullptr) {
+		if (jValue->IsArray()) {
+			config_.reserve(jValue->AsArray().size()); // reserve enough space to avoid resizing
+			for (auto &v : jValue->AsArray()) {
+				if (v->IsObject()) {
+					JSONObject vObj = v->AsObject();
+					std::string key = vObj["id"]->AsString();
+					auto constant = vObj["value"]->AsNumber();
+#ifdef _DEBUG
+					std::cout << "Loading music with id: " << key << std::endl;
+#endif
+					config_.emplace(key, constant);
+				} else {
+					throw "'config' array in '" + filename
+							+ "' includes and invalid value";
+				}
+			}
+		} else {
+			throw "'config' is not an array";
 		}
 	}
 

@@ -12,7 +12,7 @@ void server(Uint16 port) {
 	s.listen();
 }
 
-void client(char *host, Uint16 port) {
+void client(const char *host, Uint16 port) {
 	Game &g = *Game::instance();
 
 	if (g.init(host, port)) {
@@ -46,8 +46,27 @@ void start(int argc, char **argv) {
 int main(int argc, char **argv) {
 
 	try {
-		start(argc, argv);
+		//start(argc, argv);
+		const char* host ;
 
+		host = "localhost";
+		int port = 2000;
+
+		std::cout << "Client(c)/Server(s)" << std::endl;
+
+		char answer;
+
+		std::cin >> answer;
+
+		if (answer == 's') {
+			server(port);
+		}
+		else if (answer == 'c') {
+			client(host, port);
+		}
+		else {
+
+		}
 	} catch (const std::string &e) { // catch exceptions thrown as strings
 		std::cerr << e << std::endl;
 	} catch (const char *e) { // catch exceptions thrown as char*

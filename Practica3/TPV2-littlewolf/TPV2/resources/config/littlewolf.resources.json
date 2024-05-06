@@ -1,4 +1,8 @@
 {
+  "config" : [
+    { "id": "test", "value": 101 },
+    { "id": "max_life", "value": 3 }
+  ],
 
   "fonts" : [
     { "id" : "ARIAL12", "file" : "resources/fonts/ARIAL.ttf", "size": 12 },

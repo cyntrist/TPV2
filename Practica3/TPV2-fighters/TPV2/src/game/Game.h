@@ -16,7 +16,7 @@ class Game: public Singleton<Game> {
 	Game();
 public:
 	virtual ~Game();
-	bool init(char *host, Uint16 port);
+	bool init(const char *host, Uint16 port);
 	void start();
 
 	Fighter& get_fighters() {

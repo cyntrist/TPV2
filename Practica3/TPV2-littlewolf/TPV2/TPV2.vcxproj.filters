@@ -37,6 +37,12 @@
     <Filter Include="Source Files\game">
       <UniqueIdentifier>{59704455-2d06-4811-a3ad-8f7f56555aa9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\network">
+      <UniqueIdentifier>{ab7de308-ea03-4eda-a22b-cc9989b6f0aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\network">
+      <UniqueIdentifier>{56d3a926-9eaa-4f1a-8df6-ad042fc9484c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\json\JSONValue.h">
@@ -105,6 +111,15 @@
     <ClInclude Include="src\game\LittleWolf.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\UDPServer.h">
+      <Filter>Header Files\game\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Networking.h">
+      <Filter>Header Files\game\network</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\netwrok_messages.h">
+      <Filter>Header Files\game\network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\json\JSONValue.cpp">
@@ -145,6 +160,12 @@
     </ClCompile>
     <ClCompile Include="src\game\Game.cpp">
       <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\Networking.cpp">
+      <Filter>Source Files\game\network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\UDPServer.cpp">
+      <Filter>Source Files\game\network</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
