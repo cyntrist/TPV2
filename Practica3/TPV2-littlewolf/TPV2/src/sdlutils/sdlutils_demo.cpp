@@ -10,11 +10,11 @@
 
 using namespace std;
 
-void sdlutils_basic_demo() {
-
+void sdlutils_basic_demo()
+{
 	// Initialise the SDLGame singleton
 	SDLUtils::init("SDLGame Demo!", 800, 600,
-			"resources/config/sdlutilsdemo.resources.json");
+	               "resources/config/sdlutilsdemo.resources.json");
 
 	// reference to the SDLUtils Singleton. You could use it as a pointer as well,
 	// I just prefer to use . instead of ->, it is just a matter of taste, nothing
@@ -23,20 +23,20 @@ void sdlutils_basic_demo() {
 	// you can also use the inline method sdlutils() that simply returns the value
 	// of *SDLUtils::instance() --- it is defined at the end of SDLUtils.h
 	//
-	auto &sdl = *SDLUtils::instance();
+	auto& sdl = *SDLUtils::instance();
 
 	//show the cursor
 	sdl.showCursor();
 
 	// store the 'renderer' in a local variable, just for convenience
-	SDL_Renderer *renderer = sdl.renderer();
+	SDL_Renderer* renderer = sdl.renderer();
 
 	// we can take textures from the predefined ones, and we can create a custom one as well
-	auto &sdlLogo = sdl.images().at("sdl_logo");
-	auto &helloSDL = sdl.msgs().at("HelloSDL");
+	auto& sdlLogo = sdl.images().at("sdl_logo");
+	auto& helloSDL = sdl.msgs().at("HelloSDL");
 	Texture pressAnyKey(renderer, "Press any key to exit",
-			sdl.fonts().at("ARIAL24"), build_sdlcolor(0x112233ff),
-			build_sdlcolor(0xffffffff));
+	                    sdl.fonts().at("ARIAL24"), build_sdlcolor(0x112233ff),
+	                    build_sdlcolor(0xffffffff));
 
 	// some coordinates
 	auto winWidth = sdl.width();
@@ -53,12 +53,13 @@ void sdlutils_basic_demo() {
 
 	// reference to the input handler (we could use a pointer, I just . rather than ->).
 	// you can also use the inline method ih() that is defined in InputHandler.h
-	auto &ih = *InputHandler::instance();
+	auto& ih = *InputHandler::instance();
 
 	// a boolean to exit the loop
 	bool exit_ = false;
 
-	while (!exit_) {
+	while (!exit_)
+	{
 		Uint32 startTime = sdl.currRealTime();
 
 		// update the event handler
@@ -94,6 +95,4 @@ void sdlutils_basic_demo() {
 
 	// stop the music
 	Music::haltMusic();
-
 }
-

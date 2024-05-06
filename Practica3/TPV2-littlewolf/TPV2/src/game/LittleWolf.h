@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string>
 #include <fstream>
-
+#include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 
 class Vector2D;
@@ -86,6 +86,7 @@ public:
 		float acceleration; // acceleration
 		float theta; // rotation (in rad)
 		PlayerState state; // the state
+		int life;
 	};
 
 	// Representing a map, the user_walling is the walling provided by the user, and
@@ -142,9 +143,6 @@ public:
 	// mark all (used) player alive
 	void bringAllToLife();
 
-	// switch to the view of the next player
-	void switchToNextPlayer();
-
 	// render the walls, etc
 	void render();
 
@@ -152,16 +150,31 @@ public:
 	void update();
 
 	// change projection view
-	void toggleCenital() { cenital_ = !cenital_; }
+	void toggleCenital()
+	{
+		cenital_ = !cenital_;
+		cenitalTimer_ = sdlutils().virtualTimer().currTime();
+	}
 
 
 	/// ONLINE
+	void update_player_info(uint8_t playerID, float posX, float posY, float velX, float velY,
+	                    float speed, float acceleration, float theta, PlayerState state, int life);
+	void update_sync(uint8_t id, const Vector2D& pos);
+	void disconnect_player(uint8_t id);
+
 	void send_my_info();
 	void send_sync() const;
-	void update_my_info(uint8_t playerID, float posX, float posY, float velX, float velY,
-	                    float speed, float acceleration, float theta, PlayerState state);
-	void disconnect_player(uint8_t playerID);
-	void update_sync(uint8_t id, const Vector2D& pos);
+	void send_shoot_request();
+	void send_player_death(uint8_t id);
+	void send_upcoming_restart();
+	void send_restart();
+
+	void handle_shoot_request(uint8_t id);
+	void handle_player_death(uint8_t id);
+	void handle_shoot();
+	void handle_upcoming_restart();
+	void handle_restart();
 
 private:
 	// Calculates wall size using the <corrected> ray to the wall.
@@ -415,6 +428,9 @@ private:
 	// a distance after which shoot has no effect
 	float shoot_distace;
 
+	// player life
+	int max_player_life = 100;
+
 	// the map that includes the walling, etc
 	Map map_;
 
@@ -427,6 +443,14 @@ private:
 	// the GPU structure with all the needed elements to draw the world
 	Gpu gpu_;
 
+
+	/// ONLINE
 	// type of view
 	bool cenital_ = false;
+	Uint32 cenitalTimer_ = 0;
+
+	// restart
+	bool restarting_ = false;
+	Uint32 restartTimer_ = 0;
+	void render_warning();
 };

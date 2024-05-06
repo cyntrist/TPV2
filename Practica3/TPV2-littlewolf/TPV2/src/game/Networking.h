@@ -26,12 +26,15 @@ public:
 
 	void send_state(const Vector2D &pos, float w, float h, float rot);
 	void send_my_info(const Vector2D &pos, const Vector2D& velocity, 
-		float speed, float acceleration, float theta, Uint8 state);
+		float speed, float acceleration, float theta, Uint8 state, int life);
 	
-	void send_shoot(Vector2D p, Vector2D v, int width, int height, float r);
-	void send_dead(uint8_t id);
+	//void send_shoot(Vector2D p, Vector2D v, int width, int height, float r);
+	//void send_dead(uint8_t id);
 	void send_restart();
 	void send_sync(uint8_t id, const Vector2D& pos);
+	void send_shoot_request();
+	void send_player_death(uint8_t id);
+	void send_upcoming_restart();
 
 private:
 
@@ -39,10 +42,11 @@ private:
 	void handle_disconnet(Uint8 id);
 	void handle_player_state(const PlayerStateMsg &m);
 	void handle_player_info(const PlayerInfoMsg &m);
-	void handle_shoot(const ShootMsg &m);
-	void handle_dead(const MsgWithId &m);
 	void handle_restart();
 	void handle_sync(const SyncMsg& m);
+	void handle_shoot_request(const MsgWithId& m);
+	void handle_player_death(const DeathMsg& m);
+	void handle_upcoming_restart();
 
 	UDPsocket sock_;
 	SDLNet_SocketSet socketSet_;

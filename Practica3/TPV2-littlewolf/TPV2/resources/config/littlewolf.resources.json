@@ -1,7 +1,10 @@
 {
   "config" : [
-    { "id": "test", "value": 101 },
-    { "id": "max_life", "value": 3 }
+    { "id": "max_players", "value": 4 },
+    { "id": "max_life", "value": 100 },
+    { "id": "restart_time", "value": 5000 },
+    { "id": "hit_damage", "value": 50 },
+    { "id": "cenital_time", "value": 2000 }
   ],
 
   "fonts" : [

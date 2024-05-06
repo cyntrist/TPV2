@@ -23,12 +23,11 @@ enum MsgType : Uint8
 	//
 	_PLAYER_INFO,
 	//
-	_SHOOT,
-	//
-	_DEAD,
-	//
 	_RESTART,
-	_SYNC
+	_SYNC,
+	_SHOOT_REQUEST,
+	_PLAYER_DEATH,
+	_UPCOMING_RESTART
 };
 
 struct Msg
@@ -90,6 +89,7 @@ struct PlayerInfoMsg : MsgWithId
 	float acceleration;
 	float theta;
 	Uint8 state;
+	int life;
 
 	_IMPL_SERIALIAZION_WITH_BASE_(
 		MsgWithId,
@@ -100,21 +100,9 @@ struct PlayerInfoMsg : MsgWithId
 		speed,
 		acceleration,
 		theta,
-		state
+		state,
+		life
 	)
-};
-
-struct ShootMsg : MsgWithId
-{
-	float x;
-	float y;
-	float vx;
-	float vy;
-	int w;
-	int h;
-	float rot;
-
-	_IMPL_SERIALIAZION_WITH_BASE_(MsgWithId, x, y, vx, vy, w, h, rot)
 };
 
 struct SyncMsg : MsgWithId
@@ -123,4 +111,12 @@ struct SyncMsg : MsgWithId
 	float posY;
 
 	_IMPL_SERIALIAZION_WITH_BASE_(MsgWithId, posX, posY)
+};
+
+
+struct DeathMsg : MsgWithId {
+
+	int deadId;
+
+	_IMPL_SERIALIAZION_WITH_BASE_(MsgWithId, deadId)
 };
