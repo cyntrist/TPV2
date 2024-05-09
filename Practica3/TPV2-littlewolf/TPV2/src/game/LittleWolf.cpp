@@ -339,7 +339,7 @@ void LittleWolf::update_player_info(uint8_t playerID, float posX, float posY, fl
 			constexpr Point none = {0.0f, 0.0f};
 
 			if (tile(p.where, map_.walling) != player_to_tile(playerID)
-				&& tile(p.where, map_.walling) != 0) {
+				|| tile(p.where, map_.walling) != 0) {
 				p.velocity = none;
 				p.where = current;
 				std::cout << "COLISION COLISION COLISION" << std::endl;
@@ -359,8 +359,8 @@ void LittleWolf::update_player_info(uint8_t playerID, float posX, float posY, fl
 		p.speed = speed;
 		p.acceleration = acceleration;
 		p.theta = theta;
-		//p.state = state;
-		//p.life = life;
+		p.state = state;
+		p.life = life;
 
 		map_.walling[static_cast<int>(p.where.y)][static_cast<int>(p.where.x)] = player_to_tile(playerID);
 	}
@@ -829,7 +829,9 @@ bool LittleWolf::shoot(Player& p)
 					alivePlayers++;
 
 			int damage = sdlutils().config().at("hit_damage") - distance / 10;
+
 			players_[id].life -= damage;
+
 			std::cout << players_[id].life << std::endl;
 			//if (players_[id].life <= 0)
 			{
