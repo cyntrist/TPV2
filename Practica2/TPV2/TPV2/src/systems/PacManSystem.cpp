@@ -115,7 +115,8 @@ void PacManSystem::recieve(const Message& message)
 	switch (message.id)
 	{
 	case _m_NEW_GAME:
-		resetLives();
+		if (mngr_->getComponent<HealthComponent>(pacman)->getLives() <= 0)
+			resetLives();
 		resetPosition();
 		break;
 	case _m_ROUND_START:
